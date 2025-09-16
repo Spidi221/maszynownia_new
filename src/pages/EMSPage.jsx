@@ -28,7 +28,7 @@ export default function EMSPage() {
       <header className={`sticky top-0 z-50 backdrop-blur-sm border-b border-ems-gold/20 transition-colors duration-300 ${
         isScrolled ? 'bg-ems-black/95' : 'bg-black/95'
       }`}>
-        <div className="max-w-7xl mx-auto px-6 py-1">
+        <div className="max-w-none 2xl:max-w-[1920px] 3xl:max-w-[2400px] mx-auto px-6 lg:px-12 xl:px-16 2xl:px-24 3xl:px-32 4xl:px-40 py-1">
           <div className="flex items-center justify-between">
             {/* Back Arrow + Logo EMS po lewej */}
             <div className="flex items-center gap-4">
@@ -111,24 +111,27 @@ export default function EMSPage() {
       <section className="h-[calc(100vh-5rem)] relative flex items-center justify-center overflow-hidden">
         {/* Background Image */}
         <div
-          className="absolute inset-0 bg-cover bg-right transform scale-x-[-1] filter brightness-110 contrast-125 saturate-110"
-          style={{ backgroundImage: 'url(/images/hero-ems-new.jpg)' }}
+          className="absolute inset-0 bg-cover transform scale-x-[-1] filter brightness-110 contrast-125 saturate-110"
+          style={{
+            backgroundImage: 'url(/images/hero-ems-new.jpg)',
+            backgroundPosition: 'clamp(30%, 60vw, 80%) center'
+          }}
         ></div>
 
         {/* Subtle overlay for text readability */}
         <div className="absolute inset-0 bg-gradient-to-r from-ems-black/30 via-ems-black/10 to-transparent"></div>
 
         {/* Hero Content */}
-        <div className="relative z-10 text-center text-white px-6 max-w-4xl ml-auto translate-x-8">
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-light uppercase mb-6 title-dosis">
+        <div className="relative z-10 text-center text-white px-6 lg:px-12 xl:px-16 2xl:px-24 3xl:px-32 4xl:px-40 max-w-4xl xl:max-w-5xl 2xl:max-w-6xl 3xl:max-w-7xl 4xl:max-w-8xl ml-auto translate-x-8 xl:translate-x-4 2xl:translate-x-2">
+          <h1 className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-light uppercase mb-6 title-dosis">
             Skuteczny trening dla dorosłych w 30 minut
           </h1>
-          <p className="text-lg md:text-xl mb-8 text-white/90 max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl mb-8 text-white/90 max-w-2xl lg:max-w-3xl xl:max-w-4xl 2xl:max-w-5xl mx-auto">
             Trening EMS to rewolucyjna metoda, która pozwala osiągnąć rezultaty tradycyjnego 90-minutowego treningu w zaledwie 30 minut.
           </p>
           <button
             onClick={() => scrollToSection('kontakt')}
-            className="border-2 border-ems-gold text-white uppercase tracking-wider px-12 py-4 font-medium transition-all duration-300 hover:bg-ems-gold hover:text-ems-black rounded-full text-lg lg:px-16 lg:py-6"
+            className="border-2 border-ems-gold text-white uppercase tracking-wider px-12 py-4 lg:px-16 lg:py-6 xl:px-20 xl:py-7 2xl:px-24 2xl:py-8 font-medium transition-all duration-300 hover:bg-ems-gold hover:text-ems-black rounded-full text-lg lg:text-xl xl:text-2xl 2xl:text-3xl"
           >
             Zacznij swój trening już dziś
           </button>
@@ -137,8 +140,8 @@ export default function EMSPage() {
 
       {/* Czym jest EMS */}
       <section id="o-nas" className="py-16 lg:py-20 px-6 bg-ems-black">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl lg:text-6xl font-light uppercase text-center mb-12 text-ems-gold title-dosis">
+        <div className="max-w-6xl xl:max-w-7xl 2xl:max-w-[1920px] 3xl:max-w-[2400px] 4xl:max-w-[2800px] mx-auto">
+          <h2 className="text-4xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-light uppercase text-center mb-12 text-ems-gold title-dosis">
             Czym jest trening EMS?
           </h2>
 
@@ -188,9 +191,9 @@ export default function EMSPage() {
       </section>
 
       {/* Tabela porównawcza EMS vs Siłownia */}
-      <section className="py-16 lg:py-20 px-6 bg-ems-stone">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl lg:text-6xl font-light uppercase text-center mb-12 text-ems-gold title-dosis">
+      <section className="py-16 lg:py-20 px-6 lg:px-12 xl:px-16 2xl:px-24 bg-ems-stone">
+        <div className="max-w-6xl xl:max-w-7xl 2xl:max-w-[1920px] 3xl:max-w-[2400px] 4xl:max-w-[2800px] mx-auto">
+          <h2 className="text-4xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-light uppercase text-center mb-12 text-ems-gold title-dosis">
             EMS vs Tradycyjna siłownia
           </h2>
 
@@ -287,8 +290,8 @@ export default function EMSPage() {
 
       {/* Cennik */}
       <section id="cennik" className="py-16 lg:py-20 px-6 bg-ems-black">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl lg:text-6xl font-light uppercase text-center mb-12 text-ems-gold title-dosis">
+        <div className="max-w-6xl xl:max-w-7xl 2xl:max-w-[1920px] 3xl:max-w-[2400px] 4xl:max-w-[2800px] mx-auto">
+          <h2 className="text-4xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-light uppercase text-center mb-12 text-ems-gold title-dosis">
             Cennik
           </h2>
 
@@ -350,8 +353,8 @@ export default function EMSPage() {
 
       {/* Poznaj nasz zespół */}
       <section id="zespol" className="py-16 lg:py-20 px-6 bg-ems-black">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl lg:text-6xl font-light uppercase text-center mb-12 text-ems-gold title-dosis">
+        <div className="max-w-6xl xl:max-w-7xl 2xl:max-w-[1920px] 3xl:max-w-[2400px] 4xl:max-w-[2800px] mx-auto">
+          <h2 className="text-4xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-light uppercase text-center mb-12 text-ems-gold title-dosis">
             Poznaj nasz zespół
           </h2>
           <div className="text-center max-w-3xl mx-auto">
@@ -368,8 +371,8 @@ export default function EMSPage() {
 
       {/* Kontakt */}
       <section id="kontakt" className="py-16 lg:py-20 px-6 bg-ems-stone">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl lg:text-6xl font-light uppercase text-center mb-12 text-ems-gold title-dosis">
+        <div className="max-w-6xl xl:max-w-7xl 2xl:max-w-[1920px] 3xl:max-w-[2400px] 4xl:max-w-[2800px] mx-auto">
+          <h2 className="text-4xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-light uppercase text-center mb-12 text-ems-gold title-dosis">
             Kontakt
           </h2>
 
