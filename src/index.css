@@ -1,7 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@300;400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Premium Color Variables */
+:root {
+  /* Main Brand Colors */
+  --ems-gold: #D9BA74;
+  --ems-black: #18191B;
+  --ems-black-darker: #18161C;
+  --ems-stone: #0c0a09;
+
+  /* Premium Gold Variants */
+  --ems-gold-rich: #E5C988;
+  --ems-gold-deep: #C1A55E;
+  --ems-gold-whisper: #F2E6C7;
+  --ems-gold-glow: rgba(217, 186, 116, 0.3);
+
+  /* Premium Neutrals */
+  --ems-charcoal: #1C1D1F;
+  --ems-graphite: #2A2B2D;
+  --ems-pearl: #FEFDFB;
+  --ems-mist: rgba(254, 253, 251, 0.1);
+}
 
 @layer base {
   * {
@@ -10,6 +31,20 @@
 
   html, body, #root {
     @apply h-full m-0 p-0;
+  }
+
+  /* Smooth scrolling for the entire document */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Performance optimization for animations */
+  .will-animate {
+    will-change: transform, opacity;
+  }
+
+  .animation-complete {
+    will-change: auto;
   }
 }
 
@@ -21,6 +56,168 @@
 
   .ems-button {
     @apply border-2 border-ems-gold text-white uppercase tracking-wider px-8 py-4 font-medium transition-all duration-300 hover:bg-ems-gold hover:text-ems-black;
+  }
+
+  /* Premium Typography Classes */
+  .hero-title-premium {
+    font-family: 'Dosis', sans-serif;
+    font-weight: 300;
+    letter-spacing: 6.5px;
+    text-transform: uppercase;
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    text-shadow: 0 4px 8px rgba(0,0,0,0.4);
+    background: linear-gradient(135deg, #D9BA74 0%, #E5C988 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .section-title-premium {
+    font-family: 'Dosis', sans-serif;
+    font-weight: 400;
+    letter-spacing: 1.9px;
+    text-transform: uppercase;
+    font-size: clamp(1.8rem, 4vw, 3.5rem);
+    color: var(--ems-gold);
+    margin-bottom: 2rem;
+  }
+
+  .body-premium {
+    font-family: 'Dosis', sans-serif;
+    font-weight: 400;
+    letter-spacing: 2.6px;
+    line-height: 1.8;
+    font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+    color: var(--ems-pearl);
+  }
+
+  .accent-text-premium {
+    font-family: 'Dosis', sans-serif;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--ems-gold-rich);
+  }
+
+  /* Glass Morphism Cards */
+  .glass-card {
+    background: rgba(217, 186, 116, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(217, 186, 116, 0.15);
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--ems-gold), transparent);
+    opacity: 0.5;
+  }
+
+  .glass-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px var(--ems-gold-glow);
+    border-color: var(--ems-gold);
+    background: rgba(217, 186, 116, 0.12);
+  }
+
+  /* Premium Button with Shimmer */
+  .premium-button {
+    position: relative;
+    overflow: hidden;
+    background: rgba(217, 186, 116, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 2px solid var(--ems-gold);
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 1rem 2rem;
+    transition: all 0.3s ease;
+    border-radius: 50px;
+  }
+
+  .premium-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(217, 186, 116, 0.4), transparent);
+    transition: left 0.5s;
+  }
+
+  .premium-button:hover::before {
+    left: 100%;
+  }
+
+  .premium-button:hover {
+    background: var(--ems-gold);
+    color: var(--ems-black);
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(217, 186, 116, 0.4);
+  }
+
+  /* Premium Pricing Card */
+  .pricing-card-premium {
+    background: rgba(217, 186, 116, 0.05);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 2px solid rgba(217, 186, 116, 0.2);
+    border-radius: 20px;
+    position: relative;
+    transform: perspective(1000px) rotateY(0deg);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .pricing-card-premium:hover {
+    transform: perspective(1000px) rotateY(5deg) translateY(-10px);
+    border-color: var(--ems-gold);
+    box-shadow: 0 25px 60px var(--ems-gold-glow);
+  }
+
+  .popular-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, var(--ems-gold) 0%, var(--ems-gold-rich) 100%);
+    color: var(--ems-black);
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(217, 186, 116, 0.5);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+  }
+
+  /* Premium Table */
+  .premium-table {
+    background: rgba(28, 29, 31, 0.6);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(217, 186, 116, 0.2);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .table-row-premium {
+    transition: all 0.3s ease;
+  }
+
+  .table-row-premium:hover {
+    background: rgba(217, 186, 116, 0.1);
+    transform: scale(1.02);
   }
 
   /* Gym Brand Components */
@@ -56,6 +253,204 @@
     @apply font-normal;
     letter-spacing: 2.6px;
   }
+}
+
+/* Hero Animations */
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes pulse-gold {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Hero Elements Entrance Animations */
+.hero-title-entrance {
+  opacity: 0;
+  transform: translateX(100px);
+  animation: slideInFromRight 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
+}
+
+.hero-subtitle-entrance {
+  opacity: 0;
+  transform: translateX(80px);
+  animation: slideInFromRight 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s forwards;
+}
+
+.hero-cta-entrance {
+  opacity: 0;
+  transform: translateX(60px);
+  animation: slideInFromRight 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.9s forwards;
+}
+
+/* Section Fade Animations */
+.section-fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.section-fade-up.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered Card Animations */
+.card-stagger {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation-delay: calc(var(--stagger-index, 0) * 0.15s);
+}
+
+/* Premium Icon Animation */
+.icon-float {
+  animation: float 3s ease-in-out infinite;
+  animation-delay: calc(var(--float-delay, 0) * 0.5s);
+}
+
+/* Premium Section Backgrounds */
+.section-gradient-dark {
+  background: linear-gradient(135deg, #18191B 0%, #1C1D1F 50%, #0c0a09 100%);
+  position: relative;
+}
+
+.section-gradient-dark::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    radial-gradient(circle at 20% 80%, rgba(217, 186, 116, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(217, 186, 116, 0.03) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.section-gradient-stone {
+  background: var(--ems-stone);
+  background-image:
+    radial-gradient(circle at 25% 25%, rgba(217, 186, 116, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(217, 186, 116, 0.05) 0%, transparent 50%);
+}
+
+/* Premium Texture Overlay */
+.section-texture::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(217, 186, 116, 0.15) 1px, transparent 0);
+  background-size: 20px 20px;
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+/* Price Number Animation */
+.price-number {
+  font-size: 3rem;
+  font-weight: 300;
+  color: var(--ems-gold);
+  position: relative;
+  display: inline-block;
+}
+
+.price-number::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--ems-gold);
+  transition: width 0.6s ease;
+}
+
+.pricing-card-premium:hover .price-number::after {
+  width: 100%;
+}
+
+/* Gold Gradient Text */
+.gradient-gold {
+  background: linear-gradient(135deg, #D9BA74 0%, #E5C988 50%, #D9BA74 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% auto;
+  animation: shimmer 3s linear infinite;
+}
+
+/* Premium Image Effects */
+.premium-image {
+  filter: brightness(1.1) contrast(1.15) saturate(1.1);
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+}
+
+.premium-image:hover {
+  filter: brightness(1.2) contrast(1.2) saturate(1.2);
+  transform: scale(1.05);
+}
+
+/* Loading States */
+.content-skeleton {
+  background: linear-gradient(90deg,
+    rgba(217, 186, 116, 0.1) 25%,
+    rgba(217, 186, 116, 0.2) 50%,
+    rgba(217, 186, 116, 0.1) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 
 @layer utilities {
@@ -172,23 +567,25 @@
     }
 
     .mobile-ems-button {
-      transform: translateY(287px) !important;
+      transform: translateY(267px) !important;
     }
     .mobile-ems-logo {
-      transform: translateY(240px) !important;
+      transform: translateY(220px) !important;
     }
     .mobile-ems-location {
-      transform: translateY(190px) !important;
-    }
-    .mobile-gym-button {
       transform: translateY(170px) !important;
     }
+    .mobile-gym-button {
+      transform: translateY(150px) !important;
+    }
     .mobile-gym-logo {
-      transform: translateY(280px) !important;
+      transform: translateY(260px) !important;
     }
     .mobile-gym-location {
-      transform: translateY(360px) !important;
+      transform: translateY(290px) !important;
     }
+  }
+
     .mobile-diagonal-top,
     .mobile-diagonal-bottom {
       position: relative !important;
@@ -208,4 +605,3 @@
       padding: inherit !important;
     }
   }
-}

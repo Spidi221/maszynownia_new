@@ -19,7 +19,7 @@ const HomePage = () => {
         <div className="relative z-10 h-full flex flex-col justify-center py-4 lg:py-16 px-4 lg:px-8">
 
           {/* Button + Description */}
-          <div className="absolute bottom-[-60px] left-1/2 transform -translate-x-1/2 lg:relative lg:bottom-auto lg:left-auto lg:transform-none lg:text-center lg:mb-12 mobile-ems-button" style={{transform: window.innerWidth >= 1024 ? 'translateY(287px)' : 'none'}}>
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 lg:relative lg:bottom-auto lg:left-auto lg:transform-none lg:text-center lg:mb-12 mobile-ems-button">
             <a href="/ems">
               <button className="border-2 border-ems-gold text-white uppercase tracking-wider px-12 py-6 mb-4 font-medium transition-all duration-300 hover:bg-ems-gold hover:text-ems-black mobile-text-small lg:py-4 text-xl lg:min-w-[300px] lg:min-h-[60px]">
                 Zacznij swój trening już dziś
@@ -31,12 +31,12 @@ const HomePage = () => {
           </div>
 
           {/* Logo */}
-          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 lg:relative lg:bottom-auto lg:left-auto lg:transform-none lg:text-center lg:mb-8 mobile-ems-logo" style={{transform: window.innerWidth >= 1024 ? 'translateY(240px)' : 'none'}}>
+          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 lg:relative lg:bottom-auto lg:left-auto lg:transform-none lg:text-center lg:mb-8 mobile-ems-logo">
             <img src="/images/logo-ems.webp" alt="EMS Logo" className="w-96 lg:w-96 mx-auto opacity-80" />
           </div>
 
           {/* Line + Location */}
-          <div className="absolute top-4 right-4 lg:relative lg:top-auto lg:right-auto lg:text-center mobile-ems-location" style={{transform: window.innerWidth >= 1024 ? 'translateY(190px)' : 'none'}}>
+          <div className="absolute top-4 right-4 lg:relative lg:top-auto lg:right-auto lg:text-center mobile-ems-location">
             <div className="w-60 h-px bg-ems-gold mx-auto mb-4 mobile-line"></div>
             <p className="text-white uppercase tracking-wide text-base font-medium mobile-text-xs">
               📍 Józefów
@@ -67,7 +67,7 @@ const HomePage = () => {
         <div className="relative z-10 h-full flex flex-col justify-center py-4 lg:py-16 px-4 lg:px-8">
 
           {/* Button + Description */}
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 lg:relative lg:bottom-auto lg:left-auto lg:transform-none lg:text-center lg:mb-12 mobile-gym-button" style={{transform: window.innerWidth >= 1024 ? 'translateY(170px)' : 'none'}}>
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 lg:relative lg:bottom-auto lg:left-auto lg:transform-none lg:text-center lg:mb-12 mobile-gym-button">
             <button className="border-2 border-white text-white uppercase tracking-wider px-12 py-6 mb-4 font-medium transition-all duration-300 hover:bg-white hover:text-gym-yellow mobile-text-small lg:py-4 text-xl lg:min-w-[300px] lg:min-h-[60px]">
               Sprawdź zajęcia
             </button>
@@ -77,7 +77,7 @@ const HomePage = () => {
           </div>
 
           {/* Logo */}
-          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 lg:relative lg:bottom-auto lg:left-auto lg:transform-none lg:text-center lg:mb-8 mobile-gym-logo" style={{transform: window.innerWidth >= 1024 ? 'translateY(280px)' : 'none'}}>
+          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 lg:relative lg:bottom-auto lg:left-auto lg:transform-none lg:text-center lg:mb-8 mobile-gym-logo">
             <div className="relative inline-block">
               <div className="absolute inset-0 bg-black/40 rounded-full blur-xl scale-110"></div>
               <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20 rounded-full blur-lg scale-105"></div>
@@ -86,7 +86,7 @@ const HomePage = () => {
           </div>
 
           {/* Line + Locations */}
-          <div className="absolute top-4 left-4 lg:relative lg:top-auto lg:left-auto lg:text-center mobile-gym-location" style={{transform: window.innerWidth >= 1024 ? 'translateY(360px)' : 'none'}}>
+          <div className="absolute top-4 left-4 lg:relative lg:top-auto lg:left-auto lg:text-center mobile-gym-location">
             <div className="w-60 h-px bg-white mx-auto mb-4 mobile-line"></div>
             <div className="space-y-1">
               <p className="text-white uppercase tracking-wide text-base font-medium mobile-text-xs">📍 Józefów</p>
