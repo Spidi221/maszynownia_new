@@ -1,0 +1,211 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@300;400;500;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply font-dosis;
+  }
+
+  html, body, #root {
+    @apply h-full m-0 p-0;
+  }
+}
+
+@layer components {
+  /* EMS Brand Components */
+  .ems-section {
+    @apply bg-ems-black text-white relative;
+  }
+
+  .ems-button {
+    @apply border-2 border-ems-gold text-white uppercase tracking-wider px-8 py-4 font-medium transition-all duration-300 hover:bg-ems-gold hover:text-ems-black;
+  }
+
+  /* Gym Brand Components */
+  .gym-section {
+    @apply bg-gym-yellow text-white relative;
+  }
+
+  .gym-button {
+    @apply border-2 border-white text-white uppercase tracking-wider px-8 py-4 font-medium transition-all duration-300 hover:bg-white hover:text-gym-yellow;
+  }
+
+  /* Layout Components */
+  .split-screen {
+    @apply h-screen flex flex-col lg:flex-row overflow-hidden;
+  }
+
+  .panel {
+    @apply h-1/2 lg:h-full lg:flex-1 relative;
+  }
+
+  /* Typography */
+  .title-dosis {
+    @apply font-light uppercase text-xl;
+    letter-spacing: 6.5px;
+  }
+
+  .subtitle-dosis {
+    @apply font-light uppercase text-lg;
+    letter-spacing: 1.9px;
+  }
+
+  .text-dosis {
+    @apply font-normal;
+    letter-spacing: 2.6px;
+  }
+}
+
+@layer utilities {
+  /* Mobile positioning utilities from maszynownia new */
+  @media (max-width: 1023px) {
+    .mobile-diagonal-top,
+    .mobile-diagonal-bottom {
+      position: relative !important;
+      clip-path: none !important;
+      width: auto !important;
+      height: auto !important;
+      z-index: auto !important;
+    }
+
+    .mobile-ems-button,
+    .mobile-ems-logo,
+    .mobile-ems-location,
+    .mobile-gym-button,
+    .mobile-gym-logo,
+    .mobile-gym-location {
+      transform: none !important;
+    }
+
+    .mobile-ems-location {
+      text-align: right !important;
+      position: absolute !important;
+      top: 1rem !important;
+      right: 1rem !important;
+    }
+
+    .mobile-ems-button,
+    .mobile-ems-logo {
+      text-align: center !important;
+      position: absolute !important;
+      left: 50% !important;
+      transform: translateX(-50%) !important;
+    }
+
+    .mobile-ems-button {
+      bottom: 8rem !important;
+    }
+
+    .mobile-ems-logo {
+      bottom: -2.5rem !important;
+    }
+
+    .mobile-gym-location {
+      text-align: left !important;
+      position: absolute !important;
+      top: 1rem !important;
+      left: 1rem !important;
+    }
+
+    .mobile-gym-button,
+    .mobile-gym-logo {
+      text-align: center !important;
+      position: absolute !important;
+      left: 50% !important;
+      transform: translateX(-50%) !important;
+    }
+
+    .mobile-gym-button {
+      bottom: 6rem !important;
+    }
+
+    .mobile-gym-logo {
+      bottom: 1rem !important;
+    }
+
+    .mobile-ems-logo img {
+      width: 280px !important;
+    }
+
+    .mobile-gym-logo img {
+      width: 250px !important;
+    }
+
+    .mobile-text-small {
+      font-size: 0.75rem !important;
+      padding: 0.5rem 1rem !important;
+      min-width: 275px !important;
+      min-height: 40px !important;
+    }
+
+    .mobile-gym-button .mobile-text-small {
+      min-width: 180px !important;
+      min-height: 30px !important;
+      padding: 0.5rem 1rem !important;
+    }
+
+    .mobile-text-xs {
+      font-size: 0.6rem !important;
+    }
+
+    .mobile-line {
+      width: 40px !important;
+    }
+  }
+
+  /* Desktop split - laptops and desktops */
+  @media (min-width: 1024px) {
+    .mobile-ems-location,
+    .mobile-gym-location,
+    .mobile-ems-button,
+    .mobile-ems-logo,
+    .mobile-gym-button,
+    .mobile-gym-logo {
+      position: relative !important;
+      top: auto !important;
+      left: auto !important;
+      right: auto !important;
+      bottom: auto !important;
+      transform: none !important;
+    }
+
+    .mobile-ems-button {
+      transform: translateY(287px) !important;
+    }
+    .mobile-ems-logo {
+      transform: translateY(240px) !important;
+    }
+    .mobile-ems-location {
+      transform: translateY(190px) !important;
+    }
+    .mobile-gym-button {
+      transform: translateY(170px) !important;
+    }
+    .mobile-gym-logo {
+      transform: translateY(280px) !important;
+    }
+    .mobile-gym-location {
+      transform: translateY(360px) !important;
+    }
+    .mobile-diagonal-top,
+    .mobile-diagonal-bottom {
+      position: relative !important;
+      clip-path: none !important;
+      width: auto !important;
+      height: auto !important;
+      z-index: auto !important;
+    }
+
+    .mobile-line {
+      width: 240px !important;
+    }
+
+    .mobile-text-small,
+    .mobile-text-xs {
+      font-size: inherit !important;
+      padding: inherit !important;
+    }
+  }
+}
