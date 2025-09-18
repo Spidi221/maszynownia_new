@@ -65,9 +65,12 @@ export default function EMSPage() {
   return (
     <>
       <SEOHead
-        title="Trening EMS Józefów - Maszynownia | Skuteczny trening w 30 minut"
-        description="Dołącz do rewolucji w fitnessie. Trening EMS w Maszynowni to gwarancja szybkich efektów, oszczędność czasu i bezpieczeństwo. Umów trening próbny!"
+        title="Trening EMS Józefów - Najstarsze Studio (8 lat) | 30 min = 90 min treningu | Maszynownia"
+        description="💪 Profesjonalny trening EMS w Józefowie od 79zł! Najstarsze studio (8 lat doświadczenia), sprzęt bezprzewodowy, indywidualne podejście 1:1. Karnet Elite 12 treningów 1560zł - NAJPOPULARNIEJSZY! Efekty po 4-6 sesjach. Zapisz się na trening próbny!"
+        keywords="trening EMS Józefów, elektrostymulacja mięśni Józefów, studio EMS Warszawa, trening 30 minut, bezprzewodowy EMS, trening próbny 79zł, karnet EMS 1560zł, fitness Józefów, szybkie efekty treningu, Maszynownia EMS"
         canonical="/ems"
+        location="Józefów"
+        businessType="ems"
       />
 
       {/* Premium Header Navigation with Glass Effect */}
@@ -94,25 +97,29 @@ export default function EMSPage() {
             <div className="hidden md:flex items-center gap-8">
               <button
                 onClick={() => scrollToSection('o-nas')}
-                className="text-white hover:text-ems-gold transition-colors uppercase tracking-wider"
+                className="touch-nav-button text-white hover:text-ems-gold transition-colors uppercase tracking-wider"
+                style={{minWidth: '44px', minHeight: '44px'}}
               >
                 O nas
               </button>
               <button
                 onClick={() => scrollToSection('comparison')}
-                className="text-white hover:text-ems-gold transition-colors uppercase tracking-wider"
+                className="touch-nav-button text-white hover:text-ems-gold transition-colors uppercase tracking-wider"
+                style={{minWidth: '44px', minHeight: '44px'}}
               >
                 EMS vs Siłownia
               </button>
               <button
                 onClick={() => scrollToSection('cennik')}
-                className="text-white hover:text-ems-gold transition-colors uppercase tracking-wider"
+                className="touch-nav-button text-white hover:text-ems-gold transition-colors uppercase tracking-wider"
+                style={{minWidth: '44px', minHeight: '44px'}}
               >
                 Cennik
               </button>
               <button
                 onClick={() => scrollToSection('kontakt')}
-                className="text-white hover:text-ems-gold transition-colors uppercase tracking-wider"
+                className="touch-nav-button text-white hover:text-ems-gold transition-colors uppercase tracking-wider"
+                style={{minWidth: '44px', minHeight: '44px'}}
               >
                 Kontakt
               </button>
@@ -265,7 +272,8 @@ export default function EMSPage() {
             </p>
             <button
               onClick={() => scrollToSection('kontakt')}
-              className="hero-cta-entrance premium-button text-lg lg:text-xl xl:text-2xl 2xl:text-3xl px-12 py-4 lg:px-16 lg:py-6 xl:px-20 xl:py-7 2xl:px-24 2xl:py-8 font-medium"
+              className="hero-cta-entrance premium-button touch-button-primary touch-button-ems text-lg lg:text-xl xl:text-2xl 2xl:text-3xl px-12 py-4 lg:px-16 lg:py-6 xl:px-20 xl:py-7 2xl:px-24 2xl:py-8 font-medium"
+              style={{minWidth: '44px', minHeight: '44px'}}
             >
               Zacznij swój trening już dziś
             </button>
@@ -298,7 +306,8 @@ export default function EMSPage() {
             </div>
             <button
               onClick={() => scrollToSection('kontakt')}
-              className="bg-ems-gold text-ems-black px-8 py-4 rounded-full text-lg font-normal uppercase tracking-wider hover:bg-ems-gold/90 transition-all duration-300 shadow-lg"
+              className="touch-button-primary touch-button-ems bg-ems-gold text-ems-black px-8 py-4 rounded-full text-lg font-normal uppercase tracking-wider hover:bg-ems-gold/90 transition-all duration-300 shadow-lg"
+              style={{minWidth: '44px', minHeight: '44px'}}
             >
               Zacznij swój trening już dziś
             </button>
@@ -753,8 +762,9 @@ export default function EMSPage() {
       {isScrolled && (
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="fixed bottom-8 right-8 z-50 glass-card p-4 hover:scale-110 transition-all duration-300 group"
+          className="touch-button-icon fixed bottom-8 right-8 z-50 glass-card p-4 hover:scale-110 transition-all duration-300 group"
           aria-label="Scroll to top"
+          style={{minWidth: '44px', minHeight: '44px'}}
         >
           <svg
             className="w-6 h-6 text-ems-gold group-hover:text-white transition-colors"

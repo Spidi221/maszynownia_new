@@ -200,9 +200,12 @@ export default function GymnasticsPage() {
   return (
     <>
       <SEOHead
-        title="Strefa Gimnastyki - Zajęcia ogólnorozwojowe z elementami akrobatyki | Maszynownia"
-        description="Wszechstronny rozwój fizyczny dzieci i młodzieży. Zajęcia ogólnorozwojowe z elementami akrobatyki w Józefowie, Michalinie i Górze Kalwarii."
+        title="Strefa Gimnastyki Józefów - Akrobatyka dla Dzieci 4-13 lat | Warsztaty, Urodziny, Obozy | Maszynownia"
+        description="🤸‍♀️ Kompleksowa gimnastyka dla dzieci w 3 lokalizacjach! Józefów 160zł, Michalin 170zł, Góra Kalwaria. Warsztaty weekendowe, urodziny gimnastyczne (2h), pikniki sportowe, obozy akrobatyczne z Anną Błaszkiewicz. Rozwój koordynacji, siły, gibkości. Zapisz się już dziś!"
+        keywords="gimnastyka dzieci Józefów, akrobatyka dzieci Michalin, zajęcia dzieci Góra Kalwaria, warsztaty gimnastyczne, urodziny gimnastyczne, obozy akrobatyczne, Anna Błaszkiewicz, zajęcia ogólnorozwojowe, Klaudia Kołodziejska, gimnastyka 4-13 lat, pikniki sportowe"
         canonical="/strefagimnastyki"
+        location="Józefów, Michalin, Góra Kalwaria"
+        businessType="gymnastics"
       />
 
       {/* Premium Header Navigation - Always Visible */}
@@ -233,31 +236,36 @@ export default function GymnasticsPage() {
             <div className="hidden md:flex items-center gap-8">
               <button
                 onClick={() => scrollToSection('o-nas')}
-                className="text-gym-yellow hover:text-gym-yellow-light transition-colors font-montserrat font-light"
+                className="touch-nav-button text-gym-yellow hover:text-gym-yellow-light transition-colors font-montserrat font-light"
+                style={{minWidth: '44px', minHeight: '44px'}}
               >
                 O nas
               </button>
               <button
                 onClick={() => scrollToSection('uslugi')}
-                className="text-gym-yellow hover:text-gym-yellow-light transition-colors font-montserrat font-light"
+                className="touch-nav-button text-gym-yellow hover:text-gym-yellow-light transition-colors font-montserrat font-light"
+                style={{minWidth: '44px', minHeight: '44px'}}
               >
                 Usługi
               </button>
               <button
                 onClick={() => scrollToSection('kadra')}
-                className="text-gym-yellow hover:text-gym-yellow-light transition-colors font-montserrat font-light"
+                className="touch-nav-button text-gym-yellow hover:text-gym-yellow-light transition-colors font-montserrat font-light"
+                style={{minWidth: '44px', minHeight: '44px'}}
               >
                 Zespół
               </button>
               <button
                 onClick={() => scrollToSection('lokalizacje')}
-                className="text-gym-yellow hover:text-gym-yellow-light transition-colors font-montserrat font-light"
+                className="touch-nav-button text-gym-yellow hover:text-gym-yellow-light transition-colors font-montserrat font-light"
+                style={{minWidth: '44px', minHeight: '44px'}}
               >
                 Cennik
               </button>
               <button
                 onClick={() => scrollToSection('zapisy')}
-                className="text-gym-yellow hover:text-gym-yellow-light transition-colors font-montserrat font-light"
+                className="touch-nav-button text-gym-yellow hover:text-gym-yellow-light transition-colors font-montserrat font-light"
+                style={{minWidth: '44px', minHeight: '44px'}}
               >
                 Kontakt
               </button>
@@ -296,9 +304,27 @@ export default function GymnasticsPage() {
             <div className="md:hidden">
               <button
                 onClick={toggleMobileMenu}
-                className="text-gym-yellow hover:text-gym-yellow-light transition-colors p-2"
+                className="touch-button-icon text-gym-yellow hover:text-gym-yellow-light transition-colors p-3"
+                style={{minWidth: '44px', minHeight: '44px'}}
+                aria-label="Toggle navigation menu"
               >
-                <span className="text-2xl">{isMobileMenuOpen ? '×' : '☰'}</span>
+                <div className="w-6 h-6 relative flex flex-col justify-center items-center">
+                  <span
+                    className={`block w-6 h-0.5 bg-current transition-all duration-300 ${
+                      isMobileMenuOpen ? 'rotate-45 translate-y-0' : 'translate-y-[-6px]'
+                    }`}
+                  ></span>
+                  <span
+                    className={`block w-6 h-0.5 bg-current transition-all duration-300 ${
+                      isMobileMenuOpen ? 'opacity-0' : 'opacity-100'
+                    }`}
+                  ></span>
+                  <span
+                    className={`block w-6 h-0.5 bg-current transition-all duration-300 ${
+                      isMobileMenuOpen ? '-rotate-45 translate-y-0' : 'translate-y-[6px]'
+                    }`}
+                  ></span>
+                </div>
               </button>
             </div>
           </div>
@@ -372,7 +398,8 @@ export default function GymnasticsPage() {
             </p>
             <button
               onClick={() => scrollToSection('zapisy')}
-              className="gym-hero-cta-entrance bg-gym-yellow text-ems-black px-10 py-5 rounded-full text-xl md:text-2xl font-bebas font-normal uppercase tracking-wider hover:bg-gym-yellow-light transition-all duration-300 shadow-lg "
+              className="gym-hero-cta-entrance touch-button-primary touch-button-gym bg-gym-yellow text-ems-black px-10 py-5 rounded-full text-xl md:text-2xl font-bebas font-normal uppercase tracking-wider hover:bg-gym-yellow-light transition-all duration-300 shadow-lg"
+              style={{minWidth: '44px', minHeight: '44px'}}
             >
               Zapisz dziecko na zajęcia
             </button>
@@ -844,8 +871,9 @@ export default function GymnasticsPage() {
       {isScrolled && (
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="fixed bottom-8 right-8 z-50 gym-button-icon group"
+          className="touch-button-icon fixed bottom-8 right-8 z-50 gym-button-icon group"
           aria-label="Scroll to top"
+          style={{minWidth: '44px', minHeight: '44px'}}
         >
           <svg
             className="w-6 h-6 text-gym-yellow group-hover:text-white transition-colors"

@@ -28,9 +28,12 @@ function App() {
         <CookiesBanner />
         <Route path="/">
           <SEOHead
-            title="Maszynownia - Trening EMS i Gimnastyka dla Dzieci | Józefów"
-            description="Odkryj trening EMS dla dorosłych (30 min) i zajęcia gimnastyczne dla dzieci w Maszynowni. Profesjonalne studio w Józefowie, Michalinie i Górze Kalwarii. Zapisz się już dziś!"
+            title="Maszynownia Józefów - Trening EMS i Gimnastyka dla Dzieci | #1 Studio w Józefowie"
+            description="🔥 Najstarsze studio EMS w Józefowie (8 lat doświadczenia) + zajęcia gimnastyczne dla dzieci 4-13 lat. Trening EMS w 30 min = efekty 90-minutowego treningu! 3 lokalizacje: Józefów, Michalin, Góra Kalwaria. Zapisz się dziś!"
+            keywords="EMS Józefów, trening elektrostymulacja Józefów, gimnastyka dzieci Józefów, Michalin, Góra Kalwaria, studio fitness Józefów, trening 30 minut, akrobatyka dzieci, zajęcia ogólnorozwojowe, Maszynownia"
             canonical=""
+            location="Józefów"
+            businessType="fitness"
           />
           <HomePage />
         </Route>
