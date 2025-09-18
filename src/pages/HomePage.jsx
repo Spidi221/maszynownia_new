@@ -21,7 +21,7 @@ const HomePage = () => {
           {/* Button + Description */}
           <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 lg:relative lg:bottom-auto lg:left-auto lg:transform-none lg:text-center lg:mb-12 mobile-ems-button">
             <a href="/ems">
-              <button className="border-2 border-ems-gold text-white uppercase tracking-wider px-12 py-6 mb-4 font-medium transition-all duration-300 hover:bg-ems-gold hover:text-ems-black mobile-text-small lg:py-4 text-xl lg:min-w-[300px] lg:min-h-[60px]">
+              <button className="touch-button-primary border-2 border-ems-gold text-white uppercase tracking-wider px-16 py-6 mb-4 font-medium transition-all duration-300 hover:bg-ems-gold hover:text-ems-black active:scale-95 active:bg-ems-gold/90 mobile-text-small lg:py-4 text-xl lg:min-w-[380px] lg:min-h-[60px] rounded-full" style={{minWidth: '44px', minHeight: '44px'}}>
                 Zacznij swój trening już dziś
               </button>
             </a>
@@ -69,7 +69,7 @@ const HomePage = () => {
           {/* Button + Description */}
           <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 lg:relative lg:bottom-auto lg:left-auto lg:transform-none lg:text-center lg:mb-12 mobile-gym-button">
             <a href="/strefagimnastyki">
-              <button className="border-2 border-white text-white uppercase tracking-wider px-12 py-6 mb-4 font-medium transition-all duration-300 hover:bg-white hover:text-gym-yellow mobile-text-small lg:py-4 text-xl lg:min-w-[300px] lg:min-h-[60px]">
+              <button className="touch-button-primary border-2 border-white text-white uppercase tracking-wider px-12 py-6 mb-4 font-medium transition-all duration-300 hover:bg-white hover:text-gym-yellow active:scale-95 active:bg-white/90 mobile-text-small lg:py-4 text-xl lg:min-w-[300px] lg:min-h-[60px] rounded-full" style={{minWidth: '44px', minHeight: '44px'}}>
                 Sprawdź zajęcia
               </button>
             </a>

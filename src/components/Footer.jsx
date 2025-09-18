@@ -7,7 +7,7 @@ const Footer = ({ variant }) => {
   // Style bazowane na wariancie
   const bgColor = isEMS ? 'bg-ems-black' : 'bg-white';
   const textColor = isEMS ? 'text-white' : 'text-gym-navy-trust';
-  const mutedColor = isEMS ? 'text-ems-gray' : 'text-gray-600';
+  const mutedColor = isEMS ? 'text-ems-gold' : 'text-gray-600';
   const accentColor = isEMS ? 'text-ems-gold hover:text-ems-gold-light' : 'text-[#a16207] hover:text-gym-yellow';
   const borderColor = isEMS ? 'border-ems-gold/20' : 'border-[#a16207]/20';
   const iconColor = isEMS ? 'text-ems-gold' : 'text-[#a16207]';

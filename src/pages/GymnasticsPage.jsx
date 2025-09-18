@@ -7,6 +7,7 @@ import { Phone, Trophy, Shield, Heart, Calendar, Clock, MapPin } from 'lucide-re
 
 export default function GymnasticsPage() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [visibleSections, setVisibleSections] = useState(new Set());
   const [activeLocation, setActiveLocation] = useState(null);
   const [expandedServices, setExpandedServices] = useState({});
@@ -151,17 +152,24 @@ export default function GymnasticsPage() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Intersection Observer for scroll animations
+  // Intersection Observer for scroll animations - Unified configuration
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setVisibleSections((prev) => new Set([...prev, entry.target.id]));
+            // Add performance optimization - mark animation as complete after trigger
+            setTimeout(() => {
+              entry.target.classList.add('animation-complete');
+            }, 800);
           }
         });
       },
-      { threshold: 0.1 }
+      {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+      }
     );
 
     sectionsRef.current.forEach((section) => {
@@ -176,7 +184,17 @@ export default function GymnasticsPage() {
   }, []);
 
   const scrollToSection = (sectionId) => {
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+    setIsMobileMenuOpen(false); // Close menu first
+    setTimeout(() => {
+      document.getElementById(sectionId)?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }, 300); // Allow menu close animation
+  };
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   return (
@@ -184,6 +202,7 @@ export default function GymnasticsPage() {
       <SEOHead
         title="Strefa Gimnastyki - Zajęcia ogólnorozwojowe z elementami akrobatyki | Maszynownia"
         description="Wszechstronny rozwój fizyczny dzieci i młodzieży. Zajęcia ogólnorozwojowe z elementami akrobatyki w Józefowie, Michalinie i Górze Kalwarii."
+        canonical="/strefagimnastyki"
       />
 
       {/* Premium Header Navigation - Always Visible */}
@@ -272,9 +291,57 @@ export default function GymnasticsPage() {
                 </a>
               </div>
             </div>
+
+            {/* Mobile menu button */}
+            <div className="md:hidden">
+              <button
+                onClick={toggleMobileMenu}
+                className="text-gym-yellow hover:text-gym-yellow-light transition-colors p-2"
+              >
+                <span className="text-2xl">{isMobileMenuOpen ? '×' : '☰'}</span>
+              </button>
+            </div>
           </div>
         </div>
       </header>
+
+      {/* Mobile Navigation Menu */}
+      {isMobileMenuOpen && (
+        <div className="fixed top-[73px] left-0 right-0 z-40 bg-gym-yellow/95 backdrop-blur-lg border-b border-white/30 md:hidden">
+          <div className="px-6 py-4 space-y-4">
+            <button
+              onClick={() => scrollToSection('o-nas')}
+              className="block w-full text-left text-white hover:text-white/80 transition-colors py-2 border-b border-white/20"
+            >
+              O nas
+            </button>
+            <button
+              onClick={() => scrollToSection('uslugi')}
+              className="block w-full text-left text-white hover:text-white/80 transition-colors py-2 border-b border-white/20"
+            >
+              Usługi
+            </button>
+            <button
+              onClick={() => scrollToSection('kadra')}
+              className="block w-full text-left text-white hover:text-white/80 transition-colors py-2 border-b border-white/20"
+            >
+              Zespół
+            </button>
+            <button
+              onClick={() => scrollToSection('lokalizacje')}
+              className="block w-full text-left text-white hover:text-white/80 transition-colors py-2 border-b border-white/20"
+            >
+              Cennik
+            </button>
+            <button
+              onClick={() => scrollToSection('zapisy')}
+              className="block w-full text-left text-white hover:text-white/80 transition-colors py-2"
+            >
+              Kontakt
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Fullscreen Hero Section */}
       <section className="h-screen relative overflow-hidden bg-ems-black" style={{ minHeight: '100vh' }}>
@@ -317,7 +384,7 @@ export default function GymnasticsPage() {
       <section
         id="o-nas"
         ref={(el) => (sectionsRef.current[0] = el)}
-        className={`py-16 lg:py-24 px-6 bg-gym-cream section-texture ${
+        className={`py-16 lg:py-24 px-6 bg-gym-cream section-texture will-animate ${
           visibleSections.has('o-nas') ? 'gym-section-fade-up in-view' : 'gym-section-fade-up'
         }`}
       >
@@ -343,7 +410,7 @@ export default function GymnasticsPage() {
       <section
         ref={(el) => (sectionsRef.current[1] = el)}
         id="benefits"
-        className={`py-16 lg:py-24 px-6 bg-gym-beige ${
+        className={`py-16 lg:py-24 px-6 bg-gym-beige will-animate ${
           visibleSections.has('benefits') ? 'gym-section-fade-up in-view' : 'gym-section-fade-up'
         }`}
       >
@@ -392,7 +459,7 @@ export default function GymnasticsPage() {
       <section
         id="uslugi"
         ref={(el) => (sectionsRef.current[2] = el)}
-        className={`py-16 lg:py-24 bg-gym-cream section-texture ${
+        className={`py-16 lg:py-24 bg-gym-cream section-texture will-animate ${
           visibleSections.has('uslugi') ? 'gym-section-fade-up in-view' : 'gym-section-fade-up'
         }`}
       >
@@ -418,7 +485,7 @@ export default function GymnasticsPage() {
                     {/* Badge for obozy - positioned at top of text section */}
                     {index === services.length - 1 && (
                       <div className="mb-20">
-                        <span className="bg-gradient-to-r from-[#a16207] to-gym-yellow text-white px-8 py-3 rounded-full text-base font-bold uppercase tracking-wide font-montserrat shadow-lg">
+                        <span className="bg-gradient-to-r from-[#a16207] to-gym-yellow text-white px-8 py-3 rounded-full font-bold uppercase tracking-wide font-montserrat shadow-lg whitespace-nowrap" style={{fontSize: 'clamp(0.75rem, 2vw, 1rem)'}}>
                           Wakacyjna przygoda
                         </span>
                       </div>
@@ -514,7 +581,7 @@ export default function GymnasticsPage() {
       <section
         id="kadra"
         ref={(el) => (sectionsRef.current[3] = el)}
-        className={`py-16 lg:py-24 px-6 bg-gym-beige ${
+        className={`py-16 lg:py-24 px-6 bg-gym-beige will-animate ${
           visibleSections.has('kadra') ? 'gym-section-fade-up in-view' : 'gym-section-fade-up'
         }`}
       >
@@ -585,7 +652,7 @@ export default function GymnasticsPage() {
       <section
         id="lokalizacje"
         ref={(el) => (sectionsRef.current[4] = el)}
-        className={`py-16 lg:py-24 px-6 bg-gym-cream ${
+        className={`py-16 lg:py-24 px-6 bg-gym-cream will-animate ${
           visibleSections.has('lokalizacje') ? 'gym-section-fade-up in-view' : 'gym-section-fade-up'
         }`}
       >
@@ -717,7 +784,7 @@ export default function GymnasticsPage() {
       <section
         id="zapisy"
         ref={(el) => (sectionsRef.current[5] = el)}
-        className={`py-16 lg:py-24 px-6 bg-gym-beige ${
+        className={`py-16 lg:py-24 px-6 bg-gym-beige will-animate ${
           visibleSections.has('zapisy') ? 'gym-section-fade-up in-view' : 'gym-section-fade-up'
         }`}
       >

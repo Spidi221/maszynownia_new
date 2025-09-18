@@ -73,8 +73,9 @@ const NewsPage = () => {
   return (
     <>
       <SEOHead
-        title="Aktualności - Strefa Gimnastyki | Maszynownia"
-        description="Najnowsze informacje o zajęciach gimnastycznych, obozach, warsztatach i wydarzeniach w Strefie Gimnastyki Maszynownia."
+        title="Aktualności Gimnastyka Dzieci - Obozy, Warsztaty, Wydarzenia | Maszynownia Józefów"
+        description="Najnowsze informacje o obozach akrobatycznych, warsztatach gimnastycznych, urodzinach sportowych i wydarzeniach dla dzieci w okolicach Józefowa."
+        canonical="/strefagimnastyki/aktualnosci"
       />
 
       {/* Hero Section */}

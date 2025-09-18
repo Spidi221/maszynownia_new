@@ -8,7 +8,8 @@ const PrivacyPolicyPage = () => {
     <>
       <SEOHead
         title="Polityka Prywatności - Maszynownia"
-        description="Polityka prywatności Maszynownia. Dowiedz się jak przetwarzamy i chronimy Twoje dane osobowe."
+        description="Polityka prywatności Maszynownia Józefów. Zasady przetwarzania danych osobowych w studio EMS i na zajęciach gimnastycznych dla dzieci."
+        canonical="/polityka-prywatnosci"
       />
 
       <div className="min-h-screen bg-gray-50">

@@ -8,7 +8,8 @@ const RODOPage = () => {
     <>
       <SEOHead
         title="RODO - Ochrona Danych Osobowych | Maszynownia"
-        description="Informacja o przetwarzaniu danych osobowych zgodnie z RODO. Dowiedz się jak chronimy Twoje dane w Maszynowni."
+        description="Informacja o przetwarzaniu danych osobowych zgodnie z RODO. Dowiedz się jak chronimy Twoje dane w Maszynowni Józefów podczas treningów EMS i zajęć gimnastycznych."
+        canonical="/rodo"
       />
 
       <div className="min-h-screen bg-gray-50">

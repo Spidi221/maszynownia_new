@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 
 export default function EMSPage() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [visibleSections, setVisibleSections] = useState(new Set());
   const sectionsRef = useRef([]);
 
@@ -16,17 +17,24 @@ export default function EMSPage() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Intersection Observer for scroll animations
+  // Intersection Observer for scroll animations - Unified configuration
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setVisibleSections((prev) => new Set([...prev, entry.target.id]));
+            // Add performance optimization - mark animation as complete after trigger
+            setTimeout(() => {
+              entry.target.classList.add('animation-complete');
+            }, 800);
           }
         });
       },
-      { threshold: 0.1 }
+      {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+      }
     );
 
     sectionsRef.current.forEach((section) => {
@@ -41,7 +49,17 @@ export default function EMSPage() {
   }, []);
 
   const scrollToSection = (sectionId) => {
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+    setIsMobileMenuOpen(false); // Close menu first
+    setTimeout(() => {
+      document.getElementById(sectionId)?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }, 300); // Allow menu close animation
+  };
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   return (
@@ -49,14 +67,11 @@ export default function EMSPage() {
       <SEOHead
         title="Trening EMS Józefów - Maszynownia | Skuteczny trening w 30 minut"
         description="Dołącz do rewolucji w fitnessie. Trening EMS w Maszynowni to gwarancja szybkich efektów, oszczędność czasu i bezpieczeństwo. Umów trening próbny!"
+        canonical="/ems"
       />
 
       {/* Premium Header Navigation with Glass Effect */}
-      <header className={`sticky top-0 z-50 backdrop-blur-lg border-b transition-all duration-500 ${
-        isScrolled
-          ? 'bg-ems-black/80 border-ems-gold/30 shadow-2xl shadow-ems-gold/10'
-          : 'bg-black/70 border-ems-gold/20'
-      }`}>
+      <header className="sticky top-0 z-50 bg-ems-black border-b border-ems-gold/30 shadow-2xl shadow-ems-gold/10">
         <div className="max-w-none 2xl:max-w-[1920px] 3xl:max-w-[2400px] mx-auto px-6 lg:px-12 xl:px-16 2xl:px-24 3xl:px-32 4xl:px-40 py-1">
           <div className="flex items-center justify-between">
             {/* Back Arrow + Logo EMS po lewej */}
@@ -132,24 +147,94 @@ export default function EMSPage() {
               </div>
             </div>
 
-            {/* Mobile menu button */}
+            {/* Professional Mobile Hamburger Menu Button */}
             <div className="md:hidden">
-              <button className="text-white hover:text-ems-gold">
-                <span className="text-xl">☰</span>
+              <button
+                onClick={toggleMobileMenu}
+                className="text-white hover:text-ems-gold transition-colors p-3 relative z-50"
+                style={{ minWidth: '44px', minHeight: '44px' }}
+                aria-label="Toggle navigation menu"
+              >
+                <div className="w-6 h-6 relative flex flex-col justify-center items-center">
+                  <span
+                    className={`block w-6 h-0.5 bg-current transition-all duration-300 ${
+                      isMobileMenuOpen ? 'rotate-45 translate-y-0' : 'translate-y-[-6px]'
+                    }`}
+                  ></span>
+                  <span
+                    className={`block w-6 h-0.5 bg-current transition-all duration-300 ${
+                      isMobileMenuOpen ? 'opacity-0' : 'opacity-100'
+                    }`}
+                  ></span>
+                  <span
+                    className={`block w-6 h-0.5 bg-current transition-all duration-300 ${
+                      isMobileMenuOpen ? '-rotate-45 translate-y-0' : 'translate-y-[6px]'
+                    }`}
+                  ></span>
+                </div>
               </button>
             </div>
           </div>
         </div>
       </header>
 
+      {/* Professional Mobile Navigation Menu */}
+      <div
+        className={`fixed top-[73px] left-0 right-0 z-40 bg-ems-black/95 backdrop-blur-lg border-b border-ems-gold/30 md:hidden transform transition-all duration-300 ease-in-out ${
+          isMobileMenuOpen
+            ? 'translate-y-0 opacity-100 visible'
+            : '-translate-y-full opacity-0 invisible'
+        }`}
+      >
+        <div className="px-6 py-6 space-y-2">
+          <button
+            onClick={() => scrollToSection('o-nas')}
+            className="block w-full text-left text-white hover:text-ems-gold hover:bg-ems-gold/10 transition-all duration-200 py-3 px-4 rounded-lg border-b border-ems-gold/20 uppercase tracking-wider text-sm font-light"
+            style={{ minHeight: '44px' }}
+          >
+            Czym jest trening EMS
+          </button>
+          <button
+            onClick={() => scrollToSection('comparison')}
+            className="block w-full text-left text-white hover:text-ems-gold hover:bg-ems-gold/10 transition-all duration-200 py-3 px-4 rounded-lg border-b border-ems-gold/20 uppercase tracking-wider text-sm font-light"
+            style={{ minHeight: '44px' }}
+          >
+            EMS vs Siłownia
+          </button>
+          <button
+            onClick={() => scrollToSection('cennik')}
+            className="block w-full text-left text-white hover:text-ems-gold hover:bg-ems-gold/10 transition-all duration-200 py-3 px-4 rounded-lg border-b border-ems-gold/20 uppercase tracking-wider text-sm font-light"
+            style={{ minHeight: '44px' }}
+          >
+            Cennik
+          </button>
+          <button
+            onClick={() => scrollToSection('zespol')}
+            className="block w-full text-left text-white hover:text-ems-gold hover:bg-ems-gold/10 transition-all duration-200 py-3 px-4 rounded-lg border-b border-ems-gold/20 uppercase tracking-wider text-sm font-light"
+            style={{ minHeight: '44px' }}
+          >
+            Poznaj nasz zespół
+          </button>
+          <button
+            onClick={() => scrollToSection('kontakt')}
+            className="block w-full text-left text-white hover:text-ems-gold hover:bg-ems-gold/10 transition-all duration-200 py-3 px-4 rounded-lg uppercase tracking-wider text-sm font-light"
+            style={{ minHeight: '44px' }}
+          >
+            Kontakt
+          </button>
+        </div>
+      </div>
+
       {/* Fullscreen Hero Section */}
-      <section className="h-[calc(100vh-5rem)] relative overflow-hidden">
-        {/* Mobile Background - Right positioned (because of mirror effect) */}
+      <section className="relative overflow-hidden" style={{ height: '100vh', minHeight: '100vh', maxHeight: '100vh' }}>
+        {/* Mobile Background - Right edge aligned and flipped */}
         <div
-          className="absolute inset-0 bg-cover transform scale-x-[-1] filter brightness-110 contrast-125 saturate-110 sm:hidden"
+          className="absolute inset-0 sm:hidden transform scale-x-[-1]"
           style={{
             backgroundImage: 'url(/images/hero-ems-new.webp)',
-            backgroundPosition: 'right center'
+            backgroundPosition: 'right center',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat'
           }}
         ></div>
 
@@ -166,14 +251,14 @@ export default function EMSPage() {
         {/* Desktop Overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-ems-black/30 via-ems-black/10 to-transparent hidden sm:block"></div>
 
-        {/* Mobile Atmospheric Overlay - Lighter to show background */}
-        <div className="absolute inset-0 bg-black/30 sm:hidden"></div>
+        {/* Gradient overlay to protect text on mobile (like Strefa) */}
+        <div className="absolute inset-0 bg-gradient-to-r from-ems-black/60 via-ems-black/40 to-transparent sm:hidden"></div>
 
         {/* Premium Desktop Content with Entrance Animations */}
         <div className="relative z-10 text-center text-white px-6 lg:px-12 xl:px-16 2xl:px-24 3xl:px-32 4xl:px-40 max-w-4xl xl:max-w-5xl 2xl:max-w-6xl 3xl:max-w-7xl 4xl:max-w-8xl ml-auto translate-x-8 lg:translate-x-16 xl:translate-x-4 2xl:translate-x-2 hidden sm:flex sm:items-center sm:justify-center sm:h-full">
           <div>
-            <h1 className="text-ems-gold text-3xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-light uppercase mb-6 drop-shadow-lg" style={{color: '#D9BA74', opacity: 1}}>
-              Skuteczny trening dla dorosłych w 30 minut
+            <h1 className="text-ems-gold text-3xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl uppercase mb-6 drop-shadow-lg" style={{color: '#D9BA74', opacity: 1, fontWeight: '100', letterSpacing: '8px'}}>
+              Skuteczny trening w 30 minut
             </h1>
             <p className="hero-subtitle-entrance text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl mb-8 text-ems-pearl/90 max-w-2xl lg:max-w-3xl xl:max-w-4xl 2xl:max-w-5xl mx-auto drop-shadow-md font-light tracking-wide">
               Trening EMS to rewolucyjna metoda, która pozwala osiągnąć rezultaty tradycyjnego 90-minutowego treningu w zaledwie 30 minut.
@@ -187,18 +272,33 @@ export default function EMSPage() {
           </div>
         </div>
 
-        {/* Premium Mobile Content with Glass Effect */}
-        <div className="relative z-10 flex flex-col justify-center items-center h-full px-6 text-center text-white sm:hidden">
-          <div className="max-w-sm mx-auto space-y-6 glass-card p-6">
-            <h1 className="text-2xl font-light uppercase gradient-gold leading-tight drop-shadow-lg">
-              Skuteczny trening dla dorosłych w 30 minut
-            </h1>
-            <p className="text-sm leading-relaxed text-ems-pearl/95 drop-shadow-md tracking-wide">
-              Trening EMS to rewolucyjna metoda, która pozwala osiągnąć rezultaty tradycyjnego 90-minutowego treningu w zaledwie 30 minut.
-            </p>
+        {/* Mobile Content - Responsive positioned */}
+        <div className="relative z-10 h-full flex flex-col justify-end items-end p-6 sm:hidden">
+          <div className="max-w-sm text-right flex flex-col justify-center min-h-0 mb-20" style={{ height: 'auto' }}>
+            {/* H1 z własnym gradientem */}
+            <div className="relative mb-4">
+              <div className="absolute inset-0 bg-gradient-to-l from-black/70 via-black/40 to-transparent rounded-lg -m-2"></div>
+              <h1 className="relative text-4xl uppercase text-ems-gold leading-tight" style={{
+                fontWeight: '100',
+                letterSpacing: '6px',
+                textShadow: '3px 3px 8px rgba(0,0,0,1), -2px -2px 6px rgba(0,0,0,0.9), 0px 0px 20px rgba(0,0,0,0.8)'
+              }}>
+                SKUTECZNY<br />
+                TRENING<br />
+                W 30 MINUT
+              </h1>
+            </div>
+
+            {/* Paragraf z własnym gradientem */}
+            <div className="relative mb-6">
+              <div className="absolute inset-0 bg-gradient-to-l from-black/60 via-black/30 to-transparent rounded-lg -m-2"></div>
+              <p className="relative text-lg text-ems-pearl/90 max-w-sm tracking-wide leading-relaxed drop-shadow-[0_0_8px_rgba(217,186,116,0.6)]">
+                Trening EMS to rewolucyjna metoda, która pozwala osiągnąć rezultaty tradycyjnego 90-minutowego treningu w zaledwie 30 minut.
+              </p>
+            </div>
             <button
               onClick={() => scrollToSection('kontakt')}
-              className="premium-button text-sm px-8 py-3 font-medium"
+              className="bg-ems-gold text-ems-black px-8 py-4 rounded-full text-lg font-normal uppercase tracking-wider hover:bg-ems-gold/90 transition-all duration-300 shadow-lg"
             >
               Zacznij swój trening już dziś
             </button>
@@ -210,12 +310,12 @@ export default function EMSPage() {
       <section
         id="o-nas"
         ref={(el) => (sectionsRef.current[0] = el)}
-        className={`py-16 lg:py-20 px-6 section-gradient-dark section-texture ${
+        className={`py-16 lg:py-20 px-6 section-gradient-dark section-texture will-animate ${
           visibleSections.has('o-nas') ? 'section-fade-up in-view' : 'section-fade-up'
         }`}
       >
         <div className="max-w-6xl xl:max-w-7xl 2xl:max-w-[1920px] 3xl:max-w-[2400px] 4xl:max-w-[2800px] mx-auto">
-          <h2 className="section-title-premium text-4xl lg:text-6xl xl:text-7xl 2xl:text-8xl text-center mb-16">
+          <h2 className="text-4xl lg:text-6xl xl:text-7xl 2xl:text-8xl text-center mb-16 text-ems-gold" style={{fontWeight: '100', letterSpacing: '8px', textTransform: 'uppercase'}}>
             Czym jest trening EMS?
           </h2>
 
@@ -229,7 +329,7 @@ export default function EMSPage() {
                   <path d="M7 2v11h3v9l7-12h-4l4-8z"/>
                 </svg>
               </div>
-              <h3 className="accent-text-premium text-xl mb-4">Elektrostymulacja</h3>
+              <h3 className="accent-text-premium text-xl mb-4 font-light tracking-wider">Elektrostymulacja</h3>
               <p className="body-premium text-ems-pearl/80">
                 Bezpieczne impulsy elektryczne aktywują 90% mięśni jednocześnie,
                 maksymalizując efektywność każdego ruchu.
@@ -246,7 +346,7 @@ export default function EMSPage() {
                   <path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
                 </svg>
               </div>
-              <h3 className="accent-text-premium text-xl mb-4">Oszczędność czasu</h3>
+              <h3 className="accent-text-premium text-xl mb-4 font-light tracking-wider">Oszczędność czasu</h3>
               <p className="body-premium text-ems-pearl/80">
                 30 minut treningu EMS = 90 minut tradycyjnego treningu siłowego.
                 Idealny dla zapracowanych osób.
@@ -263,7 +363,7 @@ export default function EMSPage() {
                   <circle cx="12" cy="12" r="3"/>
                 </svg>
               </div>
-              <h3 className="accent-text-premium text-xl mb-4">Indywidualne podejście</h3>
+              <h3 className="accent-text-premium text-xl mb-4 font-light tracking-wider">Indywidualne podejście</h3>
               <p className="body-premium text-ems-pearl/80">
                 Trening dla każdego i indywidualne podejście.
                 Pracujemy w studio 1:1 z pełnym wsparciem trenera.
@@ -295,13 +395,13 @@ export default function EMSPage() {
       {/* Premium Comparison Table Section */}
       <section
         ref={(el) => (sectionsRef.current[1] = el)}
-        className={`py-16 lg:py-20 px-6 lg:px-12 xl:px-16 2xl:px-24 section-gradient-stone ${
+        className={`py-16 lg:py-20 px-6 lg:px-12 xl:px-16 2xl:px-24 section-gradient-stone will-animate ${
           visibleSections.has('comparison') ? 'section-fade-up in-view' : 'section-fade-up'
         }`}
         id="comparison"
       >
         <div className="max-w-6xl xl:max-w-7xl 2xl:max-w-[1920px] 3xl:max-w-[2400px] 4xl:max-w-[2800px] mx-auto">
-          <h2 className="section-title-premium text-4xl lg:text-6xl xl:text-7xl 2xl:text-8xl text-center mb-16">
+          <h2 className="text-4xl lg:text-6xl xl:text-7xl 2xl:text-8xl text-center mb-16 text-ems-gold" style={{fontWeight: '100', letterSpacing: '8px', textTransform: 'uppercase'}}>
             EMS vs Tradycyjna siłownia
           </h2>
 
@@ -309,9 +409,9 @@ export default function EMSPage() {
             <table className="w-full premium-table">
               <thead>
                 <tr className="bg-gradient-to-r from-ems-gold/20 to-ems-gold/10">
-                  <th className="px-6 py-5 text-left text-lg font-medium text-ems-pearl border-r border-ems-gold/30 uppercase tracking-wide">Cecha</th>
-                  <th className="px-6 py-5 text-center text-lg font-semibold gradient-gold border-r border-ems-gold/30 uppercase tracking-wider">Trening EMS</th>
-                  <th className="px-6 py-5 text-center text-lg font-medium text-stone-300 uppercase tracking-wide">Trening na siłowni</th>
+                  <th className="px-6 py-5 text-left text-lg font-light text-ems-pearl border-r border-ems-gold/30 uppercase tracking-widest">Cecha</th>
+                  <th className="px-6 py-5 text-center text-lg font-light gradient-gold border-r border-ems-gold/30 uppercase tracking-widest">Trening EMS</th>
+                  <th className="px-6 py-5 text-center text-lg font-light text-stone-300 uppercase tracking-widest">Trening na siłowni</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-ems-gold/10">
@@ -430,28 +530,28 @@ export default function EMSPage() {
       <section
         id="cennik"
         ref={(el) => (sectionsRef.current[2] = el)}
-        className={`py-16 lg:py-20 px-6 section-gradient-dark section-texture ${
+        className={`py-16 lg:py-20 px-6 section-gradient-dark section-texture will-animate ${
           visibleSections.has('cennik') ? 'section-fade-up in-view' : 'section-fade-up'
         }`}
       >
         <div className="max-w-6xl xl:max-w-7xl 2xl:max-w-[1920px] 3xl:max-w-[2400px] 4xl:max-w-[2800px] mx-auto">
-          <h2 className="section-title-premium text-4xl lg:text-6xl xl:text-7xl 2xl:text-8xl text-center mb-16">
+          <h2 className="text-4xl lg:text-6xl xl:text-7xl 2xl:text-8xl text-center mb-16 text-ems-gold" style={{fontWeight: '100', letterSpacing: '8px', textTransform: 'uppercase'}}>
             Cennik
           </h2>
 
           {/* Premium Single Training Cards */}
           <div className="mb-16">
-            <h3 className="accent-text-premium text-2xl mb-8 text-center">
+            <h3 className="accent-text-premium text-2xl mb-8 text-center font-light tracking-wider">
               Treningi Pojedyncze
             </h3>
             <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
               <div className="pricing-card-premium p-8 text-center card-stagger" style={{ '--stagger-index': '0' }}>
-                <h4 className="gradient-gold text-lg font-medium mb-4 uppercase tracking-wide">Trening intro</h4>
+                <h4 className="gradient-gold text-lg font-light mb-4 uppercase tracking-widest">Trening intro</h4>
                 <div className="price-number mb-3">79 zł</div>
                 <p className="text-ems-pearl/70 text-sm tracking-wide">1 trening wprowadzający</p>
               </div>
               <div className="pricing-card-premium p-8 text-center card-stagger" style={{ '--stagger-index': '1' }}>
-                <h4 className="gradient-gold text-lg font-medium mb-4 uppercase tracking-wide">Trening jednorazowy</h4>
+                <h4 className="gradient-gold text-lg font-light mb-4 uppercase tracking-widest">Trening jednorazowy</h4>
                 <div className="price-number mb-3">160 zł</div>
                 <p className="text-ems-pearl/70 text-sm tracking-wide">Pojedynczy trening</p>
               </div>
@@ -460,18 +560,18 @@ export default function EMSPage() {
 
           {/* Premium Pass Cards */}
           <div>
-            <h3 className="accent-text-premium text-2xl mb-8 text-center">
+            <h3 className="accent-text-premium text-2xl mb-8 text-center font-light tracking-wider">
               Karnety
             </h3>
             <div className="grid md:grid-cols-3 gap-8">
               <div className="pricing-card-premium p-8 text-center card-stagger" style={{ '--stagger-index': '3' }}>
-                <h4 className="gradient-gold text-lg font-medium mb-4 uppercase tracking-wide">Standard</h4>
+                <h4 className="gradient-gold text-lg font-light mb-4 uppercase tracking-widest">Standard</h4>
                 <div className="price-number mb-3">600 zł</div>
                 <p className="text-ems-pearl/70 text-sm mb-2 tracking-wide">4 treningi</p>
                 <p className="text-ems-gold-rich text-sm font-medium">150 zł za trening</p>
               </div>
               <div className="pricing-card-premium p-8 text-center card-stagger" style={{ '--stagger-index': '4' }}>
-                <h4 className="gradient-gold text-lg font-medium mb-4 uppercase tracking-wide">Premium</h4>
+                <h4 className="gradient-gold text-lg font-light mb-4 uppercase tracking-widest">Premium</h4>
                 <div className="price-number mb-3">1120 zł</div>
                 <p className="text-ems-pearl/70 text-sm mb-2 tracking-wide">8 treningów</p>
                 <p className="text-ems-gold-rich text-sm font-medium">140 zł za trening</p>
@@ -480,7 +580,7 @@ export default function EMSPage() {
                 <div className="popular-badge">
                   NAJPOPULARNIEJSZY
                 </div>
-                <h4 className="gradient-gold text-lg font-medium mb-4 mt-2 uppercase tracking-wide">Elite</h4>
+                <h4 className="gradient-gold text-lg font-light mb-4 mt-2 uppercase tracking-widest">Elite</h4>
                 <div className="price-number mb-3">1560 zł</div>
                 <p className="text-ems-pearl/70 text-sm mb-2 tracking-wide">12 treningów</p>
                 <p className="text-ems-gold-rich text-sm font-medium">130 zł za trening</p>
@@ -490,7 +590,7 @@ export default function EMSPage() {
 
           {/* Premium EMS Outfit Section */}
           <div className="mt-20">
-            <h3 className="accent-text-premium text-2xl mb-8 text-center">
+            <h3 className="accent-text-premium text-2xl mb-8 text-center font-light tracking-wider">
               Profesjonalny Strój EMS
             </h3>
             <div className="max-w-md mx-auto">
@@ -505,7 +605,7 @@ export default function EMSPage() {
                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                   </svg>
                 </div>
-                <h4 className="gradient-gold text-xl font-medium mb-6 uppercase tracking-wide">Strój treningowy EMS</h4>
+                <h4 className="gradient-gold text-xl font-light mb-6 uppercase tracking-widest">Strój treningowy EMS</h4>
                 <div className="price-number mb-6 text-4xl">200 zł</div>
                 <div className="space-y-3 mb-6">
                   <p className="text-ems-pearl/90 text-sm tracking-wide">✓ Profesjonalna technologia elektrod</p>
@@ -526,12 +626,12 @@ export default function EMSPage() {
       <section
         id="zespol"
         ref={(el) => (sectionsRef.current[3] = el)}
-        className={`py-16 lg:py-20 px-6 bg-ems-charcoal section-texture ${
+        className={`py-16 lg:py-20 px-6 bg-ems-charcoal section-texture will-animate ${
           visibleSections.has('zespol') ? 'section-fade-up in-view' : 'section-fade-up'
         }`}
       >
         <div className="max-w-6xl xl:max-w-7xl 2xl:max-w-[1920px] 3xl:max-w-[2400px] 4xl:max-w-[2800px] mx-auto">
-          <h2 className="section-title-premium text-4xl lg:text-6xl xl:text-7xl 2xl:text-8xl text-center mb-16">
+          <h2 className="text-4xl lg:text-6xl xl:text-7xl 2xl:text-8xl text-center mb-16 text-ems-gold" style={{fontWeight: '100', letterSpacing: '8px', textTransform: 'uppercase'}}>
             Poznaj nasz zespół
           </h2>
           <div className="text-center max-w-3xl mx-auto glass-card p-8">
@@ -539,7 +639,7 @@ export default function EMSPage() {
               Nasz doświadczony zespół trenerów zapewni Ci profesjonalną opiekę
               i indywidualne podejście podczas każdego treningu EMS.
             </p>
-            <p className="accent-text-premium text-xl">
+            <p className="accent-text-premium text-xl font-light tracking-wider">
               Skontaktuj się z nami, aby umówić się na trening próbny!
             </p>
           </div>
@@ -550,19 +650,19 @@ export default function EMSPage() {
       <section
         id="kontakt"
         ref={(el) => (sectionsRef.current[4] = el)}
-        className={`py-16 lg:py-20 px-6 section-gradient-stone section-texture ${
+        className={`py-16 lg:py-20 px-6 section-gradient-stone section-texture will-animate ${
           visibleSections.has('kontakt') ? 'section-fade-up in-view' : 'section-fade-up'
         }`}
       >
         <div className="max-w-6xl xl:max-w-7xl 2xl:max-w-[1920px] 3xl:max-w-[2400px] 4xl:max-w-[2800px] mx-auto">
-          <h2 className="section-title-premium text-4xl lg:text-6xl xl:text-7xl 2xl:text-8xl text-center mb-16">
+          <h2 className="text-4xl lg:text-6xl xl:text-7xl 2xl:text-8xl text-center mb-16 text-ems-gold" style={{fontWeight: '100', letterSpacing: '8px', textTransform: 'uppercase'}}>
             Kontakt
           </h2>
 
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Premium Contact Info */}
             <div>
-              <h3 className="accent-text-premium text-2xl mb-8">
+              <h3 className="accent-text-premium text-2xl mb-8 font-light tracking-wider">
                 Skontaktuj się z nami
               </h3>
               <div className="space-y-6 mb-10">
@@ -572,7 +672,7 @@ export default function EMSPage() {
                       <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>
                     </svg>
                   </div>
-                  <a href="tel:+48696376377" className="text-ems-pearl hover:text-ems-gold-rich transition-colors text-lg">
+                  <a href="tel:+48696376377" className="text-ems-pearl hover:text-ems-gold-rich transition-colors text-sm sm:text-lg">
                     +48 696 376 377
                   </a>
                 </div>
@@ -582,7 +682,7 @@ export default function EMSPage() {
                       <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
                     </svg>
                   </div>
-                  <a href="mailto:maszynowniaems@gmail.com" className="text-ems-pearl hover:text-ems-gold-rich transition-colors text-lg">
+                  <a href="mailto:maszynowniaems@gmail.com" className="text-ems-pearl hover:text-ems-gold-rich transition-colors text-sm sm:text-lg break-all">
                     maszynowniaems@gmail.com
                   </a>
                 </div>
@@ -592,7 +692,7 @@ export default function EMSPage() {
                       <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
                     </svg>
                   </div>
-                  <span className="text-ems-pearl text-lg">
+                  <span className="text-ems-pearl text-sm sm:text-lg">
                     Generała Sikorskiego 113<br />
                     Józefów, Warszawa
                   </span>
@@ -601,7 +701,7 @@ export default function EMSPage() {
 
               {/* Premium Social Media */}
               <div>
-                <h4 className="accent-text-premium text-lg mb-6">Znajdź nas w social media</h4>
+                <h4 className="accent-text-premium text-lg mb-6 font-light tracking-wider">Znajdź nas w social media</h4>
                 <div className="flex gap-4">
                   <a
                     href="https://www.facebook.com/maszynowniatreningems"
@@ -628,11 +728,11 @@ export default function EMSPage() {
             </div>
 
             {/* Premium Map Section */}
-            <div>
-              <h3 className="accent-text-premium text-2xl mb-8">
+            <div className="lg:col-start-2">
+              <h3 className="accent-text-premium text-2xl mb-8 font-light tracking-wider">
                 Lokalizacja
               </h3>
-              <div className="glass-card p-2 overflow-hidden">
+              <div className="glass-card p-2 overflow-hidden mx-auto max-w-md lg:max-w-none">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2448.7362947845826!2d21.227563!3d52.133889!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ecce5a7e3e1d9%3A0x8b3e9a5c9f8b2a1e!2sGenerała%20Sikorskiego%20113%2C%2005-410%20Józefów!5e0!3m2!1spl!2spl!4v1630000000000!5m2!1spl!2spl"
                   width="100%"
