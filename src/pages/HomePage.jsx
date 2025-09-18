@@ -55,7 +55,7 @@ const HomePage = () => {
         <div
           className="absolute inset-0 bg-cover opacity-30"
           style={{
-            backgroundImage: 'url(/images/girl-gymnastics-final.png)',
+            backgroundImage: 'url(/images/girl-gymnastics-final.webp)',
             backgroundPosition: '70% bottom',
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat'
@@ -68,9 +68,11 @@ const HomePage = () => {
 
           {/* Button + Description */}
           <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 lg:relative lg:bottom-auto lg:left-auto lg:transform-none lg:text-center lg:mb-12 mobile-gym-button">
-            <button className="border-2 border-white text-white uppercase tracking-wider px-12 py-6 mb-4 font-medium transition-all duration-300 hover:bg-white hover:text-gym-yellow mobile-text-small lg:py-4 text-xl lg:min-w-[300px] lg:min-h-[60px]">
-              Sprawdź zajęcia
-            </button>
+            <a href="/strefagimnastyki">
+              <button className="border-2 border-white text-white uppercase tracking-wider px-12 py-6 mb-4 font-medium transition-all duration-300 hover:bg-white hover:text-gym-yellow mobile-text-small lg:py-4 text-xl lg:min-w-[300px] lg:min-h-[60px]">
+                Sprawdź zajęcia
+              </button>
+            </a>
             <p className="text-white/80 text-sm tracking-wider mobile-text-xs">
               Gimnastyka dla dzieci w każdym wieku
             </p>

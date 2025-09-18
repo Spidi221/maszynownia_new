@@ -1,4 +1,5 @@
 import SEOHead from '../components/SEOHead';
+import Footer from '../components/Footer';
 import { useState, useEffect, useRef } from 'react';
 
 export default function EMSPage() {
@@ -147,7 +148,7 @@ export default function EMSPage() {
         <div
           className="absolute inset-0 bg-cover transform scale-x-[-1] filter brightness-110 contrast-125 saturate-110 sm:hidden"
           style={{
-            backgroundImage: 'url(/images/hero-ems-new.jpg)',
+            backgroundImage: 'url(/images/hero-ems-new.webp)',
             backgroundPosition: 'right center'
           }}
         ></div>
@@ -156,7 +157,7 @@ export default function EMSPage() {
         <div
           className="absolute inset-0 bg-cover transform scale-x-[-1] filter brightness-110 contrast-125 saturate-110 hidden sm:block"
           style={{
-            backgroundImage: 'url(/images/hero-ems-new.jpg)',
+            backgroundImage: 'url(/images/hero-ems-new.webp)',
             backgroundPosition: '100% center',
             backgroundSize: 'cover'
           }}
@@ -670,6 +671,9 @@ export default function EMSPage() {
           </svg>
         </button>
       )}
+
+      {/* Footer */}
+      <Footer variant="ems" />
     </>
   );
 }

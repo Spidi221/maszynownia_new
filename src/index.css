@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -22,11 +23,23 @@
   --ems-graphite: #2A2B2D;
   --ems-pearl: #FEFDFB;
   --ems-mist: rgba(254, 253, 251, 0.1);
+
+  /* Gym Color System */
+  --gym-yellow: #D9A748;
+  --gym-yellow-light: #E8C472;
+  --gym-yellow-deep: #C49A35;
+  --gym-yellow-soft: #F4E5B3;
+  --gym-orange-accent: #FF8B47;
+  --gym-cream: #FFF8E7;
+  --gym-beige: #F5F0E4;
+  --gym-brown-warm: #8B4513;
+  --gym-navy-trust: #2C3E50;
+  --gym-yellow-glow: rgba(217, 167, 72, 0.3);
 }
 
 @layer base {
   * {
-    @apply font-dosis;
+    @apply font-montserrat font-light;
   }
 
   html, body, #root {
@@ -55,12 +68,12 @@
   }
 
   .ems-button {
-    @apply border-2 border-ems-gold text-white uppercase tracking-wider px-8 py-4 font-medium transition-all duration-300 hover:bg-ems-gold hover:text-ems-black;
+    @apply border-2 border-ems-gold text-white uppercase tracking-wider px-8 py-4 font-medium transition-all duration-300 hover:bg-ems-gold hover:text-ems-black font-montserrat;
   }
 
   /* Premium Typography Classes */
   .hero-title-premium {
-    font-family: 'Dosis', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-weight: 300;
     letter-spacing: 6.5px;
     text-transform: uppercase;
@@ -73,7 +86,7 @@
   }
 
   .section-title-premium {
-    font-family: 'Dosis', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-weight: 400;
     letter-spacing: 1.9px;
     text-transform: uppercase;
@@ -83,7 +96,7 @@
   }
 
   .body-premium {
-    font-family: 'Dosis', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 400;
     letter-spacing: 2.6px;
     line-height: 1.8;
@@ -92,7 +105,7 @@
   }
 
   .accent-text-premium {
-    font-family: 'Dosis', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 500;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -226,7 +239,7 @@
   }
 
   .gym-button {
-    @apply border-2 border-white text-white uppercase tracking-wider px-8 py-4 font-medium transition-all duration-300 hover:bg-white hover:text-gym-yellow;
+    @apply border-2 border-white text-white uppercase tracking-wider px-8 py-4 font-medium transition-all duration-300 hover:bg-white hover:text-gym-yellow font-montserrat;
   }
 
   /* Layout Components */
@@ -605,3 +618,293 @@
       padding: inherit !important;
     }
   }
+
+/* ========================================
+   GYM-SPECIFIC UNIFIED CARD SYSTEM
+   ======================================== */
+
+/* Unified Gym Card - Consistent styling for all card types */
+.gym-card-unified {
+  background: rgba(217, 167, 72, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 2px solid rgba(217, 167, 72, 0.2);
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 0 10px 30px rgba(217, 167, 72, 0.15);
+}
+
+.gym-card-unified::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gym-yellow), transparent);
+  opacity: 0.6;
+}
+
+.gym-card-unified:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 25px 60px var(--gym-yellow-glow);
+  border-color: var(--gym-yellow);
+  background: rgba(217, 167, 72, 0.12);
+}
+
+/* Light variant for cream/beige backgrounds */
+.gym-card-unified.light {
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid rgba(217, 167, 72, 0.25);
+  box-shadow: 0 10px 30px rgba(217, 167, 72, 0.2);
+}
+
+.gym-card-unified.light:hover {
+  background: rgba(255, 255, 255, 1);
+  border-color: var(--gym-yellow-deep);
+  box-shadow: 0 20px 40px rgba(217, 167, 72, 0.3);
+}
+
+/* Contact variant with enhanced styling */
+.gym-card-unified.contact {
+  background: rgba(217, 167, 72, 0.12);
+  border: 2px solid rgba(217, 167, 72, 0.3);
+  padding: 1.5rem;
+}
+
+.gym-card-unified.contact:hover {
+  background: rgba(217, 167, 72, 0.18);
+  border-color: #a16207;
+}
+
+/* Location header cards - no hover effects */
+.gym-card-unified.location-header:hover {
+  transform: none;
+  box-shadow: inherit;
+  border-color: inherit;
+  background: inherit;
+}
+
+/* Location expanded content - no hover effects */
+.gym-card-unified.location-expanded:hover {
+  transform: none;
+  box-shadow: inherit;
+  border-color: inherit;
+  background: inherit;
+}
+
+/* Legacy classes for backward compatibility - will be phased out */
+.glass-card-gym,
+.light-card-gym,
+.gym-service-card,
+.gym-pricing-card,
+.gym-contact-card {
+  /* Redirect to unified system */
+  background: rgba(217, 167, 72, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 2px solid rgba(217, 167, 72, 0.2);
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 0 10px 30px rgba(217, 167, 72, 0.15);
+}
+
+.glass-card-gym::before,
+.light-card-gym::before,
+.gym-service-card::before,
+.gym-pricing-card::before,
+.gym-contact-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gym-yellow), transparent);
+  opacity: 0.6;
+}
+
+.glass-card-gym:hover,
+.light-card-gym:hover,
+.gym-service-card:hover,
+.gym-pricing-card:hover,
+.gym-contact-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 25px 60px var(--gym-yellow-glow);
+  border-color: var(--gym-yellow);
+  background: rgba(217, 167, 72, 0.12);
+}
+
+/* ========================================
+   GYM STANDARDIZED CTA BUTTONS
+   ======================================== */
+
+/* Primary CTA Button - Main call-to-action buttons */
+.gym-button-primary {
+  @apply bg-[#a16207] border-2 border-[#a16207] text-white uppercase tracking-wider;
+  @apply font-montserrat font-semibold transition-all duration-300 rounded-full;
+  @apply hover:bg-gym-navy-trust hover:border-gym-navy-trust hover:scale-105;
+  @apply px-8 py-3 text-base;
+  @apply md:px-12 md:py-4 md:text-lg;
+  @apply lg:px-16 lg:py-6 lg:text-xl;
+  @apply xl:px-20 xl:py-7 xl:text-2xl;
+  @apply 2xl:px-24 2xl:py-8 2xl:text-3xl;
+}
+
+/* Secondary CTA Button - Less prominent actions */
+.gym-button-secondary {
+  @apply bg-gym-navy-trust border-2 border-gym-navy-trust text-white;
+  @apply font-montserrat font-semibold transition-all duration-300 rounded-xl;
+  @apply hover:bg-[#a16207] hover:border-[#a16207] hover:scale-105;
+  @apply px-6 py-3 text-sm;
+  @apply flex items-center justify-center gap-2;
+}
+
+/* Navigation Button - For header/menu navigation */
+.gym-button-nav {
+  @apply text-gym-navy-trust hover:text-white transition-colors uppercase tracking-wider;
+  @apply font-montserrat font-medium;
+}
+
+/* Icon Button - For floating/utility buttons */
+.gym-button-icon {
+  background: rgba(217, 167, 72, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  @apply border-2 border-gym-yellow/30;
+  @apply text-gym-yellow hover:text-white transition-all duration-300;
+  @apply hover:scale-110 hover:border-[#a16207] hover:bg-[#a16207]/20;
+  @apply rounded-full p-4;
+}
+
+/* Map Button - For location buttons */
+.gym-button-map {
+  @apply bg-[#a16207] hover:bg-[#a16207]/80 text-white;
+  @apply px-4 py-2 rounded-lg font-montserrat font-medium transition-colors text-sm;
+  @apply flex items-center gap-2;
+}
+
+/* ========================================
+   GYM ANIMATION KEYFRAMES
+   ======================================== */
+
+/* Gentle Bounce - Kid-friendly animation */
+@keyframes gentle-bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.gym-bounce-hover {
+  animation: gentle-bounce 2s ease-in-out infinite;
+}
+
+.gym-bounce-hover:hover {
+  animation-play-state: paused;
+  transform: translateY(-5px) scale(1.05);
+}
+
+/* Gym Section Fade Up */
+.gym-section-fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.gym-section-fade-up.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Slide In From Right (consistency with EMS) */
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Gym Hero Entrance Animations */
+.gym-hero-title-entrance {
+  opacity: 0;
+  transform: translateX(100px);
+  animation: slideInFromRight 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
+}
+
+.gym-hero-subtitle-entrance {
+  opacity: 0;
+  transform: translateX(80px);
+  animation: slideInFromRight 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s forwards;
+}
+
+.gym-hero-cta-entrance {
+  opacity: 0;
+  transform: translateX(60px);
+  animation: slideInFromRight 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.9s forwards;
+}
+
+/* ========================================
+   GYM TYPOGRAPHY CLASSES
+   ======================================== */
+
+/* Gym Hero Title Premium */
+.gym-hero-title-premium {
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-size: clamp(2.5rem, 8vw, 6rem);
+  text-shadow: 0 4px 8px rgba(0,0,0,0.4);
+  background: linear-gradient(135deg, #D9A748 0%, #E8B85C 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Gym Section Title Premium */
+.gym-section-title-premium {
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.25px;
+  text-transform: uppercase;
+  font-size: clamp(1.8rem, 4vw, 3.5rem);
+  margin-bottom: 2rem;
+}
+
+/* Gym Body Premium */
+.gym-body-premium {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.15px;
+  line-height: 1.7;
+  font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+  color: var(--ems-pearl);
+}
+
+/* Gym Accent Text Premium */
+.gym-accent-text-premium {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--gym-yellow-light);
+}
+
+/* Gym Playful Accent */
+.gym-playful-accent {
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.25px;
+  color: #a16207;
+}
