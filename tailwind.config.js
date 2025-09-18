@@ -6,6 +6,18 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        // Override default breakpoints for better tablet support
+        'sm': '640px',
+        'md': '768px',
+        'lg': '1024px',
+        'xl': '1200px', // NEW: True desktop starts here (not 1024px)
+        '2xl': '1536px',
+        // Custom breakpoints for specific cases
+        'tablet-portrait': '768px',
+        'tablet-landscape': '1024px',
+        'desktop-small': '1200px',
+      },
       colors: {
         'ems-gold': '#D9BA74',
         'ems-gold-rich': '#E5C988',

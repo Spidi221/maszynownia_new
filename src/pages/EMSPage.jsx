@@ -88,13 +88,13 @@ export default function EMSPage() {
               <img
                 src="/images/logo-ems.webp"
                 alt="EMS Logo"
-                className="h-64 w-auto -my-24 -translate-y-3"
+                className="h-64 w-auto -my-24 -translate-y-3 tablet-logo-scale"
               />
               </a>
             </div>
 
-            {/* Nawigacja po prawej */}
-            <div className="hidden md:flex items-center gap-8">
+            {/* Nawigacja po prawej - TYLKO na prawdziwym desktop 1200px+ */}
+            <div className="hidden xl:flex items-center gap-8">
               <button
                 onClick={() => scrollToSection('o-nas')}
                 className="touch-nav-button text-white hover:text-ems-gold transition-colors uppercase tracking-wider"
@@ -154,8 +154,8 @@ export default function EMSPage() {
               </div>
             </div>
 
-            {/* Professional Mobile Hamburger Menu Button */}
-            <div className="md:hidden">
+            {/* Professional Mobile Hamburger Menu Button - Tablety też dostają mobile menu */}
+            <div className="xl:hidden">
               <button
                 onClick={toggleMobileMenu}
                 className="text-white hover:text-ems-gold transition-colors p-3 relative z-50"
@@ -187,7 +187,7 @@ export default function EMSPage() {
 
       {/* Professional Mobile Navigation Menu */}
       <div
-        className={`fixed top-[73px] left-0 right-0 z-40 bg-ems-black/95 backdrop-blur-lg border-b border-ems-gold/30 md:hidden transform transition-all duration-300 ease-in-out ${
+        className={`fixed top-[73px] left-0 right-0 z-40 bg-ems-black/95 backdrop-blur-lg border-b border-ems-gold/30 xl:hidden transform transition-all duration-300 ease-in-out ${
           isMobileMenuOpen
             ? 'translate-y-0 opacity-100 visible'
             : '-translate-y-full opacity-0 invisible'
@@ -245,9 +245,9 @@ export default function EMSPage() {
           }}
         ></div>
 
-        {/* Desktop Background - Woman ALWAYS on left edge */}
+        {/* Desktop Background - Woman ALWAYS on left edge - TYLKO na prawdziwym desktop */}
         <div
-          className="absolute inset-0 bg-cover transform scale-x-[-1] filter brightness-110 contrast-125 saturate-110 hidden sm:block"
+          className="absolute inset-0 bg-cover transform scale-x-[-1] filter brightness-110 contrast-125 saturate-110 hidden xl:block"
           style={{
             backgroundImage: 'url(/images/hero-ems-new.webp)',
             backgroundPosition: '100% center',
@@ -255,14 +255,27 @@ export default function EMSPage() {
           }}
         ></div>
 
-        {/* Desktop Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-ems-black/30 via-ems-black/10 to-transparent hidden sm:block"></div>
+        {/* Desktop Overlay - TYLKO desktop */}
+        <div className="absolute inset-0 bg-gradient-to-r from-ems-black/30 via-ems-black/10 to-transparent hidden xl:block"></div>
 
-        {/* Gradient overlay to protect text on mobile (like Strefa) */}
+        {/* TABLET Background (768px-1199px) - Optimized positioning */}
+        <div
+          className="absolute inset-0 transform scale-x-[-1] filter brightness-105 contrast-115 saturate-105 hidden sm:block xl:hidden tablet-background-fix ipad-air-square-fix ipad-portrait-fix"
+          style={{
+            backgroundImage: 'url(/images/hero-ems-new.webp)',
+            backgroundPosition: '70% center',
+            backgroundSize: 'cover'
+          }}
+        ></div>
+
+        {/* Tablet Overlay - Better text protection */}
+        <div className="absolute inset-0 bg-gradient-to-r from-ems-black/50 via-ems-black/30 to-transparent hidden sm:block xl:hidden"></div>
+
+        {/* Gradient overlay to protect text on mobile */}
         <div className="absolute inset-0 bg-gradient-to-r from-ems-black/60 via-ems-black/40 to-transparent sm:hidden"></div>
 
-        {/* Premium Desktop Content with Entrance Animations */}
-        <div className="relative z-10 text-center text-white px-6 lg:px-12 xl:px-16 2xl:px-24 3xl:px-32 4xl:px-40 max-w-4xl xl:max-w-5xl 2xl:max-w-6xl 3xl:max-w-7xl 4xl:max-w-8xl ml-auto translate-x-8 lg:translate-x-16 xl:translate-x-4 2xl:translate-x-2 hidden sm:flex sm:items-center sm:justify-center sm:h-full">
+        {/* Premium Desktop Content with Entrance Animations - TYLKO desktop 1200px+ */}
+        <div className="relative z-10 text-center text-white px-6 lg:px-12 xl:px-16 2xl:px-24 3xl:px-32 4xl:px-40 max-w-4xl xl:max-w-5xl 2xl:max-w-6xl 3xl:max-w-7xl 4xl:max-w-8xl ml-auto translate-x-8 lg:translate-x-16 xl:translate-x-4 2xl:translate-x-2 hidden xl:flex xl:items-center xl:justify-center xl:h-full">
           <div>
             <h1 className="text-ems-gold text-3xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl uppercase mb-6 drop-shadow-lg" style={{color: '#D9BA74', opacity: 1, fontWeight: '100', letterSpacing: '8px'}}>
               Skuteczny trening w 30 minut
@@ -280,13 +293,13 @@ export default function EMSPage() {
           </div>
         </div>
 
-        {/* Mobile Content - Responsive positioned */}
-        <div className="relative z-10 h-full flex flex-col justify-end items-end p-6 sm:hidden">
-          <div className="max-w-sm text-right flex flex-col justify-center min-h-0 mb-20" style={{ height: 'auto' }}>
-            {/* H1 z własnym gradientem */}
-            <div className="relative mb-4">
-              <div className="absolute inset-0 bg-gradient-to-l from-black/70 via-black/40 to-transparent rounded-lg -m-2"></div>
-              <h1 className="relative text-4xl uppercase text-ems-gold leading-tight" style={{
+        {/* Mobile + Tablet Content - Responsive positioned */}
+        <div className="relative z-10 h-full flex flex-col justify-end items-end p-6 xl:hidden">
+          <div className="max-w-sm sm:max-w-md lg:max-w-lg text-right flex flex-col justify-center min-h-0 mb-20 sm:mb-24 lg:mb-32 tablet-hero-content ipad-air-hero-content ipad-portrait-hero-content" style={{ height: 'auto' }}>
+            {/* H1 z responsywnym gradientem */}
+            <div className="relative mb-4 sm:mb-6">
+              <div className="absolute inset-0 bg-gradient-to-l from-black/70 via-black/40 to-transparent rounded-lg -m-2 sm:-m-3"></div>
+              <h1 className="relative text-4xl sm:text-5xl lg:text-6xl uppercase text-ems-gold leading-tight tablet-hero-title ipad-air-hero-title ipad-portrait-hero-title" style={{
                 fontWeight: '100',
                 letterSpacing: '6px',
                 textShadow: '3px 3px 8px rgba(0,0,0,1), -2px -2px 6px rgba(0,0,0,0.9), 0px 0px 20px rgba(0,0,0,0.8)'
@@ -297,16 +310,16 @@ export default function EMSPage() {
               </h1>
             </div>
 
-            {/* Paragraf z własnym gradientem */}
-            <div className="relative mb-6">
-              <div className="absolute inset-0 bg-gradient-to-l from-black/60 via-black/30 to-transparent rounded-lg -m-2"></div>
-              <p className="relative text-lg text-ems-pearl/90 max-w-sm tracking-wide leading-relaxed drop-shadow-[0_0_8px_rgba(217,186,116,0.6)]">
+            {/* Paragraf z responsywnym gradientem */}
+            <div className="relative mb-6 sm:mb-8">
+              <div className="absolute inset-0 bg-gradient-to-l from-black/60 via-black/30 to-transparent rounded-lg -m-2 sm:-m-3"></div>
+              <p className="relative text-lg sm:text-xl lg:text-2xl text-ems-pearl/90 max-w-sm sm:max-w-md lg:max-w-lg tracking-wide leading-relaxed drop-shadow-[0_0_8px_rgba(217,186,116,0.6)] tablet-hero-subtitle ipad-air-hero-subtitle ipad-portrait-hero-subtitle">
                 Trening EMS to rewolucyjna metoda, która pozwala osiągnąć rezultaty tradycyjnego 90-minutowego treningu w zaledwie 30 minut.
               </p>
             </div>
             <button
               onClick={() => scrollToSection('kontakt')}
-              className="touch-button-primary touch-button-ems bg-ems-gold text-ems-black px-8 py-4 rounded-full text-lg font-normal uppercase tracking-wider hover:bg-ems-gold/90 transition-all duration-300 shadow-lg"
+              className="touch-button-primary touch-button-ems bg-ems-gold text-ems-black px-8 py-4 sm:px-10 sm:py-5 lg:px-12 lg:py-6 rounded-full text-lg sm:text-xl lg:text-2xl font-normal uppercase tracking-wider hover:bg-ems-gold/90 transition-all duration-300 shadow-lg tablet-hero-button ipad-air-hero-button ipad-portrait-hero-button"
               style={{minWidth: '44px', minHeight: '44px'}}
             >
               Zacznij swój trening już dziś
