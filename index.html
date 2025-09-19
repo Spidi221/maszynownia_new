@@ -18,8 +18,14 @@
     <!-- Primary Meta Tags -->
     <meta name="title" content="Maszynownia - Trening EMS i Gimnastyka dla Dzieci | Józefów" />
     <meta name="description" content="Odkryj trening EMS dla dorosłych i zajęcia gimnastyczne dla dzieci w Maszynowni. Profesjonalne studio w Józefowie, Michalinie i Górze Kalwarii." />
-    <meta name="keywords" content="EMS, trening EMS, gimnastyka dla dzieci, Józefów, Michalin, Góra Kalwaria, fitness, akrobatyka" />
+    <meta name="keywords" content="EMS, trening EMS, gimnastyka dla dzieci, Józefów, Michalin, Góra Kalwaria, fitness, akrobatyka, studio treningu, elektrostymulacja, zajęcia dla dzieci" />
     <meta name="author" content="Maszynownia" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="Polish" />
+    <meta name="geo.region" content="PL-MZ" />
+    <meta name="geo.placename" content="Józefów, Poland" />
+    <meta name="geo.position" content="52.13;21.23" />
+    <meta name="ICBM" content="52.13, 21.23" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -35,8 +41,12 @@
     <meta property="twitter:description" content="Profesjonalne studio EMS i gimnastyki w Józefowie" />
     <meta property="twitter:image" content="/og-image.jpg" />
 
-    <!-- Fonts -->
+    <!-- OPTIMIZED FONT LOADING - Non-blocking with fallback -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Preload critical fonts for instant display -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"></noscript>
 
     <!-- Preload critical images -->
     <link rel="preload" href="/images/woman-ems.webp" as="image" type="image/webp">
@@ -65,8 +75,8 @@
       "priceRange": "$$"
     }
     </script>
-    <!-- Netlify Identity Widget -->
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <!-- Netlify Identity Widget - Async loading -->
+    <script async src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body>
     <div id="root"></div>

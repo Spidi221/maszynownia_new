@@ -129,6 +129,7 @@ export default function EMSPage() {
                   dimensions.width >= 1000 ? 'text-base' : 'text-sm'
                 }`}
                 style={{minWidth: '44px', minHeight: '44px'}}
+                aria-label="Przejdź do sekcji O nas - Czym jest trening EMS"
               >
                 O nas
               </button>
@@ -138,6 +139,7 @@ export default function EMSPage() {
                   dimensions.width >= 1000 ? 'text-base' : 'text-sm'
                 }`}
                 style={{minWidth: '44px', minHeight: '44px'}}
+                aria-label="Przejdź do porównania EMS vs Tradycyjna siłownia"
               >
                 EMS vs Siłownia
               </button>
@@ -147,6 +149,7 @@ export default function EMSPage() {
                   dimensions.width >= 1000 ? 'text-base' : 'text-sm'
                 }`}
                 style={{minWidth: '44px', minHeight: '44px'}}
+                aria-label="Przejdź do sekcji Cennik - ceny treningów EMS"
               >
                 Cennik
               </button>
@@ -156,6 +159,7 @@ export default function EMSPage() {
                   dimensions.width >= 1000 ? 'text-base' : 'text-sm'
                 }`}
                 style={{minWidth: '44px', minHeight: '44px'}}
+                aria-label="Przejdź do sekcji Kontakt - informacje kontaktowe"
               >
                 Kontakt
               </button>
@@ -171,6 +175,7 @@ export default function EMSPage() {
                   rel="noopener noreferrer"
                   className="text-white hover:text-ems-gold transition-colors"
                   title="Facebook"
+                  aria-label="Odwiedź naszą stronę Facebook"
                 >
                   <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
@@ -182,6 +187,7 @@ export default function EMSPage() {
                   rel="noopener noreferrer"
                   className="text-white hover:text-ems-gold transition-colors"
                   title="Instagram"
+                  aria-label="Odwiedź naszą stronę Instagram"
                 >
                   <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
@@ -238,6 +244,7 @@ export default function EMSPage() {
             onClick={() => scrollToSection('o-nas')}
             className="block w-full text-left text-white hover:text-ems-gold hover:bg-ems-gold/10 transition-all duration-200 py-3 px-4 rounded-lg border-b border-ems-gold/20 uppercase tracking-wider text-sm font-light"
             style={{ minHeight: '44px' }}
+            aria-label="Przejdź do sekcji Czym jest trening EMS"
           >
             Czym jest trening EMS
           </button>
@@ -245,6 +252,7 @@ export default function EMSPage() {
             onClick={() => scrollToSection('comparison')}
             className="block w-full text-left text-white hover:text-ems-gold hover:bg-ems-gold/10 transition-all duration-200 py-3 px-4 rounded-lg border-b border-ems-gold/20 uppercase tracking-wider text-sm font-light"
             style={{ minHeight: '44px' }}
+            aria-label="Przejdź do porównania EMS vs Siłownia"
           >
             EMS vs Siłownia
           </button>
@@ -252,6 +260,7 @@ export default function EMSPage() {
             onClick={() => scrollToSection('cennik')}
             className="block w-full text-left text-white hover:text-ems-gold hover:bg-ems-gold/10 transition-all duration-200 py-3 px-4 rounded-lg border-b border-ems-gold/20 uppercase tracking-wider text-sm font-light"
             style={{ minHeight: '44px' }}
+            aria-label="Przejdź do sekcji Cennik"
           >
             Cennik
           </button>
@@ -259,6 +268,7 @@ export default function EMSPage() {
             onClick={() => scrollToSection('zespol')}
             className="block w-full text-left text-white hover:text-ems-gold hover:bg-ems-gold/10 transition-all duration-200 py-3 px-4 rounded-lg border-b border-ems-gold/20 uppercase tracking-wider text-sm font-light"
             style={{ minHeight: '44px' }}
+            aria-label="Przejdź do sekcji Poznaj nasz zespół"
           >
             Poznaj nasz zespół
           </button>
@@ -266,6 +276,7 @@ export default function EMSPage() {
             onClick={() => scrollToSection('kontakt')}
             className="block w-full text-left text-white hover:text-ems-gold hover:bg-ems-gold/10 transition-all duration-200 py-3 px-4 rounded-lg uppercase tracking-wider text-sm font-light"
             style={{ minHeight: '44px' }}
+            aria-label="Przejdź do sekcji Kontakt"
           >
             Kontakt
           </button>
@@ -342,6 +353,7 @@ export default function EMSPage() {
                   paddingTop: 'clamp(0.75rem, 1.8vw, 1.5rem)', // Reduced vertical padding
                   paddingBottom: 'clamp(0.75rem, 1.8vw, 1.5rem)'
                 }}
+                aria-label="Zacznij swój trening już dziś - przejdź do kontaktu"
               >
                 Zacznij swój trening już dziś
               </button>
@@ -434,6 +446,7 @@ export default function EMSPage() {
                   paddingTop: 'clamp(0.5rem, 2vw, 1rem)',      // Fluid vertical padding
                   paddingBottom: 'clamp(0.5rem, 2vw, 1rem)'
                 }}
+                aria-label="Zacznij swój trening już dziś - przejdź do kontaktu"
               >
                 Zacznij swój trening już dziś
               </button>
@@ -818,7 +831,7 @@ export default function EMSPage() {
                       <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>
                     </svg>
                   </div>
-                  <a href="tel:+48696376377" className="text-ems-pearl hover:text-ems-gold-rich transition-colors text-sm sm:text-lg">
+                  <a href="tel:+48696376377" className="text-ems-pearl hover:text-ems-gold-rich transition-colors text-sm sm:text-lg" aria-label="Zadzwoń - +48 696 376 377">
                     +48 696 376 377
                   </a>
                 </div>
@@ -828,7 +841,7 @@ export default function EMSPage() {
                       <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
                     </svg>
                   </div>
-                  <a href="mailto:maszynowniaems@gmail.com" className="text-ems-pearl hover:text-ems-gold-rich transition-colors text-sm sm:text-lg break-all">
+                  <a href="mailto:maszynowniaems@gmail.com" className="text-ems-pearl hover:text-ems-gold-rich transition-colors text-sm sm:text-lg break-all" aria-label="Wyślij email - maszynowniaems@gmail.com">
                     maszynowniaems@gmail.com
                   </a>
                 </div>
@@ -854,6 +867,7 @@ export default function EMSPage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="glass-card p-4 hover:scale-110 transition-all duration-300"
+                    aria-label="Odwiedź Facebook Maszynownia EMS"
                   >
                     <svg className="w-8 h-8 text-ems-gold" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
@@ -864,6 +878,7 @@ export default function EMSPage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="glass-card p-4 hover:scale-110 transition-all duration-300"
+                    aria-label="Odwiedź Instagram Maszynownia"
                   >
                     <svg className="w-8 h-8 text-ems-gold" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
