@@ -1,8 +1,9 @@
 import SEOHead from '../components/SEOHead';
 import { useState, useEffect, useRef } from 'react';
-import { useDeviceDetection } from '../hooks/use-device-detection';
+import { useLayoutDetection } from '../hooks/useLayoutDetection';
 import { SmartContactButton } from '../components/ui/smart-contact-button';
 import Footer from '../components/Footer';
+import { Link } from 'wouter';
 import { Phone, Trophy, Shield, Heart, Calendar, Clock, MapPin } from 'lucide-react';
 
 export default function GymnasticsPage() {
@@ -12,7 +13,7 @@ export default function GymnasticsPage() {
   const [activeLocation, setActiveLocation] = useState(null);
   const [expandedServices, setExpandedServices] = useState({});
   const sectionsRef = useRef([]);
-  const { isMobile } = useDeviceDetection();
+  const { isMobile, layoutMode, dimensions, showFullNavigation, showHamburgerMenu } = useLayoutDetection();
 
   const locations = [
     {
@@ -210,10 +211,17 @@ export default function GymnasticsPage() {
 
       {/* Premium Header Navigation - Always Visible */}
       <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-lg border-b bg-ems-black/90 border-ems-black/30">
-        <div className="max-w-none 2xl:max-w-[1920px] 3xl:max-w-[2400px] mx-auto px-6 lg:px-12 xl:px-16 2xl:px-24 3xl:px-32 4xl:px-40 py-1">
+        <div className={`max-w-none 2xl:max-w-[1920px] 3xl:max-w-[2400px] mx-auto transition-all duration-300 ${
+          dimensions.width >= 1200 ? 'px-6 lg:px-12 xl:px-16 2xl:px-24 3xl:px-32 4xl:px-40 py-1' :
+          dimensions.width >= 1000 ? 'px-4 lg:px-8 xl:px-12 py-0.5' :
+          dimensions.width >= 800 ? 'px-3 lg:px-6 py-0.5' :
+          'px-2 py-0.5'
+        }`}>
           <div className="flex items-center justify-between">
             {/* Back Arrow + Logo Gimnastyki po lewej */}
-            <div className="flex items-center gap-4">
+            <div className={`flex items-center transition-all duration-300 ${
+              dimensions.width >= 1000 ? 'gap-4' : 'gap-2'
+            }`}>
               <a href="/" className="text-gym-yellow hover:text-gym-yellow-light transition-colors">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"/>
@@ -226,55 +234,100 @@ export default function GymnasticsPage() {
                   <img
                     src="/images/logo-gimnastyka.webp"
                     alt="Strefa Gimnastyki Logo"
-                    className="relative h-16 w-auto filter brightness-110 contrast-110"
+                    className={`relative w-auto filter brightness-110 contrast-110 transition-all duration-300 ${
+                      layoutMode === 'desktop' ? 'h-14' : 'h-12'
+                    }`}
+                    style={{
+                      marginTop: layoutMode === 'mobile' ? '12px' : '0px'
+                    }}
                   />
                 </div>
               </a>
             </div>
 
-            {/* Nawigacja po prawej */}
-            <div className="hidden md:flex items-center gap-8">
+            {/* Smart Navigation - Shows when there's space */}
+            <div className={`items-center transition-all duration-300 ${
+              showFullNavigation
+                ? `flex ${
+                  dimensions.width >= 1200 ? 'gap-8' :
+                  dimensions.width >= 1100 ? 'gap-6' :
+                  dimensions.width >= 1000 ? 'gap-4' :
+                  dimensions.width >= 900 ? 'gap-2' :
+                  dimensions.width >= 800 ? 'gap-1' :
+                  'gap-0'
+                }`
+                : 'hidden'
+            }`}>
               <button
                 onClick={() => scrollToSection('o-nas')}
-                className="touch-nav-button text-gym-yellow hover:text-gym-yellow-light transition-colors font-montserrat font-light"
+                className={`touch-nav-button text-gym-yellow hover:text-gym-yellow-light transition-colors font-montserrat font-light ${
+                  dimensions.width >= 1100 ? 'text-base' :
+                  dimensions.width >= 900 ? 'text-sm' :
+                  'text-xs'
+                }`}
                 style={{minWidth: '44px', minHeight: '44px'}}
               >
                 O nas
               </button>
               <button
                 onClick={() => scrollToSection('uslugi')}
-                className="touch-nav-button text-gym-yellow hover:text-gym-yellow-light transition-colors font-montserrat font-light"
+                className={`touch-nav-button text-gym-yellow hover:text-gym-yellow-light transition-colors font-montserrat font-light ${
+                  dimensions.width >= 1100 ? 'text-base' :
+                  dimensions.width >= 900 ? 'text-sm' :
+                  'text-xs'
+                }`}
                 style={{minWidth: '44px', minHeight: '44px'}}
               >
                 Usługi
               </button>
               <button
                 onClick={() => scrollToSection('kadra')}
-                className="touch-nav-button text-gym-yellow hover:text-gym-yellow-light transition-colors font-montserrat font-light"
+                className={`touch-nav-button text-gym-yellow hover:text-gym-yellow-light transition-colors font-montserrat font-light ${
+                  dimensions.width >= 1100 ? 'text-base' :
+                  dimensions.width >= 900 ? 'text-sm' :
+                  'text-xs'
+                }`}
                 style={{minWidth: '44px', minHeight: '44px'}}
               >
                 Zespół
               </button>
               <button
                 onClick={() => scrollToSection('lokalizacje')}
-                className="touch-nav-button text-gym-yellow hover:text-gym-yellow-light transition-colors font-montserrat font-light"
+                className={`touch-nav-button text-gym-yellow hover:text-gym-yellow-light transition-colors font-montserrat font-light ${
+                  dimensions.width >= 1100 ? 'text-base' :
+                  dimensions.width >= 900 ? 'text-sm' :
+                  'text-xs'
+                }`}
                 style={{minWidth: '44px', minHeight: '44px'}}
               >
                 Cennik
               </button>
               <button
                 onClick={() => scrollToSection('zapisy')}
-                className="touch-nav-button text-gym-yellow hover:text-gym-yellow-light transition-colors font-montserrat font-light"
+                className={`touch-nav-button text-gym-yellow hover:text-gym-yellow-light transition-colors font-montserrat font-light ${
+                  dimensions.width >= 1100 ? 'text-base' :
+                  dimensions.width >= 900 ? 'text-sm' :
+                  'text-xs'
+                }`}
                 style={{minWidth: '44px', minHeight: '44px'}}
               >
                 Kontakt
               </button>
 
-              {/* Separacja */}
-              <div className="w-px h-6 bg-gym-yellow/30"></div>
+              <Link href="/strefagimnastyki/aktualnosci">
+                <a className={`touch-nav-button text-gym-yellow hover:text-gym-yellow-light transition-colors font-montserrat font-light inline-block ${
+                  dimensions.width >= 1100 ? 'text-base' :
+                  dimensions.width >= 900 ? 'text-sm' :
+                  'text-xs'
+                }`} style={{minWidth: '44px', minHeight: '44px', lineHeight: '44px'}}>
+                  Aktualności
+                </a>
+              </Link>
 
-              {/* Social Media */}
-              <div className="flex items-center gap-4">
+              {/* Social Media - WIĘCEJ przestrzeni (separator usunięty dla ultra-compact) */}
+              <div className={`flex items-center ${
+                dimensions.width >= 1000 ? 'gap-6 ml-8' : 'gap-4 ml-6'
+              }`}>
                 <a
                   href="https://www.facebook.com/maszynowniatreningems"
                   target="_blank"
@@ -300,8 +353,8 @@ export default function GymnasticsPage() {
               </div>
             </div>
 
-            {/* Mobile menu button */}
-            <div className="md:hidden">
+            {/* Smart Mobile menu button - Shows when navigation is hidden */}
+            <div className={`${showHamburgerMenu ? 'block' : 'hidden'}`}>
               <button
                 onClick={toggleMobileMenu}
                 className="touch-button-icon text-gym-yellow hover:text-gym-yellow-light transition-colors p-3"
@@ -333,7 +386,7 @@ export default function GymnasticsPage() {
 
       {/* Mobile Navigation Menu */}
       {isMobileMenuOpen && (
-        <div className="fixed top-[73px] left-0 right-0 z-40 bg-gym-yellow/95 backdrop-blur-lg border-b border-white/30 md:hidden">
+        <div className="fixed top-[73px] left-0 right-0 z-40 bg-gym-yellow/95 backdrop-blur-lg border-b border-white/30 xl:hidden">
           <div className="px-6 py-4 space-y-4">
             <button
               onClick={() => scrollToSection('o-nas')}
@@ -361,10 +414,19 @@ export default function GymnasticsPage() {
             </button>
             <button
               onClick={() => scrollToSection('zapisy')}
-              className="block w-full text-left text-white hover:text-white/80 transition-colors py-2"
+              className="block w-full text-left text-white hover:text-white/80 transition-colors py-2 border-b border-white/20"
             >
               Kontakt
             </button>
+
+            <Link href="/strefagimnastyki/aktualnosci">
+              <a
+                className="block w-full text-left text-white hover:text-white/80 transition-colors py-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Aktualności
+              </a>
+            </Link>
           </div>
         </div>
       )}
@@ -377,29 +439,62 @@ export default function GymnasticsPage() {
           style={{
             backgroundImage: 'url(/images/nowe_tlo_strefa.webp)',
             backgroundSize: 'auto 100%',
-            backgroundPosition: 'center center',
+            backgroundPosition: dimensions.width < 768
+              ? '30% center'      // Mobile: przesunięte w LEWO (w TWOJE prawo) żeby dziewczynka była widoczna
+              : 'center center',  // Desktop: normalnie wyśrodkowane
             backgroundRepeat: 'no-repeat'
           }}
         ></div>
 
-        {/* Gradient overlay to protect text on smaller screens */}
-        <div className="absolute inset-0 bg-gradient-to-r from-ems-black via-ems-black/80 md:via-ems-black/60 lg:via-transparent to-transparent"></div>
+        {/* Smart gradient - TYLKO w obszarze tekstu (bottom 60%) */}
+        <div
+          className="absolute bottom-0 left-0 right-0 transition-all duration-300"
+          style={{
+            height: '30%',  // Tylko dolnych 30% ekranu - tam gdzie jest tekst
+            background: dimensions.width < 768
+              ? 'linear-gradient(to right, rgba(24, 25, 27, 0.85) 0%, rgba(24, 25, 27, 0.3) 50%, transparent 70%)'  // Mobile: protective dla tekstu
+              : dimensions.width < 1024
+              ? 'linear-gradient(to right, rgba(24, 25, 27, 0.5) 0%, rgba(24, 25, 27, 0.2) 50%, transparent 65%)'   // Tablet: lżejszy
+              : 'linear-gradient(to right, rgba(24, 25, 27, 0.6) 0%, transparent 50%)'                               // Desktop: minimalny
+          }}
+        ></div>
 
         {/* Content - on the left with black background */}
         <div className="relative z-10 h-full flex items-end pb-16">
           <div className="px-6 lg:px-12 xl:px-16 2xl:px-24 max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl">
-            <h1 className="gym-hero-title-entrance font-bebas font-bold text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl uppercase mb-8 drop-shadow-lg text-gym-yellow relative tracking-wider">
+            <h1
+              className="gym-hero-title-entrance font-bebas font-bold uppercase mb-8 drop-shadow-lg text-gym-yellow relative tracking-wider transition-all duration-300"
+              style={{
+                fontSize: 'clamp(2rem, 5vw, 5rem)',  // Fluid: 32px → 80px (dostosowane do gym theme)
+                lineHeight: 'clamp(0.9, 1.1, 1.2)'
+              }}
+            >
               <div className="absolute inset-0 bg-ems-black/60 blur-lg scale-110 -z-10"></div>
               GIMNASTYKA DLA DZIECI W KAŻDYM WIEKU
             </h1>
-            <p className="gym-hero-subtitle-entrance font-montserrat font-light text-xl md:text-2xl lg:text-3xl xl:text-3xl 2xl:text-4xl mb-10 text-gym-yellow-light/90 max-w-2xl lg:max-w-3xl drop-shadow-md tracking-wide relative leading-relaxed">
+            <p
+              className="gym-hero-subtitle-entrance font-montserrat font-light mb-10 text-gym-yellow-light/90 drop-shadow-md tracking-wide relative leading-relaxed transition-all duration-300"
+              style={{
+                fontSize: 'clamp(1rem, 2vw, 1.5rem)',    // Fluid: 16px → 24px (dostosowane do gym)
+                lineHeight: 'clamp(1.4, 1.6, 1.8)',
+                maxWidth: 'clamp(18rem, 50vw, 40rem)'      // Fluid width
+              }}
+            >
               <div className="absolute inset-0 bg-ems-black/60 blur-md scale-105 -z-10"></div>
               Wszechstronny rozwój fizyczny dzieci i młodzieży
             </p>
             <button
               onClick={() => scrollToSection('zapisy')}
-              className="gym-hero-cta-entrance touch-button-primary touch-button-gym bg-gym-yellow text-ems-black px-10 py-5 rounded-full text-xl md:text-2xl font-bebas font-normal uppercase tracking-wider hover:bg-gym-yellow-light transition-all duration-300 shadow-lg"
-              style={{minWidth: '44px', minHeight: '44px'}}
+              className="gym-hero-cta-entrance touch-button-primary touch-button-gym bg-gym-yellow text-ems-black rounded-full font-bebas font-normal uppercase tracking-wider hover:bg-gym-yellow-light transition-all duration-300 shadow-lg"
+              style={{
+                minWidth: '44px',
+                minHeight: '44px',
+                fontSize: 'clamp(0.9rem, 1.8vw, 1.3rem)',      // Fluid: 14px → 21px (button size)
+                paddingLeft: 'clamp(1.5rem, 4vw, 2.5rem)',     // Fluid horizontal padding
+                paddingRight: 'clamp(1.5rem, 4vw, 2.5rem)',
+                paddingTop: 'clamp(0.75rem, 1.5vw, 1.25rem)',  // Fluid vertical padding
+                paddingBottom: 'clamp(0.75rem, 1.5vw, 1.25rem)'
+              }}
             >
               Zapisz dziecko na zajęcia
             </button>
@@ -871,9 +966,16 @@ export default function GymnasticsPage() {
       {isScrolled && (
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="touch-button-icon fixed bottom-8 right-8 z-50 gym-button-icon group"
+          className="touch-button-icon gym-button-icon group"
           aria-label="Scroll to top"
-          style={{minWidth: '44px', minHeight: '44px'}}
+          style={{
+            position: 'fixed',
+            bottom: '2rem',
+            right: '2rem',
+            zIndex: 9999,
+            minWidth: '44px',
+            minHeight: '44px'
+          }}
         >
           <svg
             className="w-6 h-6 text-gym-yellow group-hover:text-white transition-colors"

@@ -1,12 +1,25 @@
 import SEOHead from '../components/SEOHead';
 import Footer from '../components/Footer';
 import { useState, useEffect, useRef } from 'react';
+import { useLayoutDetection } from '../hooks/useLayoutDetection';
 
 export default function EMSPage() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [visibleSections, setVisibleSections] = useState(new Set());
   const sectionsRef = useRef([]);
+
+  // Smart layout detection - Apple/Netflix style
+  const {
+    layoutMode,
+    showFullNavigation,
+    showHamburgerMenu,
+    dimensions,
+    hasSpaceForSeparateLayout,
+    textOverlapsImage,
+    needsProtection,
+    protectionLevel
+  } = useLayoutDetection();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -73,6 +86,7 @@ export default function EMSPage() {
         businessType="ems"
       />
 
+
       {/* Premium Header Navigation with Glass Effect */}
       <header className="sticky top-0 z-50 bg-ems-black border-b border-ems-gold/30 shadow-2xl shadow-ems-gold/10">
         <div className="max-w-none 2xl:max-w-[1920px] 3xl:max-w-[2400px] mx-auto px-6 lg:px-12 xl:px-16 2xl:px-24 3xl:px-32 4xl:px-40 py-1">
@@ -88,37 +102,59 @@ export default function EMSPage() {
               <img
                 src="/images/logo-ems.webp"
                 alt="EMS Logo"
-                className="h-64 w-auto -my-24 -translate-y-3 tablet-logo-scale"
+                className={`w-auto transition-all duration-300 ${
+                  layoutMode === 'desktop'
+                    ? 'h-48 lg:h-56 xl:h-64 -my-16 lg:-my-20 xl:-my-24 -translate-y-2 lg:-translate-y-2 xl:-translate-y-3'
+                    : 'h-40 sm:h-44 md:h-48 -my-14 sm:-my-16 md:-my-18 -translate-y-2'
+                }`}
               />
               </a>
             </div>
 
-            {/* Nawigacja po prawej - TYLKO na prawdziwym desktop 1200px+ */}
-            <div className="hidden xl:flex items-center gap-8">
+            {/* Smart Navigation - Shows when there's space */}
+            <div className={`items-center transition-all duration-300 ${
+              showFullNavigation
+                ? `flex ${
+                  dimensions.width >= 1200 ? 'gap-8' :
+                  dimensions.width >= 1000 ? 'gap-6' :
+                  dimensions.width >= 900 ? 'gap-4' :
+                  dimensions.width >= 800 ? 'gap-3' :
+                  'gap-2'
+                }`
+                : 'hidden'
+            }`}>
               <button
                 onClick={() => scrollToSection('o-nas')}
-                className="touch-nav-button text-white hover:text-ems-gold transition-colors uppercase tracking-wider"
+                className={`touch-nav-button text-white hover:text-ems-gold transition-colors uppercase tracking-wider ${
+                  dimensions.width >= 1000 ? 'text-base' : 'text-sm'
+                }`}
                 style={{minWidth: '44px', minHeight: '44px'}}
               >
                 O nas
               </button>
               <button
                 onClick={() => scrollToSection('comparison')}
-                className="touch-nav-button text-white hover:text-ems-gold transition-colors uppercase tracking-wider"
+                className={`touch-nav-button text-white hover:text-ems-gold transition-colors uppercase tracking-wider ${
+                  dimensions.width >= 1000 ? 'text-base' : 'text-sm'
+                }`}
                 style={{minWidth: '44px', minHeight: '44px'}}
               >
                 EMS vs Siłownia
               </button>
               <button
                 onClick={() => scrollToSection('cennik')}
-                className="touch-nav-button text-white hover:text-ems-gold transition-colors uppercase tracking-wider"
+                className={`touch-nav-button text-white hover:text-ems-gold transition-colors uppercase tracking-wider ${
+                  dimensions.width >= 1000 ? 'text-base' : 'text-sm'
+                }`}
                 style={{minWidth: '44px', minHeight: '44px'}}
               >
                 Cennik
               </button>
               <button
                 onClick={() => scrollToSection('kontakt')}
-                className="touch-nav-button text-white hover:text-ems-gold transition-colors uppercase tracking-wider"
+                className={`touch-nav-button text-white hover:text-ems-gold transition-colors uppercase tracking-wider ${
+                  dimensions.width >= 1000 ? 'text-base' : 'text-sm'
+                }`}
                 style={{minWidth: '44px', minHeight: '44px'}}
               >
                 Kontakt
@@ -154,8 +190,10 @@ export default function EMSPage() {
               </div>
             </div>
 
-            {/* Professional Mobile Hamburger Menu Button - Tablety też dostają mobile menu */}
-            <div className="xl:hidden">
+            {/* Smart Hamburger - Shows when space is limited */}
+            <div className={`transition-all duration-300 ${
+              showHamburgerMenu ? 'block' : 'hidden'
+            }`}>
               <button
                 onClick={toggleMobileMenu}
                 className="text-white hover:text-ems-gold transition-colors p-3 relative z-50"
@@ -187,7 +225,9 @@ export default function EMSPage() {
 
       {/* Professional Mobile Navigation Menu */}
       <div
-        className={`fixed top-[73px] left-0 right-0 z-40 bg-ems-black/95 backdrop-blur-lg border-b border-ems-gold/30 xl:hidden transform transition-all duration-300 ease-in-out ${
+        className={`fixed top-[73px] left-0 right-0 z-40 bg-ems-black/95 backdrop-blur-lg border-b border-ems-gold/30 transform transition-all duration-300 ease-in-out ${
+          showHamburgerMenu ? 'block' : 'hidden'
+        } ${
           isMobileMenuOpen
             ? 'translate-y-0 opacity-100 visible'
             : '-translate-y-full opacity-0 invisible'
@@ -234,98 +274,172 @@ export default function EMSPage() {
 
       {/* Fullscreen Hero Section */}
       <section className="relative overflow-hidden" style={{ height: '100vh', minHeight: '100vh', maxHeight: '100vh' }}>
-        {/* Mobile Background - Right edge aligned and flipped */}
+        {/* UNIFIED BACKGROUND IMAGE - All resolutions with consistent brightness */}
         <div
-          className="absolute inset-0 sm:hidden transform scale-x-[-1]"
+          className="absolute inset-0 filter brightness-110 contrast-125 saturate-110"
           style={{
             backgroundImage: 'url(/images/hero-ems-new.webp)',
-            backgroundPosition: 'right center',
-            backgroundSize: 'cover',
-            backgroundRepeat: 'no-repeat'
+            backgroundPosition: '100% center',  // Uniform: Woman on left edge (after flip) for all sizes
+            backgroundSize: dimensions.width < 768
+              ? 'auto 100%'       // Mobile: Height-based scaling, maintain aspect ratio
+              : 'cover',          // Desktop/Tablet: Cover full area
+            transform: 'scaleX(-1)'  // All sizes: Flip horizontally for consistent woman positioning
           }}
         ></div>
 
-        {/* Desktop Background - Woman ALWAYS on left edge - TYLKO na prawdziwym desktop */}
-        <div
-          className="absolute inset-0 bg-cover transform scale-x-[-1] filter brightness-110 contrast-125 saturate-110 hidden xl:block"
-          style={{
-            backgroundImage: 'url(/images/hero-ems-new.webp)',
-            backgroundPosition: '100% center',
-            backgroundSize: 'cover'
-          }}
-        ></div>
+        {/* BIG TECH APPROACH: Overlay only for mobile, desktop/tablet use pure scaling */}
+        {dimensions.width < 768 && (
+          <div
+            className="absolute inset-0 transition-all duration-300"
+            style={{
+              background: 'radial-gradient(circle at center, rgba(24, 25, 27, 0.60) 0%, rgba(24, 25, 27, 0.40) 60%, transparent 100%)'
+            }}
+          ></div>
+        )}
 
-        {/* Desktop Overlay - TYLKO desktop */}
-        <div className="absolute inset-0 bg-gradient-to-r from-ems-black/30 via-ems-black/10 to-transparent hidden xl:block"></div>
-
-        {/* TABLET Background (768px-1199px) - Optimized positioning */}
-        <div
-          className="absolute inset-0 transform scale-x-[-1] filter brightness-105 contrast-115 saturate-105 hidden sm:block xl:hidden tablet-background-fix ipad-air-square-fix ipad-portrait-fix"
-          style={{
-            backgroundImage: 'url(/images/hero-ems-new.webp)',
-            backgroundPosition: '70% center',
-            backgroundSize: 'cover'
-          }}
-        ></div>
-
-        {/* Tablet Overlay - Better text protection */}
-        <div className="absolute inset-0 bg-gradient-to-r from-ems-black/50 via-ems-black/30 to-transparent hidden sm:block xl:hidden"></div>
-
-        {/* Gradient overlay to protect text on mobile */}
-        <div className="absolute inset-0 bg-gradient-to-r from-ems-black/60 via-ems-black/40 to-transparent sm:hidden"></div>
-
-        {/* Premium Desktop Content with Entrance Animations - TYLKO desktop 1200px+ */}
-        <div className="relative z-10 text-center text-white px-6 lg:px-12 xl:px-16 2xl:px-24 3xl:px-32 4xl:px-40 max-w-4xl xl:max-w-5xl 2xl:max-w-6xl 3xl:max-w-7xl 4xl:max-w-8xl ml-auto translate-x-8 lg:translate-x-16 xl:translate-x-4 2xl:translate-x-2 hidden xl:flex xl:items-center xl:justify-center xl:h-full">
-          <div>
-            <h1 className="text-ems-gold text-3xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl uppercase mb-6 drop-shadow-lg" style={{color: '#D9BA74', opacity: 1, fontWeight: '100', letterSpacing: '8px'}}>
-              Skuteczny trening w 30 minut
-            </h1>
-            <p className="hero-subtitle-entrance text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl mb-8 text-ems-pearl/90 max-w-2xl lg:max-w-3xl xl:max-w-4xl 2xl:max-w-5xl mx-auto drop-shadow-md font-light tracking-wide">
-              Trening EMS to rewolucyjna metoda, która pozwala osiągnąć rezultaty tradycyjnego 90-minutowego treningu w zaledwie 30 minut.
-            </p>
-            <button
-              onClick={() => scrollToSection('kontakt')}
-              className="hero-cta-entrance premium-button touch-button-primary touch-button-ems text-lg lg:text-xl xl:text-2xl 2xl:text-3xl px-12 py-4 lg:px-16 lg:py-6 xl:px-20 xl:py-7 2xl:px-24 2xl:py-8 font-medium"
-              style={{minWidth: '44px', minHeight: '44px'}}
-            >
-              Zacznij swój trening już dziś
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile + Tablet Content - Responsive positioned */}
-        <div className="relative z-10 h-full flex flex-col justify-end items-end p-6 xl:hidden">
-          <div className="max-w-sm sm:max-w-md lg:max-w-lg text-right flex flex-col justify-center min-h-0 mb-20 sm:mb-24 lg:mb-32 tablet-hero-content ipad-air-hero-content ipad-portrait-hero-content" style={{ height: 'auto' }}>
-            {/* H1 z responsywnym gradientem */}
-            <div className="relative mb-4 sm:mb-6">
-              <div className="absolute inset-0 bg-gradient-to-l from-black/70 via-black/40 to-transparent rounded-lg -m-2 sm:-m-3"></div>
-              <h1 className="relative text-4xl sm:text-5xl lg:text-6xl uppercase text-ems-gold leading-tight tablet-hero-title ipad-air-hero-title ipad-portrait-hero-title" style={{
-                fontWeight: '100',
-                letterSpacing: '6px',
-                textShadow: '3px 3px 8px rgba(0,0,0,1), -2px -2px 6px rgba(0,0,0,0.9), 0px 0px 20px rgba(0,0,0,0.8)'
-              }}>
-                SKUTECZNY<br />
-                TRENING<br />
-                W 30 MINUT
+        {/* BIG TECH DESKTOP CONTENT - Fluid scaling system */}
+        {hasSpaceForSeparateLayout && (
+          <div className="relative z-10 text-center text-white ml-auto flex items-center justify-center h-full"
+               style={{
+                 padding: 'clamp(1rem, 3vw, 6rem)',              // Reduced padding
+                 maxWidth: 'clamp(25rem, 50vw, 60rem)',         // Narrower content
+                 transform: `translateX(clamp(-110px, -4vw, -30px))` // Optimized positioning: -110px → -30px
+               }}>
+            <div>
+              <h1
+                className="text-ems-gold uppercase mb-6"
+                style={{
+                  color: '#D9BA74',
+                  opacity: 1,
+                  fontWeight: '100',
+                  letterSpacing: 'clamp(4px, 0.8vw, 10px)',
+                  fontSize: 'clamp(2.5rem, 6vw, 6rem)',  // Reduced: 40px → 96px fluid scaling
+                  lineHeight: 'clamp(0.9, 1.1, 1.2)'
+                }}
+              >
+                Skuteczny trening w 30 minut
               </h1>
-            </div>
-
-            {/* Paragraf z responsywnym gradientem */}
-            <div className="relative mb-6 sm:mb-8">
-              <div className="absolute inset-0 bg-gradient-to-l from-black/60 via-black/30 to-transparent rounded-lg -m-2 sm:-m-3"></div>
-              <p className="relative text-lg sm:text-xl lg:text-2xl text-ems-pearl/90 max-w-sm sm:max-w-md lg:max-w-lg tracking-wide leading-relaxed drop-shadow-[0_0_8px_rgba(217,186,116,0.6)] tablet-hero-subtitle ipad-air-hero-subtitle ipad-portrait-hero-subtitle">
+              <p
+                className="text-ems-pearl/90 mx-auto font-light tracking-wide"
+                style={{
+                  fontSize: 'clamp(1rem, 2.2vw, 1.8rem)',    // Reduced: 16px → 29px fluid scaling
+                  lineHeight: 'clamp(1.4, 1.6, 1.8)',
+                  maxWidth: 'clamp(18rem, 55vw, 45rem)',     // Slightly narrower
+                  marginBottom: 'clamp(1.5rem, 3vw, 3rem)'   // Reduced spacing
+                }}
+              >
                 Trening EMS to rewolucyjna metoda, która pozwala osiągnąć rezultaty tradycyjnego 90-minutowego treningu w zaledwie 30 minut.
               </p>
+              <button
+                onClick={() => scrollToSection('kontakt')}
+                className="premium-button touch-button-primary touch-button-ems font-medium"
+                style={{
+                  minWidth: '44px',
+                  minHeight: '44px',
+                  fontSize: 'clamp(0.8rem, 1.5vw, 1.15rem)',  // Even smaller: 13px → 18px fluid scaling
+                  paddingLeft: 'clamp(1.5rem, 4vw, 4rem)',   // Reduced horizontal padding
+                  paddingRight: 'clamp(1.5rem, 4vw, 4rem)',
+                  paddingTop: 'clamp(0.75rem, 1.8vw, 1.5rem)', // Reduced vertical padding
+                  paddingBottom: 'clamp(0.75rem, 1.8vw, 1.5rem)'
+                }}
+              >
+                Zacznij swój trening już dziś
+              </button>
             </div>
-            <button
-              onClick={() => scrollToSection('kontakt')}
-              className="touch-button-primary touch-button-ems bg-ems-gold text-ems-black px-8 py-4 sm:px-10 sm:py-5 lg:px-12 lg:py-6 rounded-full text-lg sm:text-xl lg:text-2xl font-normal uppercase tracking-wider hover:bg-ems-gold/90 transition-all duration-300 shadow-lg tablet-hero-button ipad-air-hero-button ipad-portrait-hero-button"
-              style={{minWidth: '44px', minHeight: '44px'}}
-            >
-              Zacznij swój trening już dziś
-            </button>
           </div>
-        </div>
+        )}
+
+        {/* SMART MOBILE/TABLET CONTENT - Shows when space is limited */}
+        {!hasSpaceForSeparateLayout && (
+          <div className={`relative z-10 h-full flex flex-col p-6 ${
+            dimensions.width < 768
+              ? 'justify-end items-center text-center'     // Mobile: Bottom aligned
+              : 'justify-end items-end'                     // Tablet: Right aligned
+          }`}>
+            <div
+              className={`max-w-sm sm:max-w-md lg:max-w-lg flex flex-col justify-center min-h-0 transition-all duration-300 ${
+                dimensions.width < 768 ? 'text-center' : 'text-right'
+              }`}
+              style={{
+                height: 'auto',
+                marginBottom: `${
+                  dimensions.width >= 1000 ? '8rem' :
+                  dimensions.width >= 800 ? '6rem' :
+                  dimensions.width >= 600 ? '5rem' :
+                  dimensions.width >= 400 ? '6rem' :
+                  '7rem'
+                }`
+              }}>
+              {/* SMART H1 - Dynamic background based on protection level */}
+              <div className="relative mb-4 sm:mb-6">
+                {protectionLevel === 'full' && (
+                  <div className="absolute inset-0 bg-gradient-to-l from-black/70 via-black/40 to-transparent rounded-lg -m-2 sm:-m-3"></div>
+                )}
+                {protectionLevel === 'partial' && (
+                  <div className="absolute inset-0 bg-gradient-to-l from-black/50 via-black/25 to-transparent rounded-lg -m-2 sm:-m-3"></div>
+                )}
+                <h1
+                  className={`relative uppercase text-ems-gold leading-tight ${
+                    protectionLevel === 'full'
+                      ? 'drop-shadow-[3px_3px_8px_rgba(0,0,0,1)]'
+                    : protectionLevel === 'partial'
+                      ? 'drop-shadow-[2px_2px_6px_rgba(0,0,0,0.8)]'
+                    : 'drop-shadow-lg'
+                  }`}
+                  style={{
+                    fontWeight: '100',
+                    letterSpacing: 'clamp(3px, 1.5vw, 6px)',
+                    fontSize: 'clamp(1.8rem, 8vw, 4rem)'  // Mobile fluid: 29px → 64px
+                  }}
+                >
+                  SKUTECZNY<br />
+                  TRENING<br />
+                  W 30 MINUT
+                </h1>
+              </div>
+
+              {/* SMART PARAGRAPH - Dynamic background based on protection level */}
+              <div className="relative mb-6 sm:mb-8">
+                {protectionLevel === 'full' && (
+                  <div className="absolute inset-0 bg-gradient-to-l from-black/60 via-black/30 to-transparent rounded-lg -m-2 sm:-m-3"></div>
+                )}
+                {protectionLevel === 'partial' && (
+                  <div className="absolute inset-0 bg-gradient-to-l from-black/40 via-black/20 to-transparent rounded-lg -m-2 sm:-m-3"></div>
+                )}
+                <p
+                  className={`relative text-ems-pearl/90 tracking-wide leading-relaxed ${
+                    protectionLevel === 'full'
+                      ? 'drop-shadow-[0_0_8px_rgba(217,186,116,0.6)]'
+                    : protectionLevel === 'partial'
+                      ? 'drop-shadow-[0_0_6px_rgba(217,186,116,0.4)]'
+                    : 'drop-shadow-md'
+                  }`}
+                  style={{
+                    fontSize: 'clamp(0.9rem, 3.5vw, 1.5rem)',  // Mobile fluid: 14px → 24px
+                    maxWidth: 'clamp(20rem, 90vw, 32rem)'      // Fluid width
+                  }}
+                >
+                  Trening EMS to rewolucyjna metoda, która pozwala osiągnąć rezultaty tradycyjnego 90-minutowego treningu w zaledwie 30 minut.
+                </p>
+              </div>
+              <button
+                onClick={() => scrollToSection('kontakt')}
+                className="touch-button-primary touch-button-ems bg-ems-gold text-ems-black rounded-full font-normal uppercase tracking-wider hover:bg-ems-gold/90 transition-all duration-300 shadow-lg"
+                style={{
+                  minWidth: '44px',
+                  minHeight: '44px',
+                  fontSize: 'clamp(0.7rem, 2.5vw, 1rem)',      // Mobile fluid button: 11px → 16px
+                  paddingLeft: 'clamp(1rem, 6vw, 2.5rem)',     // Fluid horizontal padding
+                  paddingRight: 'clamp(1rem, 6vw, 2.5rem)',
+                  paddingTop: 'clamp(0.5rem, 2vw, 1rem)',      // Fluid vertical padding
+                  paddingBottom: 'clamp(0.5rem, 2vw, 1rem)'
+                }}
+              >
+                Zacznij swój trening już dziś
+              </button>
+            </div>
+          </div>
+        )}
       </section>
 
       {/* Premium Czym jest EMS Section */}
@@ -338,7 +452,7 @@ export default function EMSPage() {
       >
         <div className="max-w-6xl xl:max-w-7xl 2xl:max-w-[1920px] 3xl:max-w-[2400px] 4xl:max-w-[2800px] mx-auto">
           <h2 className="text-4xl lg:text-6xl xl:text-7xl 2xl:text-8xl text-center mb-16 text-ems-gold" style={{fontWeight: '100', letterSpacing: '8px', textTransform: 'uppercase'}}>
-            Czym jest trening EMS?
+            <span className="text-white" style={{fontWeight: '100'}}>Czym jest trening</span> EMS?
           </h2>
 
           <div className="grid md:grid-cols-3 gap-8 mb-12">
@@ -351,7 +465,7 @@ export default function EMSPage() {
                   <path d="M7 2v11h3v9l7-12h-4l4-8z"/>
                 </svg>
               </div>
-              <h3 className="accent-text-premium text-xl mb-4 font-light tracking-wider">Elektrostymulacja</h3>
+              <h3 className="accent-text-premium text-xl mb-4 font-light tracking-wider" style={{ fontSize: 'clamp(1rem, 2.5vw, 1.25rem)' }}>Elektrostymulacja</h3>
               <p className="body-premium text-ems-pearl/80">
                 Bezpieczne impulsy elektryczne aktywują 90% mięśni jednocześnie,
                 maksymalizując efektywność każdego ruchu.
@@ -368,7 +482,7 @@ export default function EMSPage() {
                   <path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
                 </svg>
               </div>
-              <h3 className="accent-text-premium text-xl mb-4 font-light tracking-wider">Oszczędność czasu</h3>
+              <h3 className="accent-text-premium text-xl mb-4 font-light tracking-wider" style={{ fontSize: 'clamp(1rem, 2.5vw, 1.25rem)' }}>Oszczędność czasu</h3>
               <p className="body-premium text-ems-pearl/80">
                 30 minut treningu EMS = 90 minut tradycyjnego treningu siłowego.
                 Idealny dla zapracowanych osób.
@@ -385,7 +499,7 @@ export default function EMSPage() {
                   <circle cx="12" cy="12" r="3"/>
                 </svg>
               </div>
-              <h3 className="accent-text-premium text-xl mb-4 font-light tracking-wider">Indywidualne podejście</h3>
+              <h3 className="accent-text-premium text-xl mb-4 font-light tracking-wider" style={{ fontSize: 'clamp(1rem, 2.5vw, 1.25rem)' }}>Indywidualne podejście</h3>
               <p className="body-premium text-ems-pearl/80">
                 Trening dla każdego i indywidualne podejście.
                 Pracujemy w studio 1:1 z pełnym wsparciem trenera.
@@ -424,7 +538,7 @@ export default function EMSPage() {
       >
         <div className="max-w-6xl xl:max-w-7xl 2xl:max-w-[1920px] 3xl:max-w-[2400px] 4xl:max-w-[2800px] mx-auto">
           <h2 className="text-4xl lg:text-6xl xl:text-7xl 2xl:text-8xl text-center mb-16 text-ems-gold" style={{fontWeight: '100', letterSpacing: '8px', textTransform: 'uppercase'}}>
-            EMS vs Tradycyjna siłownia
+            EMS <span className="text-white" style={{fontWeight: '100'}}>vs Tradycyjna siłownia</span>
           </h2>
 
           <div className="overflow-x-auto">
@@ -558,7 +672,7 @@ export default function EMSPage() {
       >
         <div className="max-w-6xl xl:max-w-7xl 2xl:max-w-[1920px] 3xl:max-w-[2400px] 4xl:max-w-[2800px] mx-auto">
           <h2 className="text-4xl lg:text-6xl xl:text-7xl 2xl:text-8xl text-center mb-16 text-ems-gold" style={{fontWeight: '100', letterSpacing: '8px', textTransform: 'uppercase'}}>
-            Cennik
+            <span className="text-white" style={{fontWeight: '100'}}>Cennik</span>
           </h2>
 
           {/* Premium Single Training Cards */}
@@ -618,7 +732,7 @@ export default function EMSPage() {
             <div className="max-w-md mx-auto">
               <div className="pricing-card-premium p-10 text-center relative border-2 border-ems-gold/30 transform hover:scale-105 transition-all duration-300 card-stagger" style={{ '--stagger-index': '6' }}>
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <span className="bg-gradient-to-r from-ems-gold to-ems-gold-rich text-ems-black px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider">
+                  <span className="bg-gradient-to-r from-ems-gold to-ems-gold-rich text-ems-black px-6 py-2 rounded-full text-xs font-bold uppercase tracking-wider">
                     Niezbędny do treningu
                   </span>
                 </div>
@@ -654,16 +768,26 @@ export default function EMSPage() {
       >
         <div className="max-w-6xl xl:max-w-7xl 2xl:max-w-[1920px] 3xl:max-w-[2400px] 4xl:max-w-[2800px] mx-auto">
           <h2 className="text-4xl lg:text-6xl xl:text-7xl 2xl:text-8xl text-center mb-16 text-ems-gold" style={{fontWeight: '100', letterSpacing: '8px', textTransform: 'uppercase'}}>
-            Poznaj nasz zespół
+            <span className="text-white" style={{fontWeight: '100'}}>Poznaj nasz</span> zespół
           </h2>
           <div className="text-center max-w-3xl mx-auto glass-card p-8">
             <p className="body-premium text-lg mb-6">
               Nasz doświadczony zespół trenerów zapewni Ci profesjonalną opiekę
               i indywidualne podejście podczas każdego treningu EMS.
             </p>
-            <p className="accent-text-premium text-xl font-light tracking-wider">
+            <p className="accent-text-premium text-xl font-light tracking-wider mb-8">
               Skontaktuj się z nami, aby umówić się na trening próbny!
             </p>
+            {/* Team Photo */}
+            <div className="mt-8">
+              <img
+                src="/images/zespol-ems.webp"
+                alt="Zespół Maszynownia EMS - profesjonalni trenerzy w studio"
+                className="rounded-xl shadow-2xl mx-auto max-w-full h-auto"
+                style={{ maxHeight: '400px' }}
+                loading="lazy"
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -672,13 +796,13 @@ export default function EMSPage() {
       <section
         id="kontakt"
         ref={(el) => (sectionsRef.current[4] = el)}
-        className={`py-16 lg:py-20 px-6 section-gradient-stone section-texture will-animate ${
+        className={`py-16 lg:py-20 px-6 bg-ems-black section-texture will-animate ${
           visibleSections.has('kontakt') ? 'section-fade-up in-view' : 'section-fade-up'
         }`}
       >
         <div className="max-w-6xl xl:max-w-7xl 2xl:max-w-[1920px] 3xl:max-w-[2400px] 4xl:max-w-[2800px] mx-auto">
           <h2 className="text-4xl lg:text-6xl xl:text-7xl 2xl:text-8xl text-center mb-16 text-ems-gold" style={{fontWeight: '100', letterSpacing: '8px', textTransform: 'uppercase'}}>
-            Kontakt
+            <span className="text-white" style={{fontWeight: '100'}}>Kontakt</span>
           </h2>
 
           <div className="grid lg:grid-cols-2 gap-12">
@@ -777,7 +901,15 @@ export default function EMSPage() {
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           className="touch-button-icon fixed bottom-8 right-8 z-50 glass-card p-4 hover:scale-110 transition-all duration-300 group"
           aria-label="Scroll to top"
-          style={{minWidth: '44px', minHeight: '44px'}}
+          style={{
+            minWidth: '44px',
+            minHeight: '44px',
+            position: 'fixed',
+            bottom: '2rem',
+            right: '2rem',
+            zIndex: 9999,
+            transform: 'none' // Override glass-card transform
+          }}
         >
           <svg
             className="w-6 h-6 text-ems-gold group-hover:text-white transition-colors"

@@ -4,6 +4,14 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Reset for body and html to eliminate white gaps */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #18191B; /* EMS black */
+}
+
 /* Premium Color Variables */
 :root {
   /* Main Brand Colors */
@@ -878,139 +886,9 @@
 }
 
 /* ========================================
-   TABLET RESPONSIVE BREAKPOINT FIXES
+   LEGACY TABLET CSS REMOVED
+   Now using intelligent layout detection system
    ======================================== */
-
-/* Critical: iPad Portrait (768x1024) and iPad Air (1024x1024) fixes */
-@media screen and (min-width: 768px) and (max-width: 1199px) {
-  /* Force mobile-style navigation for tablets */
-  .tablet-force-mobile-nav {
-    display: none !important;
-  }
-
-  /* Tablet hero section optimization */
-  .tablet-hero-content {
-    padding: 2rem !important;
-    max-width: 600px !important;
-  }
-
-  /* Tablet text sizing - between mobile and desktop */
-  .tablet-hero-title {
-    font-size: 3.5rem !important;
-    line-height: 1.1 !important;
-    letter-spacing: 4px !important;
-  }
-
-  .tablet-hero-subtitle {
-    font-size: 1.25rem !important;
-    line-height: 1.6 !important;
-    max-width: 500px !important;
-  }
-
-  .tablet-hero-button {
-    font-size: 1.125rem !important;
-    padding: 1rem 2.5rem !important;
-  }
-
-  /* Better background positioning for tablets */
-  .tablet-background-fix {
-    background-position: 65% center !important;
-    background-size: cover !important;
-  }
-
-  /* Header logo scaling for tablets */
-  .tablet-logo-scale {
-    height: 3.5rem !important;
-    margin-top: -1rem !important;
-    margin-bottom: -1rem !important;
-  }
-}
-
-/* iPad Pro landscape (1024x1366) specific fixes */
-@media screen and (min-width: 1024px) and (max-width: 1199px) and (orientation: landscape) {
-  .ipad-pro-landscape-fix {
-    background-position: 60% center !important;
-  }
-
-  .ipad-pro-hero-content {
-    padding: 3rem !important;
-    margin-bottom: 8rem !important;
-  }
-}
-
-/* iPad Pro portrait (1366x1024) specific fixes */
-@media screen and (min-width: 1024px) and (max-width: 1199px) and (orientation: portrait) {
-  .ipad-pro-portrait-fix {
-    background-position: 70% center !important;
-  }
-
-  .ipad-pro-hero-title {
-    font-size: 4rem !important;
-  }
-
-  .ipad-pro-hero-subtitle {
-    font-size: 1.5rem !important;
-    max-width: 600px !important;
-  }
-}
-
-/* CRITICAL: 1024x1024 iPad Air specific fix */
-@media screen and (width: 1024px) and (height: 1024px) {
-  .ipad-air-square-fix {
-    background-position: 55% center !important;
-  }
-
-  .ipad-air-hero-content {
-    padding: 2.5rem !important;
-    margin-bottom: 6rem !important;
-    margin-right: 2rem !important;
-  }
-
-  .ipad-air-hero-title {
-    font-size: 3.25rem !important;
-    letter-spacing: 3px !important;
-    line-height: 1.05 !important;
-  }
-
-  .ipad-air-hero-subtitle {
-    font-size: 1.1rem !important;
-    max-width: 400px !important;
-    line-height: 1.5 !important;
-  }
-
-  .ipad-air-hero-button {
-    font-size: 1rem !important;
-    padding: 0.875rem 2rem !important;
-  }
-}
-
-/* CRITICAL: 768x1024 iPad Portrait specific fix */
-@media screen and (width: 768px) and (height: 1024px) {
-  .ipad-portrait-fix {
-    background-position: 75% center !important;
-  }
-
-  .ipad-portrait-hero-content {
-    padding: 1.5rem !important;
-    margin-bottom: 4rem !important;
-    margin-right: 1rem !important;
-  }
-
-  .ipad-portrait-hero-title {
-    font-size: 2.75rem !important;
-    letter-spacing: 2px !important;
-  }
-
-  .ipad-portrait-hero-subtitle {
-    font-size: 1rem !important;
-    max-width: 320px !important;
-  }
-
-  .ipad-portrait-hero-button {
-    font-size: 0.95rem !important;
-    padding: 0.75rem 1.75rem !important;
-  }
-}
 
 /* ========================================
    TOUCH INTERACTION ENHANCEMENTS

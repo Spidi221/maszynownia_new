@@ -1,0 +1,123 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/images"
+public_folder: "/images"
+
+collections:
+  - name: "news"
+    label: "Aktualności"
+    folder: "content/news"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Tytuł", name: "title", widget: "string"}
+      - {label: "Data publikacji", name: "date", widget: "datetime"}
+      - {label: "Autor", name: "author", widget: "string"}
+      - {label: "Kategoria", name: "category", widget: "select", options: ["Zajęcia", "Obozy", "Warsztaty", "Lokalizacje", "Wydarzenia"]}
+      - {label: "Krótki opis", name: "excerpt", widget: "text"}
+      - {label: "Treść", name: "body", widget: "markdown"}
+      - {label: "Zdjęcie główne", name: "image", widget: "image", required: false}
+      - {label: "Status", name: "status", widget: "select", options: ["draft", "published"], default: "published"}
+
+  - name: "pages"
+    label: "Strony"
+    files:
+      - label: "Strona główna"
+        name: "home"
+        file: "content/pages/home.md"
+        fields:
+          - {label: "Tytuł", name: "title", widget: "string"}
+          - {label: "Opis EMS", name: "ems_description", widget: "text"}
+          - {label: "Opis Gimnastyki", name: "gym_description", widget: "text"}
+
+      - label: "EMS - O treningu"
+        name: "ems_about"
+        file: "content/pages/ems-about.md"
+        fields:
+          - {label: "Tytuł sekcji", name: "title", widget: "string"}
+          - {label: "Opis treningu EMS", name: "description", widget: "markdown"}
+          - {label: "Korzyści", name: "benefits", widget: "list", field: {label: "Korzyść", name: "benefit", widget: "string"}}
+
+      - label: "Gimnastyka - Informacje"
+        name: "gym_info"
+        file: "content/pages/gym-info.md"
+        fields:
+          - {label: "Filozofia działania", name: "philosophy", widget: "markdown"}
+          - {label: "Dlaczego my - punkty", name: "why_us", widget: "list", fields: [
+              {label: "Ikona", name: "icon", widget: "string"},
+              {label: "Tytuł", name: "title", widget: "string"},
+              {label: "Opis", name: "description", widget: "text"}
+            ]}
+
+  - name: "services"
+    label: "Usługi dodatkowe"
+    folder: "content/services"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Nazwa usługi", name: "title", widget: "string"}
+      - {label: "Identyfikator", name: "id", widget: "string"}
+      - {label: "Krótki opis", name: "short_description", widget: "text"}
+      - {label: "Pełny opis", name: "full_description", widget: "markdown"}
+      - {label: "Cechy usługi", name: "features", widget: "list", field: {label: "Cecha", name: "feature", widget: "string"}}
+      - {label: "Cena", name: "price", widget: "string", required: false}
+      - {label: "Czas trwania", name: "duration", widget: "string", required: false}
+      - {label: "Wiek uczestników", name: "age_range", widget: "string", required: false}
+      - {label: "Aktywna", name: "active", widget: "boolean", default: true}
+
+  - name: "team"
+    label: "Zespół"
+    folder: "content/team"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Imię i nazwisko", name: "name", widget: "string"}
+      - {label: "Stanowisko", name: "position", widget: "string"}
+      - {label: "Opis", name: "description", widget: "text"}
+      - {label: "Kwalifikacje", name: "qualifications", widget: "text"}
+      - {label: "Zdjęcie", name: "image", widget: "image", required: false}
+      - {label: "Kolejność wyświetlania", name: "order", widget: "number", default: 1}
+
+  - name: "locations"
+    label: "Lokalizacje"
+    folder: "content/locations"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Nazwa", name: "name", widget: "string"}
+      - {label: "Adres", name: "address", widget: "string"}
+      - {label: "Harmonogram", name: "schedule", widget: "list", field: {label: "Godzina", name: "time", widget: "string"}}
+      - {label: "Data rozpoczęcia", name: "start_date", widget: "string"}
+      - {label: "Cennik", name: "prices", widget: "list", field: {label: "Cena", name: "price", widget: "string"}}
+      - {label: "Link do mapy", name: "map_url", widget: "string"}
+      - {label: "Embed mapy", name: "embed_url", widget: "string"}
+      - {label: "Aktywna", name: "active", widget: "boolean", default: true}
+
+  - name: "settings"
+    label: "Ustawienia"
+    files:
+      - label: "Kontakt"
+        name: "contact"
+        file: "content/settings/contact.md"
+        fields:
+          - {label: "Numer telefonu", name: "phone", widget: "string"}
+          - {label: "Email EMS", name: "email_ems", widget: "string"}
+          - {label: "Email Gimnastyka", name: "email_gym", widget: "string"}
+          - {label: "Facebook EMS", name: "facebook_ems", widget: "string"}
+          - {label: "Instagram EMS", name: "instagram_ems", widget: "string"}
+          - {label: "Facebook Gimnastyka", name: "facebook_gym", widget: "string"}
+          - {label: "Instagram Gimnastyka", name: "instagram_gym", widget: "string"}
+
+      - label: "SEO"
+        name: "seo"
+        file: "content/settings/seo.md"
+        fields:
+          - {label: "Tytuł strony głównej", name: "home_title", widget: "string"}
+          - {label: "Opis strony głównej", name: "home_description", widget: "text"}
+          - {label: "Słowa kluczowe", name: "keywords", widget: "string"}
+          - {label: "Tytuł EMS", name: "ems_title", widget: "string"}
+          - {label: "Opis EMS", name: "ems_description", widget: "text"}
+          - {label: "Tytuł Gimnastyka", name: "gym_title", widget: "string"}
+          - {label: "Opis Gimnastyka", name: "gym_description", widget: "text"}

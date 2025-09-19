@@ -14,7 +14,7 @@ const Footer = ({ variant }) => {
   const passionText = isEMS ? 'skutecznego treningu 💪' : 'szczęśliwego dzieciństwa 🤸';
 
   return (
-    <footer className={`${bgColor} py-12 px-6 border-t ${borderColor}`}>
+    <footer className={`${bgColor} py-12 px-6`}>
       <div className="max-w-7xl mx-auto">
         {/* Główna sekcja z linkami */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
