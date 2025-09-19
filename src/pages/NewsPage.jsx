@@ -1,11 +1,16 @@
 import SEOHead from '../components/SEOHead';
 import Footer from '../components/Footer';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Calendar, ArrowLeft, Clock, User, ChevronRight } from 'lucide-react';
 import { Link } from 'wouter';
+import useResponsiveImage from '../hooks/useResponsiveImage';
 
 const NewsPage = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+
+  // Responsive images for optimal mobile performance
+  const warsztatyImage = useResponsiveImage('/images/warsztaty.webp');
+  const piknikiImage = useResponsiveImage('/images/pikniki.webp');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,7 +22,7 @@ const NewsPage = () => {
   }, []);
 
   // Przykładowe aktualności
-  const news = [
+  const news = useMemo(() => [
     {
       id: 1,
       title: "Nowe zajęcia akrobatyczne dla młodzieży 12+",
@@ -26,7 +31,7 @@ const NewsPage = () => {
       category: "Zajęcia",
       excerpt: "Z radością informujemy o uruchomieniu nowej grupy zaawansowanej dla młodzieży powyżej 12 roku życia. Zajęcia będą prowadzone w Józefowie.",
       content: "Zapraszamy wszystkich chętnych w wieku 12+ na nowe zajęcia akrobatyczne. Program obejmuje naukę zaawansowanych elementów gimnastycznych, salt, przerzutów i elementów na trampolinie. Zajęcia prowadzi doświadczona trenerka Klaudia Kołodziejska.",
-      image: "/images/warsztaty.webp"
+      image: warsztatyImage
     },
     {
       id: 2,
@@ -46,7 +51,7 @@ const NewsPage = () => {
       category: "Warsztaty",
       excerpt: "Już 20-21 stycznia zapraszamy na intensywne warsztaty gimnastyczne. Dwa dni pełne nauki i zabawy!",
       content: "Warsztaty to intensywny weekend treningów, podczas którego dzieci będą miały okazję nauczyć się nowych elementów akrobatycznych. W programie: rozgrzewka, nauka podstawowych i zaawansowanych elementów, ćwiczenia na równoważni i trampolinie.",
-      image: "/images/pikniki.webp"
+      image: piknikiImage
     },
     {
       id: 4,
@@ -68,7 +73,7 @@ const NewsPage = () => {
       content: "Świąteczne pokazy naszych podopiecznych były prawdziwym sukcesem! Dzieci zaprezentowały swoje umiejętności przed rodzicami i bliskimi, pokazując efekty ciężkiej pracy przez cały semestr. Gratulujemy wszystkim uczestnikom!",
       image: "/images/urodziny.webp"
     }
-  ];
+  ], [warsztatyImage, piknikiImage]);
 
   return (
     <>

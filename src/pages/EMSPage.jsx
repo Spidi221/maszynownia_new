@@ -745,7 +745,7 @@ export default function EMSPage() {
             <div className="max-w-md mx-auto">
               <div className="pricing-card-premium p-10 text-center relative border-2 border-ems-gold/30 transform hover:scale-105 transition-all duration-300 card-stagger" style={{ '--stagger-index': '6' }}>
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <span className="bg-gradient-to-r from-ems-gold to-ems-gold-rich text-ems-black px-6 py-2 rounded-full text-xs font-bold uppercase tracking-wider">
+                  <span className="bg-gradient-to-r from-ems-gold to-ems-gold-rich text-ems-black px-8 py-3 rounded-full text-xs font-bold uppercase tracking-wider whitespace-nowrap">
                     Niezbędny do treningu
                   </span>
                 </div>

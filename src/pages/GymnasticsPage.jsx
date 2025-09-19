@@ -1,6 +1,7 @@
 import SEOHead from '../components/SEOHead';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { useLayoutDetection } from '../hooks/useLayoutDetection';
+import useResponsiveImage from '../hooks/useResponsiveImage';
 import { SmartContactButton } from '../components/ui/smart-contact-button';
 import Footer from '../components/Footer';
 import { Link } from 'wouter';
@@ -14,6 +15,11 @@ export default function GymnasticsPage() {
   const [expandedServices, setExpandedServices] = useState({});
   const sectionsRef = useRef([]);
   const { isMobile, layoutMode, dimensions, showFullNavigation, showHamburgerMenu } = useLayoutDetection();
+
+  // Responsive images for critical performance optimization
+  const heroBackground = useResponsiveImage('/images/nowe_tlo_strefa.webp');
+  const warsztatyImage = useResponsiveImage('/images/warsztaty.webp');
+  const piknikiImage = useResponsiveImage('/images/pikniki.webp');
 
   const locations = [
     {
@@ -71,7 +77,7 @@ export default function GymnasticsPage() {
     }));
   };
 
-  const services = [
+  const services = useMemo(() => [
     {
       id: 'warsztaty',
       title: 'Warsztaty gimnastyczne',
@@ -84,7 +90,7 @@ export default function GymnasticsPage() {
         'Indywidualne podejście do każdego dziecka',
         'Małe grupy - maksymalnie 10 osób'
       ],
-      image: '/images/warsztaty.webp'
+      image: warsztatyImage
     },
     {
       id: 'urodziny',
@@ -112,7 +118,7 @@ export default function GymnasticsPage() {
         'Różnorodne aktywności dla wszystkich grup wiekowych',
         'Wydarzenia na świeżym powietrzu'
       ],
-      image: '/images/pikniki.webp'
+      image: piknikiImage
     },
     {
       id: 'placowki',
@@ -142,7 +148,7 @@ export default function GymnasticsPage() {
       ],
       image: '/images/obozy.webp'
     }
-  ];
+  ], [warsztatyImage, piknikiImage]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -451,7 +457,7 @@ export default function GymnasticsPage() {
         <div
           className="absolute top-20 bottom-0 right-0 w-full md:w-3/4 lg:w-2/3 xl:w-7/12"
           style={{
-            backgroundImage: 'url(/images/nowe_tlo_strefa.webp)',
+            backgroundImage: `url(${heroBackground})`,
             backgroundSize: 'auto 100%',
             backgroundPosition: dimensions.width < 768
               ? '30% center'      // Mobile: przesunięte w LEWO (w TWOJE prawo) żeby dziewczynka była widoczna

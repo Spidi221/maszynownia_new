@@ -1,4 +1,10 @@
+import useResponsiveImage from '../hooks/useResponsiveImage';
+
 const HomePage = () => {
+  // Responsive images for optimal mobile performance
+  const emsBackground = useResponsiveImage('/images/woman-ems.webp');
+  const gymBackground = useResponsiveImage('/images/girl-gymnastics-final.webp');
+
   return (
     <div className="h-screen flex flex-col lg:flex-row relative overflow-hidden">
       {/* EMS Section */}
@@ -7,7 +13,7 @@ const HomePage = () => {
         <div
           className="absolute inset-0 bg-cover bg-left opacity-30"
           style={{
-            backgroundImage: 'url(/images/woman-ems.webp)',
+            backgroundImage: `url(${emsBackground})`,
             backgroundPosition: 'left top',
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat'
@@ -22,7 +28,7 @@ const HomePage = () => {
           <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 lg:relative lg:bottom-auto lg:left-auto lg:transform-none lg:text-center lg:mb-12 mobile-ems-button">
             <a
               href="/ems"
-              className="inline-block border-2 border-ems-gold text-white uppercase tracking-wider px-24 py-6 mb-4 font-medium transition-all duration-300 hover:bg-ems-gold hover:text-ems-black active:scale-95 active:bg-ems-gold/90 mobile-text-small lg:py-4 text-xl lg:min-w-[480px] lg:min-h-[60px] rounded-full text-center text-decoration-none"
+              className="inline-flex items-center justify-center border-2 border-ems-gold text-white uppercase tracking-wider px-24 py-6 mb-4 font-medium transition-all duration-300 hover:bg-ems-gold hover:text-ems-black active:scale-95 active:bg-ems-gold/90 mobile-text-small lg:py-4 text-xl lg:min-w-[480px] lg:min-h-[60px] rounded-full text-decoration-none"
               style={{minWidth: '380px', minHeight: '44px'}}
               aria-label="Przejdź do strony treningu EMS - Zacznij swój trening już dziś"
               role="button"
@@ -59,7 +65,7 @@ const HomePage = () => {
         <div
           className="absolute inset-0 bg-cover opacity-30"
           style={{
-            backgroundImage: 'url(/images/girl-gymnastics-final.webp)',
+            backgroundImage: `url(${gymBackground})`,
             backgroundPosition: '70% bottom',
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat'
@@ -74,7 +80,7 @@ const HomePage = () => {
           <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 lg:relative lg:bottom-auto lg:left-auto lg:transform-none lg:text-center lg:mb-12 mobile-gym-button">
             <a
               href="/strefagimnastyki"
-              className="inline-block border-2 border-white text-white uppercase tracking-wider px-16 py-6 mb-4 font-medium transition-all duration-300 hover:bg-white hover:text-gym-yellow active:scale-95 active:bg-white/90 mobile-text-small lg:py-4 text-xl lg:min-w-[320px] lg:min-h-[60px] rounded-full text-center text-decoration-none"
+              className="inline-flex items-center justify-center border-2 border-white text-white uppercase tracking-wider px-16 py-6 mb-4 font-medium transition-all duration-300 hover:bg-white hover:text-gym-yellow active:scale-95 active:bg-white/90 mobile-text-small lg:py-4 text-xl lg:min-w-[320px] lg:min-h-[60px] rounded-full text-decoration-none"
               style={{minWidth: '280px', minHeight: '44px'}}
               aria-label="Przejdź do strony gimnastyki dla dzieci - Sprawdź zajęcia"
               role="button"
