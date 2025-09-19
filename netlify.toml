@@ -10,9 +10,7 @@
 [build.environment]
   NODE_VERSION = "18"
 
-# Netlify Identity configuration for CMS
-[[plugins]]
-  package = "netlify-plugin-git-lfs"
+# Plugins removed - not needed for this project
 
 # Headers for security and performance
 [[headers]]
