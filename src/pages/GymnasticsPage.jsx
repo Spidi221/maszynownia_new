@@ -779,10 +779,17 @@ export default function GymnasticsPage() {
 
             {/* Klaudia Nowicka */}
             <div className="gym-card-unified light p-10 rounded-3xl text-center group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
-              <div className="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-[#a16207]/30 mb-6 bg-gradient-to-br from-gym-yellow/20 to-gym-orange-accent/20 flex items-center justify-center">
-                <svg className="w-16 h-16 text-[#a16207]" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                </svg>
+              <div className="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-[#a16207]/30 mb-6 relative">
+                <img
+                  src="/images/klaudia-nowicka.webp"
+                  alt="Klaudia Nowicka"
+                  width={128}
+                  height={128}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  style={{
+                    objectPosition: 'center 30%'
+                  }}
+                />
               </div>
               <h3 className="text-2xl font-bebas font-normal mb-2 text-gym-navy-trust">Klaudia Nowicka</h3>
               <p className="text-[#a16207] font-montserrat font-light mb-4">Założycielka i instruktorka</p>
