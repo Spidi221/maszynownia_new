@@ -1,9 +1,17 @@
 import SEOHead from '../components/SEOHead';
 import Footer from '../components/Footer';
 import { ArrowLeft, Shield, Lock, FileText, Users, Eye, AlertCircle } from 'lucide-react';
-import { Link } from 'wouter';
+import { Link, useLocation } from 'wouter';
 
 const RODOPage = () => {
+  const [location] = useLocation();
+  const params = new URLSearchParams(location.split('?')[1]);
+  const from = params.get('from');
+
+  // Smart back link based on referrer
+  const backLink = from === 'ems' ? '/ems' : from === 'gym' ? '/strefagimnastyki' : '/';
+  const backText = from === 'ems' ? 'Powrót do EMS' : from === 'gym' ? 'Powrót do Strefy Gimnastyki' : 'Powrót do strony głównej';
+
   return (
     <>
       <SEOHead
@@ -16,10 +24,10 @@ const RODOPage = () => {
         {/* Header */}
         <header className="bg-gradient-to-r from-ems-black to-gray-800 text-white py-8">
           <div className="max-w-4xl mx-auto px-4">
-            <Link href="/">
+            <Link href={backLink}>
               <a className="inline-flex items-center gap-2 text-ems-gold hover:text-ems-gold-light transition-colors mb-4">
                 <ArrowLeft className="h-5 w-5" />
-                <span>Powrót do strony głównej</span>
+                <span>{backText}</span>
               </a>
             </Link>
             <h1 className="text-4xl font-bold flex items-center gap-3">
@@ -61,7 +69,8 @@ const RODOPage = () => {
                 <div>
                   <h3 className="font-bold text-lg text-gray-800 mb-2">Kontakt w sprawie danych</h3>
                   <p className="text-gray-600">
-                    Email: maszynowniaems@gmail.com<br />
+                    Email EMS: maszynowniaems@gmail.com<br />
+                    Email Strefa Gimnastyki: maszynowniastrefagimnastyki@gmail.com<br />
                     Tel: 696 376 377<br />
                     Adres: ul. Gen. Sikorskiego 113<br />
                     05-410 Józefów
@@ -261,7 +270,8 @@ const RODOPage = () => {
                 Skontaktuj się z nami - chętnie odpowiemy na wszystkie pytania:
               </p>
               <div className="space-y-2 text-gray-700">
-                <p><strong>Email:</strong> maszynowniaems@gmail.com</p>
+                <p><strong>Email EMS:</strong> maszynowniaems@gmail.com</p>
+                <p><strong>Email Strefa Gimnastyki:</strong> maszynowniastrefagimnastyki@gmail.com</p>
                 <p><strong>Telefon:</strong> 696 376 377</p>
                 <p><strong>Adres:</strong> ul. Generała Sikorskiego 113, 05-410 Józefów</p>
               </div>

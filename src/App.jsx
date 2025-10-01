@@ -7,6 +7,8 @@ import GymnasticsPage from './pages/GymnasticsPage';
 import NewsPage from './pages/NewsPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import RODOPage from './pages/RODOPage';
+import RegulaminPage from './pages/RegulaminPage';
+import CookiesPage from './pages/CookiesPage';
 import CookiesBanner from './components/CookiesBanner';
 import SEOHead from './components/SEOHead';
 
@@ -58,6 +60,14 @@ function App() {
 
         <Route path="/rodo">
           <RODOPage />
+        </Route>
+
+        <Route path="/regulamin">
+          <RegulaminPage />
+        </Route>
+
+        <Route path="/cookies">
+          <CookiesPage />
         </Route>
       </Router>
     </HelmetProvider>

@@ -51,7 +51,7 @@ const Footer = ({ variant }) => {
             {/* Social Media */}
             <div className="flex gap-4 pt-2">
               <a
-                href={isEMS ? "https://www.facebook.com/MaszynowniaEMS" : "https://www.facebook.com/MaszynowniaStrefaGimnastyki"}
+                href={isEMS ? "https://www.facebook.com/MaszynowniaEMS" : "https://www.facebook.com/share/17Lxyh9rwd/"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`${iconColor} hover:opacity-80 transition-opacity`}
@@ -103,16 +103,16 @@ const Footer = ({ variant }) => {
           <div className="space-y-3">
             <h4 className={`text-xl font-bold ${textColor} mb-4`}>Informacje prawne</h4>
             <div className="space-y-2">
-              <Link href="/polityka-prywatnosci" className={`block text-sm ${accentColor} transition-colors`}>
+              <Link href={`/polityka-prywatnosci?from=${isEMS ? 'ems' : 'gym'}`} className={`block text-sm ${accentColor} transition-colors`}>
                 Polityka prywatności
               </Link>
-              <Link href="/regulamin" className={`block text-sm ${accentColor} transition-colors`}>
+              <Link href={`/regulamin?from=${isEMS ? 'ems' : 'gym'}`} className={`block text-sm ${accentColor} transition-colors`}>
                 Regulamin
               </Link>
-              <Link href="/rodo" className={`block text-sm ${accentColor} transition-colors`}>
+              <Link href={`/rodo?from=${isEMS ? 'ems' : 'gym'}`} className={`block text-sm ${accentColor} transition-colors`}>
                 RODO
               </Link>
-              <Link href="/cookies" className={`block text-sm ${accentColor} transition-colors`}>
+              <Link href={`/cookies?from=${isEMS ? 'ems' : 'gym'}`} className={`block text-sm ${accentColor} transition-colors`}>
                 Polityka cookies
               </Link>
             </div>

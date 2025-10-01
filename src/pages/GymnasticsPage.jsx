@@ -781,13 +781,13 @@ export default function GymnasticsPage() {
             <div className="gym-card-unified light p-10 rounded-3xl text-center group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
               <div className="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-[#a16207]/30 mb-6 relative">
                 <img
-                  src="/images/klaudia-nowicka.webp"
+                  src="/images/klaudia-nowicka-new.webp"
                   alt="Klaudia Nowicka"
                   width={128}
                   height={128}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   style={{
-                    objectPosition: 'center 30%'
+                    objectPosition: 'center 18%'
                   }}
                 />
               </div>

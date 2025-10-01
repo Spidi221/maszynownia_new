@@ -1,9 +1,17 @@
 import SEOHead from '../components/SEOHead';
 import Footer from '../components/Footer';
 import { ArrowLeft } from 'lucide-react';
-import { Link } from 'wouter';
+import { Link, useLocation } from 'wouter';
 
 const PrivacyPolicyPage = () => {
+  const [location] = useLocation();
+  const params = new URLSearchParams(location.split('?')[1]);
+  const from = params.get('from');
+
+  // Smart back link based on referrer
+  const backLink = from === 'ems' ? '/ems' : from === 'gym' ? '/strefagimnastyki' : '/';
+  const backText = from === 'ems' ? 'Powrót do EMS' : from === 'gym' ? 'Powrót do Strefy Gimnastyki' : 'Powrót do strony głównej';
+
   return (
     <>
       <SEOHead
@@ -16,10 +24,10 @@ const PrivacyPolicyPage = () => {
         {/* Header */}
         <header className="bg-gradient-to-r from-ems-black to-gray-800 text-white py-8">
           <div className="max-w-4xl mx-auto px-4">
-            <Link href="/">
+            <Link href={backLink}>
               <a className="inline-flex items-center gap-2 text-ems-gold hover:text-ems-gold-light transition-colors mb-4">
                 <ArrowLeft className="h-5 w-5" />
-                <span>Powrót do strony głównej</span>
+                <span>{backText}</span>
               </a>
             </Link>
             <h1 className="text-4xl font-bold">Polityka Prywatności</h1>
@@ -39,7 +47,8 @@ const PrivacyPolicyPage = () => {
               </p>
               <p className="text-gray-700 leading-relaxed mt-2">
                 Kontakt z administratorem:<br />
-                Email: maszynowniaems@gmail.com<br />
+                Email EMS: maszynowniaems@gmail.com<br />
+                Email Strefa Gimnastyki: maszynowniastrefagimnastyki@gmail.com<br />
                 Telefon: 696 376 377
               </p>
             </section>
@@ -148,7 +157,8 @@ const PrivacyPolicyPage = () => {
               <h2 className="text-2xl font-bold text-gray-800 mb-4">10. Kontakt</h2>
               <p className="text-gray-700 leading-relaxed">
                 W przypadku pytań dotyczących przetwarzania danych osobowych prosimy o kontakt:<br />
-                Email: maszynowniaems@gmail.com<br />
+                Email EMS: maszynowniaems@gmail.com<br />
+                Email Strefa Gimnastyki: maszynowniastrefagimnastyki@gmail.com<br />
                 Telefon: 696 376 377<br />
                 Adres: ul. Generała Sikorskiego 113, 05-410 Józefów
               </p>

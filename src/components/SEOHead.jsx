@@ -16,6 +16,11 @@ export default function SEOHead({
   const canonicalUrl = canonical ? `https://maszynownia.pl${canonical}` : "https://maszynownia.pl/";
   const imageUrl = image.startsWith('http') ? image : `https://maszynownia.pl${image}`;
 
+  // Email based on business type
+  const contactEmail = businessType === "gymnastics"
+    ? "maszynowniastrefagimnastyki@gmail.com"
+    : "maszynowniaems@gmail.com";
+
   // Enhanced Local Business Schema for Maszynownia
   const localBusinessSchema = {
     "@context": "https://schema.org",
@@ -26,7 +31,7 @@ export default function SEOHead({
     "logo": "https://maszynownia.pl/images/logo-ems.webp",
     "image": ["https://maszynownia.pl/images/hero-ems-new.webp", "https://maszynownia.pl/images/girl-gymnastics-final.webp"],
     "telephone": "+48696376377",
-    "email": "maszynowniaems@gmail.com",
+    "email": contactEmail,
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "ul. Generała Sikorskiego 113",
@@ -358,7 +363,7 @@ export default function SEOHead({
       <meta name="qa-fitness-ems" content="EMS training 30 minutes equals 90-minute traditional workout, prices from 79zł, wireless equipment, individual approach" />
       <meta name="qa-children-gymnastics" content="Gymnastics classes for children 4-13 years, 3 locations: Józefów 160zł, Michalin 170zł, Góra Kalwaria, certified trainers" />
       <meta name="qa-services-offered" content="5 main services: weekend gymnastics workshops, gymnastics birthday parties (2h), family sports picnics, institution visits with equipment, summer acrobatic camps" />
-      <meta name="qa-contact-booking" content="SMS to 696 376 377 with child name, age, location preference, or email maszynowniaems@gmail.com" />
+      <meta name="qa-contact-booking" content={`SMS to 696 376 377 with child name, age, location preference, or email ${contactEmail}`} />
 
       {/* Knowledge Graph Optimization */}
       <meta name="organization-founding-year" content="2017" />
@@ -385,7 +390,7 @@ export default function SEOHead({
       <meta property="business:contact_data:postal_code" content="05-410" />
       <meta property="business:contact_data:country_name" content="Poland" />
       <meta property="business:contact_data:phone_number" content="+48696376377" />
-      <meta property="business:contact_data:email" content="maszynowniaems@gmail.com" />
+      <meta property="business:contact_data:email" content={contactEmail} />
 
       {/* Enhanced Twitter Card */}
       <meta name="twitter:card" content="summary_large_image" />

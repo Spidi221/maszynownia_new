@@ -783,24 +783,100 @@ export default function EMSPage() {
           <h2 className="text-4xl lg:text-6xl xl:text-7xl 2xl:text-8xl text-center mb-16 text-ems-gold" style={{fontWeight: '100', letterSpacing: '8px', textTransform: 'uppercase'}}>
             <span className="text-white" style={{fontWeight: '100'}}>Poznaj nasz</span> zespół
           </h2>
-          <div className="text-center max-w-3xl mx-auto glass-card p-8">
-            <p className="body-premium text-lg mb-6">
-              Nasz doświadczony zespół trenerów zapewni Ci profesjonalną opiekę
-              i indywidualne podejście podczas każdego treningu EMS.
-            </p>
-            <p className="accent-text-premium text-xl font-light tracking-wider mb-8">
-              Skontaktuj się z nami, aby umówić się na trening próbny!
-            </p>
-            {/* Team Photo */}
-            <div className="mt-8">
-              <img
-                src="/images/zespol-ems.webp"
-                alt="Zespół Maszynownia EMS - profesjonalni trenerzy w studio"
-                className="rounded-xl shadow-2xl mx-auto max-w-full h-auto"
-                style={{ maxHeight: '400px' }}
-                loading="lazy"
-              />
+          {/* Founder Portrait - Hero Center Stage */}
+          <div className="flex flex-col items-center mb-12">
+            <div className="relative mb-8">
+              <div
+                className="w-64 h-64 lg:w-80 lg:h-80 rounded-full overflow-hidden border-4 border-ems-gold mx-auto"
+                style={{
+                  boxShadow: '0 0 60px rgba(217, 186, 116, 0.5), 0 0 120px rgba(217, 186, 116, 0.3)'
+                }}
+              >
+                <img
+                  src="/images/klaudia-nowicka-new.webp"
+                  alt="Klaudia Nowicka - Założycielka Maszynownia"
+                  className="w-full h-full object-cover"
+                  style={{ objectPosition: 'center 18%' }}
+                />
+              </div>
             </div>
+
+            <h3 className="text-3xl lg:text-4xl text-white font-light tracking-[8px] mb-4">
+              KLAUDIA NOWICKA
+            </h3>
+            <p className="text-ems-gold text-sm lg:text-base tracking-[4px] uppercase mb-8">
+              Założycielka Maszynownia | Trener II klasy
+            </p>
+
+            {/* Gold Divider */}
+            <div className="w-32 h-0.5 bg-ems-gold mb-12"></div>
+          </div>
+
+          {/* Biography Section */}
+          <div className="max-w-4xl mx-auto glass-card p-8 lg:p-12 mb-12 text-center">
+            <p className="body-premium text-base lg:text-lg mb-6 leading-relaxed">
+              Założycielka studia Maszynownia, absolwentka Warszawskiej AWF. Od najmłodszych lat związana ze sportem wyczynowym – swoją przygodę rozpoczęła od gimnastyki sportowej, która ukształtowała w niej dyscyplinę, determinację i wrażliwość na technikę ruchu. Później trenowała także lekkoatletykę, specjalizując się w biegu na 400 m przez płotki – dyscyplinie wymagającej ogromnej siły charakteru, wytrzymałości i konsekwencji.
+            </p>
+            <p className="body-premium text-base lg:text-lg leading-relaxed">
+              Wieloletnia trenerka UKS SP 7 Łódź, a także nauczycielka Wychowania Fizycznego z ponad 6-letnim doświadczeniem w pracy z dziećmi i młodzieżą. Instruktor kulturystyki, trójboju siłowego, fitness oraz korektywy. Trener II klasy gimnastyki sportowej oraz sędzina Polskiego Związku Gimnastycznego.
+            </p>
+          </div>
+
+          {/* Strengths Grid - Asymmetric 4+1 Layout */}
+          <div className="max-w-6xl mx-auto mb-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+              {/* Strength 1 */}
+              <div className="glass-card p-6 text-center hover:scale-105 transition-transform duration-300">
+                <div className="text-ems-gold text-3xl mb-4">✦</div>
+                <p className="body-premium text-sm lg:text-base">
+                  wszechstronna wiedza z zakresu sportu i zdrowego ruchu
+                </p>
+              </div>
+
+              {/* Strength 2 */}
+              <div className="glass-card p-6 text-center hover:scale-105 transition-transform duration-300">
+                <div className="text-ems-gold text-3xl mb-4">✦</div>
+                <p className="body-premium text-sm lg:text-base">
+                  doświadczenie w pracy indywidualnej i z grupami
+                </p>
+              </div>
+
+              {/* Strength 3 */}
+              <div className="glass-card p-6 text-center hover:scale-105 transition-transform duration-300">
+                <div className="text-ems-gold text-3xl mb-4">✦</div>
+                <p className="body-premium text-sm lg:text-base">
+                  umiejętność łączenia teorii z praktyką
+                </p>
+              </div>
+
+              {/* Strength 4 */}
+              <div className="glass-card p-6 text-center hover:scale-105 transition-transform duration-300">
+                <div className="text-ems-gold text-3xl mb-4">✦</div>
+                <p className="body-premium text-sm lg:text-base">
+                  pasja do sportu, którą zaraża swoich podopiecznych
+                </p>
+              </div>
+            </div>
+
+            {/* Strength 5 - Centered below */}
+            <div className="flex justify-center">
+              <div className="glass-card p-6 text-center hover:scale-105 transition-transform duration-300 w-full md:w-1/2 lg:w-1/4">
+                <div className="text-ems-gold text-3xl mb-4">✦</div>
+                <p className="body-premium text-sm lg:text-base">
+                  cierpliwość, wyrozumiałość i otwartość na potrzeby różnych osób – od dzieci po dorosłych
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Team Photo - Panoramic */}
+          <div className="max-w-6xl mx-auto">
+            <img
+              src="/images/zespol-ems.webp"
+              alt="Zespół Maszynownia EMS - profesjonalni trenerzy w studio"
+              className="rounded-xl shadow-2xl mx-auto max-w-full h-auto"
+              style={{ maxHeight: '400px' }}
+            />
           </div>
         </div>
       </section>
