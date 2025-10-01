@@ -524,7 +524,7 @@ export default function EMSPage() {
           <div className="max-w-4xl mx-auto mb-16">
             <div className="glass-card p-8 lg:p-12">
               <p className="body-premium text-lg lg:text-xl leading-relaxed text-ems-pearl/90 text-center">
-                Trening opierający się na elektrostymulacji mięśni (ang. Electrical Muscle Stimulation), to niezwykle szybko rozwijająca się metoda ćwiczeń, która kompleksowo rozwija cały układ mięśniowy człowieka. Jest doskonałą alternatywą dla siłowni i treningów outdoor, umożliwiającą poprawę całej sylwetki przy maksymalnej oszczędności czasu. Od kilku lat metoda EMS znajduje zastosowanie i przynosi znakomite efekty w fitnessie, fizjoterapii oraz medycynie estetycznej. <strong className="text-ems-gold">Maszynownia to jedyne miejsce w Józefowie i Warszawie, gdzie możesz przekonać się o fantastycznym wpływie treningu EMS na Twoje zdrowie oraz kondycję fizyczną.</strong>
+                Trening opierający się na elektrostymulacji mięśni (ang. Electrical Muscle Stimulation), to niezwykle szybko rozwijająca się metoda ćwiczeń, która kompleksowo rozwija cały układ mięśniowy człowieka. Jest doskonałą alternatywą dla siłowni i treningów outdoor, umożliwiającą poprawę całej sylwetki przy maksymalnej oszczędności czasu. Od kilku lat metoda EMS znajduje zastosowanie i przynosi znakomite efekty w fitnessie, fizjoterapii oraz medycynie estetycznej. <strong className="text-ems-gold">Maszynownia to pierwsze miejsce w Józefowie, gdzie możesz przekonać się o fantastycznym wpływie treningu EMS na Twoje zdrowie oraz kondycję fizyczną.</strong>
               </p>
             </div>
           </div>
@@ -533,7 +533,7 @@ export default function EMSPage() {
           <div className="text-center max-w-4xl mx-auto">
             <div className="glass-card inline-block px-8 py-6">
               <p className="body-premium text-lg mb-2">
-                <strong className="gradient-gold text-xl">Maszynownia to najstarsze studio EMS w Józefowie</strong>
+                <strong className="gradient-gold text-xl">Maszynownia to najstarsze studio EMS w Józefowie | Od 2017 roku</strong>
               </p>
               <p className="text-ems-pearl/70">8 lat doświadczenia • Profesjonalny bezprzewodowy sprzęt • Certyfikowani trenerzy</p>
             </div>

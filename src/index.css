@@ -595,12 +595,20 @@ html, body {
       padding: 0.5rem 1rem !important;
     }
 
-    .mobile-text-xs {
-      font-size: 0.6rem !important;
+    .mobile-ems-location .mobile-text-xs,
+    .mobile-gym-location .mobile-text-xs {
+      font-size: 0.65rem !important;
+      line-height: 1.2 !important;
     }
 
-    .mobile-line {
-      width: 40px !important;
+    .mobile-ems-location .mobile-line {
+      width: 90px !important;
+      max-width: 90px !important;
+    }
+
+    .mobile-gym-location .mobile-line {
+      width: 140px !important;
+      max-width: 140px !important;
     }
   }
 

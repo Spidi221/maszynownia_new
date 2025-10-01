@@ -103,25 +103,17 @@ const Footer = ({ variant }) => {
           <div className="space-y-3">
             <h4 className={`text-xl font-bold ${textColor} mb-4`}>Informacje prawne</h4>
             <div className="space-y-2">
-              <Link href="/polityka-prywatnosci">
-                <a className={`block text-sm ${accentColor} transition-colors`}>
-                  Polityka prywatności
-                </a>
+              <Link href="/polityka-prywatnosci" className={`block text-sm ${accentColor} transition-colors`}>
+                Polityka prywatności
               </Link>
-              <Link href="/regulamin">
-                <a className={`block text-sm ${accentColor} transition-colors`}>
-                  Regulamin
-                </a>
+              <Link href="/regulamin" className={`block text-sm ${accentColor} transition-colors`}>
+                Regulamin
               </Link>
-              <Link href="/rodo">
-                <a className={`block text-sm ${accentColor} transition-colors`}>
-                  RODO
-                </a>
+              <Link href="/rodo" className={`block text-sm ${accentColor} transition-colors`}>
+                RODO
               </Link>
-              <Link href="/cookies">
-                <a className={`block text-sm ${accentColor} transition-colors`}>
-                  Polityka cookies
-                </a>
+              <Link href="/cookies" className={`block text-sm ${accentColor} transition-colors`}>
+                Polityka cookies
               </Link>
             </div>
           </div>

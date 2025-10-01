@@ -47,8 +47,8 @@ const HomePage = () => {
 
           {/* Line + Location */}
           <div className="absolute top-4 right-4 lg:relative lg:top-auto lg:right-auto lg:text-center mobile-ems-location">
-            <div className="w-60 h-px bg-ems-gold mx-auto mb-4 mobile-line"></div>
-            <p className="text-white uppercase tracking-wide text-base font-medium mobile-text-xs">
+            <div className="lg:w-60 h-px bg-ems-gold mx-auto mb-4 mobile-line"></div>
+            <p className="text-white uppercase tracking-wide lg:text-base font-medium mobile-text-xs">
               📍 Józefów
             </p>
           </div>
@@ -103,11 +103,11 @@ const HomePage = () => {
 
           {/* Line + Locations */}
           <div className="absolute top-4 left-4 lg:relative lg:top-auto lg:left-auto lg:text-center mobile-gym-location">
-            <div className="w-60 h-px bg-white mx-auto mb-4 mobile-line"></div>
+            <div className="lg:w-60 h-px bg-white mx-auto mb-4 mobile-line"></div>
             <div className="space-y-1">
-              <p className="text-white uppercase tracking-wide text-base font-medium mobile-text-xs">📍 Józefów</p>
-              <p className="text-white uppercase tracking-wide text-base font-medium mobile-text-xs">📍 Michalin</p>
-              <p className="text-white uppercase tracking-wide text-base font-medium mobile-text-xs">📍 Góra Kalwaria</p>
+              <p className="text-white uppercase tracking-wide lg:text-base font-medium mobile-text-xs">📍 Józefów</p>
+              <p className="text-white uppercase tracking-wide lg:text-base font-medium mobile-text-xs">📍 Michalin</p>
+              <p className="text-white uppercase tracking-wide lg:text-base font-medium mobile-text-xs">📍 Góra Kalwaria</p>
             </div>
           </div>
 

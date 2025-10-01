@@ -32,7 +32,7 @@ export default function GymnasticsPage() {
         "18:30 - grupa 10-13 lat"
       ],
       start: "Start: 9 września 2025",
-      prices: ["160 zł (1x/tyg)", "260 zł (2x/tyg)"],
+      prices: ["160 zł (1x/tyg)", "260 zł (2x/tyg)", "Trening jednorazowy: 50 zł"],
       mapUrl: "https://maps.app.goo.gl/DnvYvg56dvt17BCK8",
       embedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2443.7!2d21.2342!3d52.1234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ecb1234567890%3A0x1234567890abcdef!2sDolna%2019%2C%20J%C3%B3zef%C3%B3w!5e0!3m2!1spl!2spl!4v1234567890"
     },
@@ -45,7 +45,7 @@ export default function GymnasticsPage() {
         "14:30"
       ],
       start: "Zajęcia pokazowe: 5 września 2025",
-      prices: ["170 zł (1x/tyg)"],
+      prices: ["170 zł (1x/tyg)", "Trening jednorazowy: 50 zł"],
       mapUrl: "https://maps.app.goo.gl/CY1z53FRVMVQtDHVA",
       embedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2443.8!2d21.3157!3d52.1789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ecd12345678ab%3A0xabcdef1234567890!2sSienkiewicza%202%2C%2005-462%20Michalin!5e0!3m2!1spl!2spl!4v1693567890001"
     },
@@ -137,16 +137,17 @@ export default function GymnasticsPage() {
     {
       id: 'obozy',
       title: 'Obozy akrobatyczne',
-      shortDescription: 'Prowadzone przez Annę Błaszkiewicz - letnie obozy pełne nauki i zabawy.',
-      fullDescription: 'Obozy akrobatyczne to wyjątkowa propozycja wakacyjna dla dzieci, które chcą spędzić czas aktywnie i kreatywnie. Pod kierunkiem doświadczonej Anny Błaszkiewicz, kierownika wypoczynku z 10-letnim doświadczeniem, dzieci poznają tajniki akrobatyki w przyjaznej i bezpiecznej atmosferze. Tygodniowe turnusy obejmują naukę podstawowych i zaawansowanych elementów akrobatycznych, gry zespołowe, zabawy ruchowe oraz aktywności integracyjne. Program jest bogaty i różnorodny - od porannej gimnastyki, przez treningi akrobatyczne, aż po wieczorne gry i zabawy. Wszystko odbywa się w grupach maksymalnie 16 dzieci, co gwarantuje indywidualne podejście i wysoką jakość zajęć. To doskonała okazja do nauki nowych umiejętności, poznania rówieśników i spędzenia niezapomnianych wakacji.',
+      shortDescription: 'Wakacyjne obozy akrobatyczne organizowane przez Maszynownię Strefa Gimnastyki. Tygodniowe turnusy pełne nauki, zabawy i sportowych wyzwań.',
+      fullDescription: 'Obozy akrobatyczne to wyjątkowa propozycja wakacyjna organizowana przez Maszynownię Strefa Gimnastyki. Dzieci spędzają czas aktywnie i kreatywnie pod opieką całego zespołu trenerskiego studia. Anna Błaszkiewicz, kierownik obozów i kierownik wypoczynku z 10-letnim doświadczeniem, koordynuje program, wspierana przez pełną kadrę instruktorów Maszynowni. Tygodniowe turnusy obejmują naukę podstawowych i zaawansowanych elementów akrobatycznych, gry zespołowe, zabawy ruchowe oraz aktywności integracyjne. Program jest bogaty i różnorodny - od porannej gimnastyki, przez treningi akrobatyczne, aż po wieczorne gry i zabawy. Wszystko odbywa się w grupach maksymalnie 16 dzieci, co gwarantuje indywidualne podejście i wysoką jakość zajęć. To doskonała okazja do nauki nowych umiejętności, poznania rówieśników i spędzenia niezapomnianych wakacji.',
       features: [
         'Tygodniowe turnusy wakacyjne',
         'Nauka elementów akrobatycznych',
         'Grupa maksymalnie 16 dzieci',
-        'Doświadczony kierownik wypoczynku',
+        'Profesjonalna kadra trenerska Maszynowni',
         'Bogaty program zajęć'
       ],
-      image: '/images/obozy.webp'
+      image: '/images/IMG_0228-final.webp',
+      expandedImage: '/images/IMG_0213-final.webp'
     }
   ], [warsztatyImage, piknikiImage]);
 
@@ -325,14 +326,17 @@ export default function GymnasticsPage() {
                 Kontakt
               </button>
 
-              <Link href="/strefagimnastyki/aktualnosci">
-                <a className={`touch-nav-button text-gym-yellow hover:text-gym-yellow-light transition-colors font-montserrat font-light inline-block no-underline text-center ${
+              <Link
+                href="/strefagimnastyki/aktualnosci"
+                className={`touch-nav-button text-gym-yellow hover:text-gym-yellow-light transition-colors font-montserrat font-light inline-block no-underline text-center ${
                   dimensions.width >= 1100 ? 'text-base' :
                   dimensions.width >= 900 ? 'text-sm' :
                   'text-xs'
-                }`} style={{minWidth: '44px', minHeight: '44px', lineHeight: '44px'}} aria-label="Przejdź do aktualności Strefy Gimnastyki" role="button">
-                  Aktualności
-                </a>
+                }`}
+                style={{minWidth: '44px', minHeight: '44px', lineHeight: '44px'}}
+                aria-label="Przejdź do aktualności Strefy Gimnastyki"
+              >
+                Aktualności
               </Link>
 
               {/* Social Media - WIĘCEJ przestrzeni (separator usunięty dla ultra-compact) */}
@@ -340,7 +344,7 @@ export default function GymnasticsPage() {
                 dimensions.width >= 1000 ? 'gap-6 ml-8' : 'gap-4 ml-6'
               }`}>
                 <a
-                  href="https://www.facebook.com/maszynowniatreningems"
+                  href="https://www.facebook.com/profile.php?id=100063143113987"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gym-yellow hover:text-gym-yellow-light transition-colors"
@@ -352,7 +356,7 @@ export default function GymnasticsPage() {
                   </svg>
                 </a>
                 <a
-                  href="https://www.instagram.com/maszynownia"
+                  href="https://www.instagram.com/maszynownia_strefa_gimnastyki?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gym-yellow hover:text-gym-yellow-light transition-colors"
@@ -437,15 +441,13 @@ export default function GymnasticsPage() {
               Kontakt
             </button>
 
-            <Link href="/strefagimnastyki/aktualnosci">
-              <a
-                className="block w-full text-left text-white hover:text-white/80 transition-colors py-2 no-underline"
-                onClick={() => setIsMobileMenuOpen(false)}
-                aria-label="Przejdź do aktualności Strefy Gimnastyki"
-                role="button"
-              >
-                Aktualności
-              </a>
+            <Link
+              href="/strefagimnastyki/aktualnosci"
+              className="block w-full text-left text-white hover:text-white/80 transition-colors py-2 no-underline"
+              onClick={() => setIsMobileMenuOpen(false)}
+              aria-label="Przejdź do aktualności Strefy Gimnastyki"
+            >
+              Aktualności
             </Link>
           </div>
         </div>
@@ -500,7 +502,7 @@ export default function GymnasticsPage() {
                 maxWidth: 'clamp(18rem, 50vw, 40rem)'      // Fluid width
               }}
             >
-              <div className="absolute inset-0 bg-ems-black/60 blur-md scale-105 -z-10"></div>
+              <span className="absolute inset-0 bg-ems-black/60 blur-md scale-105 -z-10"></span>
               Wszechstronny rozwój fizyczny dzieci i młodzieży
             </p>
             <button
@@ -619,6 +621,7 @@ export default function GymnasticsPage() {
                   index === services.length - 1 ? 'border-2 border-[#a16207]' : ''
                 }`}
               >
+                {/* Grid z tekstem i głównym zdjęciem */}
                 <div className={`grid lg:grid-cols-2 gap-8 items-center ${
                   index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''
                 }`}>
@@ -666,25 +669,6 @@ export default function GymnasticsPage() {
                       {service.shortDescription}
                     </p>
 
-                    {/* Expandable content */}
-                    <div className={`transition-all duration-500 overflow-hidden ${
-                      expandedServices[service.id] ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
-                    }`}>
-                      <div className="mb-6">
-                        <p className="text-gym-navy-trust/70 font-montserrat font-light leading-relaxed mb-4">
-                          {service.fullDescription}
-                        </p>
-                        <ul className="space-y-2">
-                          {service.features.map((feature, featureIndex) => (
-                            <li key={featureIndex} className="flex items-center text-gym-navy-trust/70 font-montserrat">
-                              <div className="w-2 h-2 bg-[#a16207] rounded-full mr-3 flex-shrink-0"></div>
-                              {feature}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-
                     {/* Read More Button */}
                     <button
                       onClick={() => toggleService(service.id)}
@@ -701,7 +685,7 @@ export default function GymnasticsPage() {
                     </button>
                   </div>
 
-                  {/* Service Image */}
+                  {/* Service Image - POZOSTAJE NA MIEJSCU */}
                   <div className={`${index % 2 === 1 ? 'lg:col-start-1' : ''}`}>
                     <div className="aspect-[4/3] rounded-lg overflow-hidden shadow-lg bg-gym-cream/50">
                       <img
@@ -713,6 +697,43 @@ export default function GymnasticsPage() {
                             : 'object-cover'
                         }`}
                       />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Expandable content - POD GRIDEM */}
+                <div className={`transition-all duration-500 overflow-hidden ${
+                  expandedServices[service.id] ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'
+                }`}>
+                  <div className={`grid lg:grid-cols-2 gap-8 px-8 pb-8 pt-4 ${
+                    index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''
+                  }`}>
+                    {/* Tekst po lewej */}
+                    <div className={`${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
+                      <p className="text-gym-navy-trust/70 font-montserrat font-light leading-relaxed mb-4">
+                        {service.fullDescription}
+                      </p>
+                      <ul className="space-y-2">
+                        {service.features.map((feature, featureIndex) => (
+                          <li key={featureIndex} className="flex items-center text-gym-navy-trust/70 font-montserrat">
+                            <div className="w-2 h-2 bg-[#a16207] rounded-full mr-3 flex-shrink-0"></div>
+                            {feature}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Zdjęcie po prawej (pod głównym zdjęciem) */}
+                    <div className={`${index % 2 === 1 ? 'lg:col-start-1' : ''}`}>
+                      {service.expandedImage && (
+                        <div className="aspect-[4/3] rounded-lg overflow-hidden shadow-lg bg-gym-cream/50">
+                          <img
+                            src={service.expandedImage}
+                            alt={`${service.title} - dodatkowe zdjęcie`}
+                            className="w-full h-full object-contain p-1 transition-transform duration-300 hover:scale-105"
+                          />
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -747,12 +768,12 @@ export default function GymnasticsPage() {
                 />
               </div>
               <h3 className="text-2xl font-bebas font-normal mb-2 text-gym-navy-trust">Klaudia Kołodziejska</h3>
-              <p className="text-[#a16207] font-montserrat font-light mb-4">Główny Trener</p>
+              <p className="text-[#a16207] font-montserrat font-light mb-4">Instruktorka gimnastyki</p>
               <p className="text-gym-navy-trust/80 font-montserrat leading-relaxed mb-4">
-                Doświadczony trener gimnastyki z pasją do pracy z dziećmi. Specjalizuje się w kompleksowym rozwoju motoryki, koordynacji i akrobatyki u najmłodszych.
+                Doświadczona instruktorka gimnastyki z pasją do pracy z dziećmi. Specjalizuje się w kompleksowym rozwoju motoryki, koordynacji i akrobatyki u najmłodszych.
               </p>
               <p className="text-gym-navy-trust/70 font-montserrat text-sm">
-                Certyfikat trenera gimnastyki, wieloletnie doświadczenie w pracy z dziećmi wieku 4-13 lat.
+                Certyfikat instruktorki gimnastyki, wieloletnie doświadczenie w pracy z dziećmi wieku 4-13 lat.
               </p>
             </div>
 
@@ -764,12 +785,12 @@ export default function GymnasticsPage() {
                 </svg>
               </div>
               <h3 className="text-2xl font-bebas font-normal mb-2 text-gym-navy-trust">Klaudia Nowicka</h3>
-              <p className="text-[#a16207] font-montserrat font-light mb-4">Trener Gimnastyki</p>
+              <p className="text-[#a16207] font-montserrat font-light mb-4">Założycielka i instruktorka</p>
               <p className="text-gym-navy-trust/80 font-montserrat leading-relaxed mb-4">
-                Certyfikowany trener z wieloletnim doświadczeniem w pracy z dziećmi i młodzieżą. Ekspert w zakresie bezpieczeństwa podczas ćwiczeń gimnastycznych.
+                Założycielka studia Maszynownia, absolwentka Warszawskiej AWF. Od najmłodszych lat związana ze sportem wyczynowym – gymnastyką sportową i lekkoatletyką (400m przez płotki). Wieloletnia trenerka UKS SP 7 Łódź oraz nauczycielka Wychowania Fizycznego z 6-letnim doświadczeniem.
               </p>
               <p className="text-gym-navy-trust/70 font-montserrat text-sm">
-                Specjalizacja: bezpieczny trening, techniki gimnastyczne dla dzieci.
+                Instruktorka kulturystyki, trójboju siłowego, fitness oraz korektywy. Trenerka II klasy gimnastyki sportowej oraz sędzina Polskiego Związku Gimnastycznego.
               </p>
             </div>
 
@@ -781,13 +802,44 @@ export default function GymnasticsPage() {
                 </svg>
               </div>
               <h3 className="text-2xl font-bebas font-normal mb-2 text-gym-navy-trust">Anna Błaszkiewicz</h3>
-              <p className="text-[#a16207] font-montserrat font-light mb-4">Kierownik Wypoczynku</p>
+              <p className="text-[#a16207] font-montserrat font-light mb-4">Kierowniczka obozów</p>
               <p className="text-gym-navy-trust/80 font-montserrat leading-relaxed mb-4">
-                Kierownik wypoczynku z 10-letnim doświadczeniem jako nauczyciel wychowania fizycznego. Specjalistka od organizacji obozów akrobatycznych.
+                Kierowniczka wypoczynku z 10-letnim doświadczeniem jako nauczycielka wychowania fizycznego. Specjalistka od organizacji obozów akrobatycznych.
               </p>
               <p className="text-gym-navy-trust/70 font-montserrat text-sm">
                 Tworzy niezapomniane wakacyjne przygody pełne nauki i zabawy dla dzieci w każdym wieku.
               </p>
+            </div>
+          </div>
+
+          {/* Team Strengths Section */}
+          <div className="mt-16 max-w-4xl mx-auto">
+            <div className="gym-card-unified p-10">
+              <h3 className="text-3xl font-bebas font-bold text-center mb-8 text-gym-navy-trust">
+                Co wyróżnia nasz zespół?
+              </h3>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="flex items-start gap-3">
+                  <div className="w-3 h-3 bg-[#a16207] rounded-full mt-1.5 flex-shrink-0"></div>
+                  <p className="text-gym-navy-trust/80 font-montserrat">Wszechstronna wiedza z zakresu sportu i zdrowego ruchu</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-3 h-3 bg-[#a16207] rounded-full mt-1.5 flex-shrink-0"></div>
+                  <p className="text-gym-navy-trust/80 font-montserrat">Doświadczenie w pracy indywidualnej i z grupami</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-3 h-3 bg-[#a16207] rounded-full mt-1.5 flex-shrink-0"></div>
+                  <p className="text-gym-navy-trust/80 font-montserrat">Umiejętność łączenia teorii z praktyką</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-3 h-3 bg-[#a16207] rounded-full mt-1.5 flex-shrink-0"></div>
+                  <p className="text-gym-navy-trust/80 font-montserrat">Pasja do sportu, którą zarażamy naszych podopiecznych</p>
+                </div>
+                <div className="flex items-start gap-3 md:col-span-2 justify-center">
+                  <div className="w-3 h-3 bg-[#a16207] rounded-full mt-1.5 flex-shrink-0"></div>
+                  <p className="text-gym-navy-trust/80 font-montserrat">Cierpliwość, wyrozumiałość i otwartość na potrzeby - od dzieci po dorosłych</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -923,6 +975,26 @@ export default function GymnasticsPage() {
                 </div>
               </div>
             )}
+          </div>
+
+          {/* Bank Account Section */}
+          <div className="mt-12 max-w-2xl mx-auto">
+            <div className="gym-card-unified p-8">
+              <h4 className="text-2xl font-bebas text-gym-navy-trust mb-4 text-center">
+                Płatności za zajęcia
+              </h4>
+              <p className="text-gym-navy-trust/70 font-montserrat text-center mb-4">
+                Numer konta do przelewów:
+              </p>
+              <div className="bg-gym-cream/50 p-6 rounded-xl">
+                <p className="font-mono text-xl text-gym-navy-trust font-bold text-center tracking-wider mb-3">
+                  81 1050 1461 1000 0091 2108 5493
+                </p>
+                <p className="text-sm text-gym-navy-trust/60 text-center font-montserrat">
+                  Tytuł przelewu: Imię i nazwisko dziecka + lokalizacja
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>

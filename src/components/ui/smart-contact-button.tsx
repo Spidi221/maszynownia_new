@@ -45,6 +45,11 @@ export function SmartContactButton({
   };
 
   const getButtonText = () => {
+    // Desktop: show "Skopiowano!" when copied
+    if (!isMobile && copied) {
+      return 'Skopiowano!';
+    }
+
     if (children) return children;
 
     if (isMobile) {
@@ -70,9 +75,8 @@ export function SmartContactButton({
     return (
       <a
         href={getMobileUrl()}
-        className={`inline-flex items-center gap-2 transition-transform duration-200 hover:scale-105 active:scale-95 ${className}`}
+        className={`transition-transform duration-200 hover:scale-105 active:scale-95 ${className}`}
       >
-        {getIcon()}
         {getButtonText()}
       </a>
     );
@@ -81,16 +85,11 @@ export function SmartContactButton({
   return (
     <button
       onClick={handleDesktopClick}
-      className={`inline-flex items-center gap-2 transition-transform duration-200 hover:scale-105 active:scale-95 relative ${className}`}
+      className={`transition-all duration-200 hover:scale-105 active:scale-95 ${className}`}
       title={copied ? 'Skopiowano!' : 'Kliknij aby skopiować numer'}
     >
       {getIcon()}
       {getButtonText()}
-      {copied && (
-        <span className="text-sm text-green-400 absolute -top-8 left-1/2 transform -translate-x-1/2 whitespace-nowrap animate-in slide-in-from-bottom-2 fade-in duration-200">
-          Skopiowano!
-        </span>
-      )}
     </button>
   );
 }
