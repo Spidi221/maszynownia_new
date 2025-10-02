@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import matter from 'gray-matter';
+import { parseFrontmatter } from '../utils/parseFrontmatter';
 
 /**
  * Custom hook to load and parse news articles from content/news/*.md
@@ -27,8 +27,8 @@ const useNewsData = () => {
         const newsPromises = Object.entries(newsFiles).map(async ([path, importFn]) => {
           const rawContent = await importFn();
 
-          // Parse frontmatter with gray-matter
-          const { data, content } = matter(rawContent);
+          // Parse frontmatter with custom parser (no Buffer dependency)
+          const { data, content } = parseFrontmatter(rawContent);
 
           // Extract filename for ID
           const filename = path.split('/').pop().replace('.md', '');
