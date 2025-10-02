@@ -1,9 +1,10 @@
 import SEOHead from '../components/SEOHead';
 import Footer from '../components/Footer';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { Calendar, ArrowLeft, Clock, User, ChevronRight } from 'lucide-react';
 import { Link } from 'wouter';
 import useResponsiveImage from '../hooks/useResponsiveImage';
+import useNewsData from '../hooks/useNewsData';
 
 const NewsPage = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -11,6 +12,9 @@ const NewsPage = () => {
   // Responsive images for optimal mobile performance
   const warsztatyImage = useResponsiveImage('/images/warsztaty.webp');
   const piknikiImage = useResponsiveImage('/images/pikniki.webp');
+
+  // Load news from CMS
+  const { news, loading, error } = useNewsData();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,9 +24,6 @@ const NewsPage = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  // Dane aktualności - będą aktualizowane przez klientkę
-  const news = useMemo(() => [], []);
 
   return (
     <>
@@ -64,8 +65,33 @@ const NewsPage = () => {
       {/* News Grid */}
       <section className="py-20 px-4 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {news.map((article) => (
+          {/* Loading State */}
+          {loading && (
+            <div className="text-center py-20">
+              <div className="inline-block animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-gym-yellow"></div>
+              <p className="mt-4 text-gray-600 font-medium">Ładowanie aktualności...</p>
+            </div>
+          )}
+
+          {/* Error State */}
+          {error && (
+            <div className="text-center py-20">
+              <p className="text-red-600 font-medium">Błąd ładowania aktualności: {error}</p>
+            </div>
+          )}
+
+          {/* No News State */}
+          {!loading && !error && news.length === 0 && (
+            <div className="text-center py-20">
+              <p className="text-gray-600 text-xl">Brak aktualności do wyświetlenia.</p>
+              <p className="text-gray-500 mt-2">Wkrótce pojawią się tu nowe informacje!</p>
+            </div>
+          )}
+
+          {/* News Grid */}
+          {!loading && !error && news.length > 0 && (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {news.map((article) => (
               <article
                 key={article.id}
                 className="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
@@ -119,15 +145,18 @@ const NewsPage = () => {
                   </button>
                 </div>
               </article>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
 
-          {/* Load More Button */}
-          <div className="text-center mt-12">
-            <button className="px-8 py-4 bg-gym-yellow text-white font-bold rounded-full hover:bg-gym-yellow-deep transition-colors shadow-lg hover:shadow-xl">
-              Załaduj więcej aktualności
-            </button>
-          </div>
+          {/* Load More Button - only show when we have news */}
+          {!loading && !error && news.length > 6 && (
+            <div className="text-center mt-12">
+              <button className="px-8 py-4 bg-gym-yellow text-white font-bold rounded-full hover:bg-gym-yellow-deep transition-colors shadow-lg hover:shadow-xl">
+                Załaduj więcej aktualności
+              </button>
+            </div>
+          )}
         </div>
       </section>
 
