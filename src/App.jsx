@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage';
 import EMSPage from './pages/EMSPage';
 import GymnasticsPage from './pages/GymnasticsPage';
 import NewsPage from './pages/NewsPage';
+import SingleNewsPage from './pages/SingleNewsPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import RODOPage from './pages/RODOPage';
 import RegulaminPage from './pages/RegulaminPage';
@@ -47,6 +48,11 @@ function App() {
 
         <Route path="/strefagimnastyki">
           <GymnasticsPage />
+        </Route>
+
+        {/* Single News Article - must be before /aktualnosci for routing priority */}
+        <Route path="/strefagimnastyki/aktualnosci/:slug">
+          <SingleNewsPage />
         </Route>
 
         <Route path="/strefagimnastyki/aktualnosci">

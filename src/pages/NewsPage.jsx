@@ -139,10 +139,12 @@ const NewsPage = () => {
                   </p>
 
                   {/* Read More */}
-                  <button className="inline-flex items-center gap-2 text-[#a16207] font-medium hover:text-gym-yellow transition-colors group/btn">
-                    <span>Czytaj więcej</span>
-                    <ChevronRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
-                  </button>
+                  <Link href={`/strefagimnastyki/aktualnosci/${article.id}`}>
+                    <a className="inline-flex items-center gap-2 text-[#a16207] font-medium hover:text-gym-yellow transition-colors group/btn">
+                      <span>Czytaj więcej</span>
+                      <ChevronRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                    </a>
+                  </Link>
                 </div>
               </article>
               ))}
